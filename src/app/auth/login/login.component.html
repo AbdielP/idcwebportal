@@ -1,1 +1,44 @@
-<p>login works!</p>
+<main class="main">
+    
+    <div class="container main-container">
+        <div class="row">
+            <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
+                <div class="row">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <i class="fas fa-exclamation-circle text-warning lead mr-2 mb-2"></i> 
+                        <p class='text-secondary text-justify'>Inicie sesión para poder acceder al sitio web.</p>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="col-md-5 d-flex flex-column justify-content-center align-items-center">
+                <i class="fas fa-store text-primary m-3 display-2"></i>
+                <form ngNativeValidate class="form-signin" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" >
+                    <input type="text" id="usrn" name="usrn" class="form-control" autocomplete="on" placeholder="Usuario" required ngModel>
+                    <input type="password" name="pswd" id="pswd" class="form-control" autocomplete="on" placeholder="Contraseña" required ngModel>
+                    
+                    <button class="btn btn-sm btn-primary btn-block mt-4" type="submit">Entrar</button>
+                    
+                </form>
+                <footer class="mt-4 text-center">
+                    
+                    <small class="text-secondary">Sitio web con acceso restringido.</small>
+                    <br>
+                    <!-- <a [routerLink]="['/']" class="h6"><i class="fas fa-home"></i> Ir a inicio</a> -->
+                    <hr>
+                </footer>
+                <div class="row d-flex">
+                    <!-- <i class="fab fa-cc-visa text-secondary h2 m-2"></i>
+                    <i class="fab fa-cc-mastercard text-secondary h2 m-2"></i>
+                    <i class="fab fa-cc-paypal text-secondary h2 m-2"></i> -->
+                    <p class="mb-1 text-secondary">&copy; {{year}} - IDC Liberty Latin America.</p>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+                <p class="lead">¿Aún no tienes cuenta?</p>
+                <p class="text-secondary text-center">- Planificar los pasos para que soliciten una cuenta -</p>
+            </div>
+            
+        </div>
+    </div>
+</main>
