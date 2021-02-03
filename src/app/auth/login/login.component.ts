@@ -1,3 +1,4 @@
+import { Usuario } from 'src/app/classes/usuario.class';
 import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -16,7 +17,8 @@ export class LoginComponent {
 
   onSubmit(form: NgForm): void {
     if (form.invalid) { return; }
-    this.authService.login(form, `sp_select_datos_usuario('${form.value.usrn}')`).subscribe((resp: any) => {
+    const usuario = new Usuario(form.value.usrn, form.value.pswd);
+    this.authService.login(usuario, `sp_select_datos_usuario('${usuario.usrn}')`).subscribe((resp: any) => {
       // if (resp.ok) {
       //   this.router.navigate([`/`]);
       // }
