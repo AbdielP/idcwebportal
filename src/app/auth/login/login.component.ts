@@ -15,12 +15,12 @@ export class LoginComponent {
   constructor(private router: Router, private authService: AuthService) { }
 
   onSubmit(form: NgForm): void {
-    console.log(form);
-    // if (form.invalid) { return; }
-    // this.authService.login(form, `sp_select_datos_usuario('${form.value.usrn}')`).subscribe((resp: any) => {
-    //   if (resp.ok) {
-    //     this.router.navigate([`/`]);
-    //   }
-    // });
+    if (form.invalid) { return; }
+    this.authService.login(form, `sp_select_datos_usuario('${form.value.usrn}')`).subscribe((resp: any) => {
+      // if (resp.ok) {
+      //   this.router.navigate([`/`]);
+      // }
+      console.log(resp);
+    });
   }
 }
