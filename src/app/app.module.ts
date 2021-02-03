@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PublicModule } from './public/public.module';
 import { AdminModule } from './admin/admin.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { AdminModule } from './admin/admin.module';
     BrowserModule,
     PublicModule,
     AdminModule,
+    AuthModule,
     AppRoutingModule
   ],
   providers: [],
