@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  SERVER_URL: 'https://idcnodejsbackend.herokuapp.com'
+  SERVER_URL: 'http://localhost:3000'
+  // SERVER_URL: 'https://idcnodejsbackend.herokuapp.com'
 };
 
 /*
