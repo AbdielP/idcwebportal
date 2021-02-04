@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/classes/usuario.class';
 import { environment } from 'src/environments/environment';
 import { map, catchError } from 'rxjs/operators';
@@ -13,7 +14,7 @@ export class AuthService {
   token: string;
   SERVER_URL = environment.SERVER_URL;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     this.loadSession();
   }
 
@@ -28,7 +29,7 @@ export class AuthService {
   login(usuario: Usuario, storedprocedure: string): Observable<any> {
     return this.http.post(`${this.SERVER_URL}/auth/login/${storedprocedure}`, usuario)
     .pipe(map((resp: any) => {
-      // this.setStorage(resp.token);
+      this.setStorage(resp.token);
       return resp;
     }))
     .pipe(catchError(err => of([
@@ -37,7 +38,23 @@ export class AuthService {
     ])));
   }
 
+  setStorage(token: any) {
+    localStorage.setItem('sti', token);
+    this.token  = token;
+  }
+
   isLogedIn(): boolean {
     return (this.token.length > 5) ? true : false;
+  }
+
+  logOut() {
+    this.token = '';
+    this.clearStorage();
+    this.router.navigate(['/auth/login']);
+  }
+
+  clearStorage() {
+    localStorage.removeItem('sti');
+    localStorage.clear();
   }
 }
