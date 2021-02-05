@@ -7,6 +7,9 @@ const routes: Routes = [
   { path: 'admin', canActivate: [LoginGuard], component: AdminComponent, children: [
     {
       path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+    },
+    {
+      path: 'access', loadChildren: () => import('./accesos/accesos.module').then(m => m.AccesosModule)
     }
   ]}
 ];
