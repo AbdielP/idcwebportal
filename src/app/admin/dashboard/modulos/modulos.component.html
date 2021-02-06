@@ -1,20 +1,28 @@
-<div class="row">
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+<!-- <div class="row"> -->
+  <div class="card-columns">
+
+    
+    <div class="card border-info m-0">
+      <div class="card-body">
+        <h5 class="card-title text-secondary"><i class="fas fa-male mr-1"></i><i class="fas fa-female"></i> Accesos</h5>
+        <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+        <hr>
+        <a [routerLink]="['/admin/access']" routerLinkActive="router-link-active"  class="btn btn-outline-info btn-sm btn-block">Ir a accesos</a>
       </div>
     </div>
-    <div class="col-sm-6">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title">Special title treatment</h5>
-          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
+
+    
+    <div class="card border-info m-0">
+      <div class="card-body">
+        <h5 class="card-title text-secondary"><i class="fas fa-qrcode"></i> Códigos QR</h5>
+        <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+        <hr>
+        <a [routerLink]="['/admin/access']" routerLinkActive="router-link-active"  class="btn btn-outline-info btn-sm btn-block">Ir a QR</a>
       </div>
     </div>
-</div>
+
+   
+  </div>
+    
+    
+<!-- </div> -->
