@@ -13,7 +13,8 @@
               <span class="input-group-text text-info"><i class="fas fa-angle-down mr-1"></i> Listado</span>
             </div>
             <select class="form-control text-secondary">
-                <option>Seleccione un cliente</option>
+                <option value="" disabled>Seleccione un cliente</option>
+                <option *ngFor="let proyecto of proyectos" value="{{proyectos | json}}">{{proyecto.nombre_empresa}} - LOC{{proyecto.loc}} - {{proyecto.datacenter}}</option>    
             </select>
             <!-- <input type="text" class="form-control" placeholder="Busqueda por nombre, cédula o compañía" aria-label="Busqueda" aria-describedby="basic-addon1"> -->
         </div>

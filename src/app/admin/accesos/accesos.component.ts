@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccesosComponent implements OnInit {
 
+  accesos = [];
+
   constructor() { }
 
   ngOnInit() {

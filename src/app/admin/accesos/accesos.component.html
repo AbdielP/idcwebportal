@@ -6,6 +6,14 @@
 
 <div class="row">
     <div class="col-md-12 card p-2">
-        <app-listado></app-listado>
+        <div *ngIf="accesos.length === 0" class="col-md-12 d-flex flex-column justify-content-center align-items-center my-4">
+            <i class="fas fa-box-open display-1 text-info"></i>
+            <h2 class="my-3 text-info">¡Vaya, está vacio! <hr></h2>
+            <p class="text-center lead"> Asegurese de presionar <b>'Enter'</b> para realizar una busqueda o seleccionar un <b>'Cliente'</b> o <b>'Proyecto'</b> en el listado de clientes para realizar una busqueda, o puede que los accesos <i class="text-warning">no hayan sido aprobados</i> aún.</p>
+            <br>
+            <!-- <a [routerLink]="['/']" class="text-info h5">Volver atrás <i class="fas fa-walking"></i></a> -->
+        </div>
+        
+        <!-- <app-listado></app-listado> -->
     </div>
 </div>
