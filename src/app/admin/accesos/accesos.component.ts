@@ -7,18 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accesos.component.css']
 })
 export class AccesosComponent implements OnInit {
-
-  accesos = [];
   eventSubject: Subject<any> = new Subject<any>();
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-  // Recibe el idproyecto emitido desde el componmente hijo: app-busqueda cuando se usa el <select> para buscar accesos
-  getProyecto(idproyecto): void {
-    // Emite el idproyecto recibido hacia el componente hijo: app-listado
-    this.eventSubject.next({idproyecto});
+  // Recibe el proyecto emitido desde el componmente hijo: app-busqueda cuando se usa el <select> para buscar accesos
+  getProyecto(proyecto): void {
+    // Emite el proyecto recibido hacia el componente hijo: app-listado
+    this.eventSubject.next({proyecto});
   }
 }

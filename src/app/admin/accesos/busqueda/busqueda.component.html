@@ -14,7 +14,7 @@
             </div>
             <select class="form-control text-secondary" (change)="onChangeProyecto($event)">
                 <option value="" disabled>Seleccione un cliente</option>
-                <option *ngFor="let proyecto of proyectos" value="{{proyecto.idproyecto}}">{{proyecto.nombre_empresa}} - LOC{{proyecto.loc}} - {{proyecto.datacenter}}</option>    
+                <option *ngFor="let proyecto of proyectos" value="{{proyecto | json}}">{{proyecto.nombre_empresa}} - LOC{{proyecto.loc}} - {{proyecto.datacenter}}</option>    
             </select>
             <!-- <input type="text" class="form-control" placeholder="Busqueda por nombre, cédula o compañía" aria-label="Busqueda" aria-describedby="basic-addon1"> -->
         </div>
