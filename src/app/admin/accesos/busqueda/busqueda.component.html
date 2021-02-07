@@ -1,9 +1,21 @@
 <div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <input class="form-control" type="text" placeholder="Busqueda por nombre, cédula o companía." aria-label="Search">
-
+    <div class="col-md-6">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text text-info"><i class="fas fa-search mr-1"></i> Busqueda</span>
+            </div>
+            <input type="text" class="form-control" placeholder="Busqueda por nombre, cédula o compañía" aria-label="Busqueda" aria-describedby="basic-addon1">
         </div>
     </div>
-
+    <div class="col-md-6">
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text text-info"><i class="fas fa-angle-down mr-1"></i> Listado</span>
+            </div>
+            <select class="form-control text-secondary">
+                <option>Seleccione un cliente</option>
+            </select>
+            <!-- <input type="text" class="form-control" placeholder="Busqueda por nombre, cédula o compañía" aria-label="Busqueda" aria-describedby="basic-addon1"> -->
+        </div>
+    </div>
 </div>
