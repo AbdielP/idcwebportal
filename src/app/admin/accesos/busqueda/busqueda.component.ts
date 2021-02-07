@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { GeneralService } from 'src/app/services/general.service';
 export class BusquedaComponent implements OnInit {
 
   proyectos = [];
+  @Output() emitirProyecto: EventEmitter<any> = new EventEmitter();
 
   constructor(private generalService: GeneralService) { }
 
@@ -16,10 +17,16 @@ export class BusquedaComponent implements OnInit {
     this.selectProyectos();
   }
 
+  // Llamada al servicio REST para consultar el listado de proyectos/clientes disponible.
   selectProyectos(): void {
     this.generalService.select('sp_select_proyectos()').subscribe((resp: any) => {
       this.proyectos = resp.select;
     });
+  }
+
+  // Evento que captura el proyecto/cliente seleccionado de la lista <select>
+  onChangeProyecto(event): void {
+    this.emitirProyecto.emit(event.target.value);
   }
 
 }
