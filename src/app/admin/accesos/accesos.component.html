@@ -5,6 +5,13 @@
 </div>
 
 <div class="row">
+    <div class="col-md-12 p-1">
+        <app-opciones (emitirOpciones)="getOpciones($event)"></app-opciones>
+
+    </div>
+</div>
+
+<div class="row">
     <div class="col-md-12 card p-2">
         <app-listado [events]="eventSubject.asObservable()"></app-listado>
     </div>

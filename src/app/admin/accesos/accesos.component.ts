@@ -18,4 +18,9 @@ export class AccesosComponent implements OnInit {
     // Emite el proyecto recibido hacia el componente hijo: app-listado
     this.eventSubject.next({proyecto});
   }
+
+  // Recibe opciones para mostrar (Accesos aprobados o en trámite) desde el componente hijo: app-opciones
+  getOpciones(opciones): void {
+    console.log(opciones);
+  }
 }
