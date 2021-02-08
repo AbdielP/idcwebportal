@@ -1,5 +1,6 @@
 import { Subject } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+import { SessionInactivityService } from 'src/app/services/session/session-inactivity.service';
 
 @Component({
   selector: 'app-accesos',
@@ -8,13 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AccesosComponent implements OnInit {
 
+  userActivity: any;
+  userInactive: Subject<any> = new Subject();
   eventSubject: Subject<any> = new Subject<any>();
   eventOpciones: Subject<any> = new Subject<any>();
   esconderBusqueda = false;
 
-  constructor() { }
+  constructor(private sessionInactivity: SessionInactivityService) { }
 
   ngOnInit() {}
+
+  @HostListener('window:mousemove') refreshUserState() {
+    this.sessionInactivity.resetActivity();
+  }
 
   // Recibe el proyecto emitido desde el componmente hijo: app-busqueda cuando se usa el <select> para buscar accesos
   getProyecto(proyecto): void {
