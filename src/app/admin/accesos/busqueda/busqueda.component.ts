@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { GeneralService } from 'src/app/services/general.service';
 
 @Component({
@@ -9,6 +9,7 @@ import { GeneralService } from 'src/app/services/general.service';
 export class BusquedaComponent implements OnInit {
 
   proyectos = [];
+  @ViewChild('test', {static: false}) test: ElementRef;
   @Output() emitirProyecto: EventEmitter<any> = new EventEmitter();
 
   constructor(private generalService: GeneralService) { }

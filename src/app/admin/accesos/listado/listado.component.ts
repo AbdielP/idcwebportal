@@ -57,6 +57,7 @@ export class ListadoComponent implements OnInit {
       });
   }
 
+  // Si existe un acceso seleccionado en localstorage, lo lee y lo coloca en html.
   localStorageGetAccesos(): void {
     if (this.localstorageService.getProyecto() != null) {
       this.proyecto = JSON.parse(this.localstorageService.getProyecto());
