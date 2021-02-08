@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" [hidden]="esconderBusqueda">
     <div class="col-md-12 card p-2">
         <app-busqueda (emitirProyecto)="getProyecto($event)"></app-busqueda>
     </div>
@@ -13,6 +13,6 @@
 
 <div class="row">
     <div class="col-md-12 card p-2">
-        <app-listado [events]="eventSubject.asObservable()"></app-listado>
+        <app-listado [events]="eventSubject.asObservable()" [opciones]="eventOpciones.asObservable()"></app-listado>
     </div>
 </div>

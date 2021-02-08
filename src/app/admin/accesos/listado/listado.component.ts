@@ -10,25 +10,47 @@ import { Component, Input, OnInit } from '@angular/core';
 export class ListadoComponent implements OnInit {
 
   accesos = [];
+  proyecto: any = [];
 
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
+  @Input() opciones: Observable<any>;
 
   constructor(private seguridadService: SeguridadService) { }
 
   ngOnInit() {
-    this.subscribeEventIdProyecto();
+    this.subscribeEventProyecto();
+    this.subscribeEventOpciones();
   }
 
-  subscribeEventIdProyecto(): void {
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy(): void {
+    this.eventSubscription.unsubscribe();
+  }
+
+  subscribeEventProyecto(): void {
     this.eventSubscription = this.events.subscribe(({proyecto}) => {
-      const proyect = JSON.parse(proyecto);
-      this.seguridadService.select(`sp_select_accesos_compania('${proyect.nombre_empresa}', '${proyect.datacenter}')`)
-      .subscribe((resp: any) => {
-        console.log(resp);
+      this.proyecto = JSON.parse(proyecto);
+      this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
+    });
+  }
+
+  subscribeEventOpciones(): void {
+    this.eventSubscription = this.opciones.subscribe(({opciones}) => {
+      // console.log(opciones);
+      if (opciones === 'tramite') {
+        this.selectAccesos(`sp_select_accesos_pendientes_aprobacion()`);
+      } else {
+        this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
+      }
+    });
+  }
+
+  selectAccesos(storedprocedure: string): void {
+    this.seguridadService.select(storedprocedure).subscribe((resp: any) => {
+        // console.log(resp);
         this.accesos = resp.select;
       });
-    });
   }
 
 }

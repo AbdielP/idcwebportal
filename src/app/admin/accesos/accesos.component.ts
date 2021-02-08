@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accesos.component.css']
 })
 export class AccesosComponent implements OnInit {
+
   eventSubject: Subject<any> = new Subject<any>();
+  eventOpciones: Subject<any> = new Subject<any>();
+  esconderBusqueda = false;
 
   constructor() { }
 
@@ -21,6 +24,12 @@ export class AccesosComponent implements OnInit {
 
   // Recibe opciones para mostrar (Accesos aprobados o en trámite) desde el componente hijo: app-opciones
   getOpciones(opciones): void {
-    console.log(opciones);
+    // Emite las opciones de accesos aprobados o en trámite hacia el componente hijo app-listado
+    if (opciones === 'tramite') {
+      this.esconderBusqueda = true;
+    } else {
+      this.esconderBusqueda = false;
+    }
+    this.eventOpciones.next({opciones});
   }
 }
