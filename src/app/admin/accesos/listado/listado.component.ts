@@ -46,6 +46,7 @@ export class ListadoComponent implements OnInit {
     });
   }
 
+  // Llama al servicio para obtener listado de acesos
   selectAccesos(storedprocedure: string): void {
     this.seguridadService.select(storedprocedure).subscribe((resp: any) => {
         // console.log(resp);
