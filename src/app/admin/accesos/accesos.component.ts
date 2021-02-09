@@ -13,7 +13,11 @@ export class AccesosComponent implements OnInit {
   userInactive: Subject<any> = new Subject();
   eventSubject: Subject<any> = new Subject<any>();
   eventOpciones: Subject<any> = new Subject<any>();
+  eventDetalleAcceso: Subject<any> = new Subject<any>();
+
+  // Esconder componentes
   esconderBusqueda = false;
+  esconderDetalle = true;
 
   constructor(private sessionInactivity: SessionInactivityService) { }
 
@@ -31,12 +35,20 @@ export class AccesosComponent implements OnInit {
 
   // Recibe opciones para mostrar (Accesos aprobados o en trámite) desde el componente hijo: app-opciones
   getOpciones(opciones): void {
-    // Emite las opciones de accesos aprobados o en trámite hacia el componente hijo app-listado
+    this.esconderDetalle = true;
     if (opciones === 'tramite') {
       this.esconderBusqueda = true;
     } else {
       this.esconderBusqueda = false;
     }
+    // Emite las opciones de accesos aprobados o en trámite hacia el componente hijo app-listado
     this.eventOpciones.next({opciones});
+  }
+
+  // Recibe la información del acceso (ID) a mostrar (Detalles)
+  getDetallesAcceso(detalle): void {
+    this.esconderDetalle = false;
+    // Emite el ID del acceso hacia el componente hijo app-detalle
+    this.eventDetalleAcceso.next({detalle});
   }
 }

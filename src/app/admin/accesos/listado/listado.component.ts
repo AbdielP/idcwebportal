@@ -1,6 +1,6 @@
 import { SeguridadService } from 'src/app/services/seguridad.service';
 import { Subscription, Observable } from 'rxjs';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, OnInit, EventEmitter } from '@angular/core';
 import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 
 @Component({
@@ -16,6 +16,8 @@ export class ListadoComponent implements OnInit {
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
   @Input() opciones: Observable<any>;
+
+  @Output() emitirDetalleAcceso: EventEmitter<any> = new EventEmitter();
 
   constructor(private seguridadService: SeguridadService, private localstorageService: LocalstorageService) { }
 
@@ -63,6 +65,10 @@ export class ListadoComponent implements OnInit {
       this.proyecto = JSON.parse(this.localstorageService.getProyecto());
       this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
     }
+  }
+
+  onClickDetalleAcceso(detalle): void {
+    this.emitirDetalleAcceso.emit(detalle);
   }
 
 }

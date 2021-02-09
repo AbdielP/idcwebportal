@@ -6,9 +6,10 @@ import { AccesosComponent } from './accesos.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { ListadoComponent } from './listado/listado.component';
 import { OpcionesComponent } from './opciones/opciones.component';
+import { DetalleComponent } from './detalle/detalle.component';
 
 @NgModule({
-  declarations: [AccesosComponent, BusquedaComponent, ListadoComponent, OpcionesComponent],
+  declarations: [AccesosComponent, BusquedaComponent, ListadoComponent, OpcionesComponent, DetalleComponent],
   imports: [
     CommonModule,
     AccesosRoutingModule

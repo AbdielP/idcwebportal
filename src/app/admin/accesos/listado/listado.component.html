@@ -22,7 +22,7 @@
     <tbody>
         <tr *ngFor="let acceso of accesos; let i = index">
             <th class="align-middle" scope='row'>{{i+1}}</th>
-            <td class="align-middle"> <button type="button" class="btn btn-link m-0 p-0"><img src="{{acceso.foto}}" alt="Error" onerror="this.onerror=null;this.src='../../../../assets/unknown.jpg';" width="35" height="35"></button></td>
+            <td class="align-middle"> <button (click)="onClickDetalleAcceso(acceso.idseguridad)" type="button" class="btn btn-link m-0 p-0"><img src="{{acceso.foto}}" alt="Error" onerror="this.onerror=null;this.src='../../../../assets/unknown.jpg';" width="35" height="35"></button></td>
             <td class="align-middle">{{acceso.nombre_visitante}}</td>
             <td class="align-middle">{{acceso.cedula_visitante}}</td>
             <td class="align-middle">{{acceso.empleado_visitante}}</td>
