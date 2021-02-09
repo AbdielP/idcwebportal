@@ -1,5 +1,6 @@
 import { Observable, Subscription } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 
 @Component({
   selector: 'app-detalle',
@@ -8,10 +9,11 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DetalleComponent implements OnInit {
 
+  acceso = [];
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
 
-  constructor() { }
+  constructor(private seguridadService: SeguridadService) { }
 
   ngOnInit() {
     this.subscribeEventDetalleAcceso();
@@ -24,7 +26,10 @@ export class DetalleComponent implements OnInit {
 
   subscribeEventDetalleAcceso(): void {
     this.eventSubscription = this.events.subscribe(({detalle}) => {
-      console.log(detalle);
+      this.seguridadService.select(`sp_select_accesos_detalle('${detalle}')`).subscribe((resp: any) => {
+        console.log(resp);
+        this.acceso = resp.select[0];
+      });
     });
   }
 

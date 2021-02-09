@@ -12,9 +12,17 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12 card p-2">
+    <div [hidden]="!esconderDetalle" class="col-md-12 card p-2">
         <app-listado (emitirDetalleAcceso)="getDetallesAcceso($event)" [events]="eventSubject.asObservable()"
-         [opciones]="eventOpciones.asObservable()" [hidden]="!esconderDetalle"></app-listado>
-        <app-detalle [events]="eventDetalleAcceso.asObservable()" [hidden]="esconderDetalle"></app-detalle>
+         [opciones]="eventOpciones.asObservable()" ></app-listado>
+    </div>
+    <div [hidden]="esconderDetalle" class="card col-md-12 p-2">
+        <app-detalle [events]="eventDetalleAcceso.asObservable()" ></app-detalle>
     </div>
 </div>
+
+<!-- <div class="row">
+    <div class="card col-md-12 p-2">
+        <app-detalle [events]="eventDetalleAcceso.asObservable()" ></app-detalle>
+    </div>
+</div> -->
