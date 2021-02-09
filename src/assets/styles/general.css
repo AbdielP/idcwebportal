@@ -1,0 +1,5 @@
+::ng-deep :root {
+    --card-rgba-suave: rgba(255, 255, 255, .7);
+    --card-rgba-media: rgba(255, 255, 255, .4);
+    --card-rgba-fuerte: rgba(255, 255, 255, .2);
+}
