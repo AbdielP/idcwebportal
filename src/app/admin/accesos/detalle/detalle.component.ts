@@ -9,7 +9,7 @@ import { SeguridadService } from 'src/app/services/seguridad.service';
 })
 export class DetalleComponent implements OnInit {
 
-  acceso = [];
+  acceso: any = [];
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
 
