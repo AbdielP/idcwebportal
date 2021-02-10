@@ -7,3 +7,66 @@
 .opacidad-media {
     background-color: var(--card-rgba-media);
 }
+
+/* .body-container-qr {
+    background-image: url('../../../../assets/img/QR_base.PNG');
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.qr-info {
+    color: #8970a8;
+    font-size: 1rem;
+}
+.qr-img {
+    height: 10%;
+}
+
+.bgred {
+    background-color: red;
+} */
+
+.body-container-qr{
+    display: flex;
+    background-image: url('../../../../assets/img/QR_base.PNG');
+    /* background-color: gray; */
+    margin-top: 2%;
+    height: auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    /* border: 1px solid green; */
+}
+
+.container-qr-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #8970a8;
+    width: 55%;
+    height: auto;
+    font-size: 1rem;
+    padding-top: 15px;
+    /* border: 1px solid red; */
+    /* background-color: goldenrod; */
+}
+
+.container-qr-img{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10% 0;
+    width: 45%;
+    height: 100%;
+    /* border: 1px solid blue; */
+    /* background-color: indigo; */
+}.container-qr-img img{
+    margin-left: 3%;
+    width: 82%;
+}
+
+.btn-descargar-qr{
+    background-color: #8970a8;
+}.btn-descargar-qr:hover{
+    background-color: #9B8CAE;
+}
