@@ -1,8 +1,11 @@
 import { Observable, Subscription } from 'rxjs';
-import { Component, Input, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { SeguridadService } from 'src/app/services/seguridad.service';
-import html2canvas from 'html2canvas';
+import { QrcodeComponent } from '../qrcode/qrcode.component';
+
 import QRCode from 'qrcode';
+
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-detalle',
@@ -11,17 +14,12 @@ import QRCode from 'qrcode';
 })
 export class DetalleComponent implements OnInit {
 
-  @ViewChild('screen', { static: false}) screenx: ElementRef;
-  @ViewChild('canvas', { static: false}) canvasx: ElementRef;
-  @ViewChild('downloadLink', { static: false}) downloadLinkx: ElementRef;
-
   qrcode: any = '';
   acceso: any = [];
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
-  @Output() emitirQRCode: EventEmitter<QRCode> = new EventEmitter();
 
-  constructor(private seguridadService: SeguridadService) { }
+  constructor(private seguridadService: SeguridadService, public dialog: MatDialog) { }
 
   ngOnInit() {
     this.subscribeEventDetalleAcceso();
@@ -53,23 +51,16 @@ export class DetalleComponent implements OnInit {
     });
   }
 
-  // Genera un CANVAS a partir del HTML con el formato de QR IDC
-  downloadImage(name: string, id: string) {
-    html2canvas(this.screenx.nativeElement).then(canvas => {
-      this.canvasx.nativeElement.src = canvas.toDataURL();
-      this.downloadLinkx.nativeElement.href = canvas.toDataURL('image/png');
-      this.downloadLinkx.nativeElement.download = `QR_Code_${name}_${id}.png`;
-      this.downloadLinkx.nativeElement.click();
+  // Abre el modal de Angular-Material para mostrar el QRCode
+  openDialog() {
+    const dialogRef = this.dialog.open(QrcodeComponent, {
+      width: '500px',
+      data: {qrcode: this.qrcode, nombre: this.acceso.nombre_visitante, cedula: this.acceso.cedula_visitante}
     });
-    return;
-  }
 
-  // Al darle click al botón 'ver qrcode, emite los datos al componente padre 'accesos'
-  onClickemitirQRCode(): void {
-    const qrcode = this.qrcode;
-    const nombre = this.acceso.nombre_visitante;
-    const cedula = this.acceso.cedula_visitante;
-    this.emitirQRCode.emit({qrcode, nombre, cedula});
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(`Dialog result: ${result}`); NO HACE NADA A PROPOSITO
+    });
   }
 
 }

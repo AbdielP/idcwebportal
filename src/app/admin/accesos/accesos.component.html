@@ -17,10 +17,6 @@
          [opciones]="eventOpciones.asObservable()" ></app-listado>
     </div>
     <div [hidden]="esconderDetalle" class="card opacidad-fuerte col-md-12 p-2">
-        <app-detalle (emitirQRCode)="getQRCode($event)" [events]="eventDetalleAcceso.asObservable()" ></app-detalle>
+        <app-detalle [events]="eventDetalleAcceso.asObservable()" ></app-detalle>
     </div>
 </div>
-
-<!--  -->
-<app-qrcode [events]="eventQRCode.asObservable()"></app-qrcode>
-

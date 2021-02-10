@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import {MatDialogModule} from '@angular/material/dialog';
+
 import { AccesosRoutingModule } from './accesos-routing.module';
 import { AccesosComponent } from './accesos.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
@@ -13,7 +15,10 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
   declarations: [AccesosComponent, BusquedaComponent, ListadoComponent, OpcionesComponent, DetalleComponent, QrcodeComponent],
   imports: [
     CommonModule,
-    AccesosRoutingModule
-  ]
+    AccesosRoutingModule,
+    MatDialogModule
+  ], exports: [
+    MatDialogModule
+  ], entryComponents: [QrcodeComponent]
 })
 export class AccesosModule { }

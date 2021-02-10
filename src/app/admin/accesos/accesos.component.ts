@@ -11,7 +11,6 @@ export class AccesosComponent implements OnInit {
 
   userActivity: any;
   userInactive: Subject<any> = new Subject();
-  eventQRCode: Subject<any> = new Subject<any>();
   eventSubject: Subject<any> = new Subject<any>();
   eventOpciones: Subject<any> = new Subject<any>();
   eventDetalleAcceso: Subject<any> = new Subject<any>();
@@ -53,9 +52,4 @@ export class AccesosComponent implements OnInit {
     this.eventDetalleAcceso.next({detalle});
   }
 
-  // Recibe el QRCode generado en componente: app-detalle
-  getQRCode(qrcode): void {
-    // Emite el QRCode al componente hijo :app-qrcode
-    this.eventQRCode.next({qrcode});
-  }
 }

@@ -1,20 +1,4 @@
-<!-- <div *ngIf="qrcode != ''" class="card container-qr">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-6 d-flex flex-column justify-content-center align-items-center info-qr">
-                <p class="m-1">FUCK</p>
-                <p class="m-1">THIS</p>
-                <p class="m-1">SHIT</p>
-            </div>
-            <div class="col-6 d-flex flex-column justify-content-center align-items-center container-qr-img">
-                <img src="{{qrcode}}" alt="QRCode">
-            </div>
-        </div>
-
-    </div>
-</div> -->
-
-<div *ngIf="qrcode != ''" class="card">
+<div class="card">
     <div class="body-container-qr" #screen>
         <div class="container-qr-info mt-3">
             <h4 class="m-0 mb-2 font-weight-bold">Bienvenido</h4>
@@ -25,7 +9,7 @@
             <img src="{{qrcode}}" alt="QR Code">
         </div> 
     </div>
-    <button class="btn btn-sm btn-block text-light btn-descargar-qr">Descargar QR</button>
+    <button (click)="downloadImage(nombre, cedula)" class="btn btn-sm btn-block text-light btn-descargar-qr">Descargar QR</button>
     <!-- ESTO ES PARA LA DESCARGA DEL QR -->
     <div [hidden]="true" id="download">
         <img #canvas>

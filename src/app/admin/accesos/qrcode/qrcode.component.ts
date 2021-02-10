@@ -1,40 +1,35 @@
-import { Observable, Subscription } from 'rxjs';
-import { Component, OnInit, ViewChild, ElementRef, Input  } from '@angular/core';
+import { Component, ViewChild, ElementRef, Inject  } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-qrcode',
   templateUrl: './qrcode.component.html',
   styleUrls: ['./qrcode.component.css']
 })
-export class QrcodeComponent implements OnInit {
+export class QrcodeComponent {
 
   qrcode: any = '';
   nombre = '';
   cedula = '';
-  @Input() events: Observable<any>;
-  eventSubscription: Subscription;
 
   @ViewChild('screen', { static: false}) screenx: ElementRef;
   @ViewChild('canvas', { static: false}) canvasx: ElementRef;
   @ViewChild('downloadLink', { static: false}) downloadLinkx: ElementRef;
 
-  constructor() { }
-
-  ngOnInit() {
-    this.subscribeEventQRCode();
+  constructor(public dialogRef: MatDialogRef<QrcodeComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
+    this.qrcode = data.qrcode;
+    this.nombre = data.nombre;
+    this.cedula = data.cedula;
   }
 
-  // tslint:disable-next-line: use-lifecycle-interface
-  ngOnDestroy(): void {
-    this.eventSubscription.unsubscribe();
-  }
-
-  // Observable, se subscribe al evento que emite el qrcode desde componente padre app-accesos
-  subscribeEventQRCode(): void {
-    this.eventSubscription = this.events.subscribe(({qrcode}) => {
-      this.qrcode = qrcode.qrcode;
-      this.nombre = qrcode.nombre;
-      this.cedula = qrcode.cedula;
+  // Genera un CANVAS a partir del HTML con el formato de QR IDC
+  downloadImage(name: string, id: string) {
+    html2canvas(this.screenx.nativeElement).then(canvas => {
+      this.canvasx.nativeElement.src = canvas.toDataURL();
+      this.downloadLinkx.nativeElement.href = canvas.toDataURL('image/png');
+      this.downloadLinkx.nativeElement.download = `QR_Code_${name}_${id}.png`;
+      this.downloadLinkx.nativeElement.click();
     });
   }
 

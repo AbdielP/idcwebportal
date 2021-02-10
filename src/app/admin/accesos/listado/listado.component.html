@@ -17,6 +17,7 @@
             <th scope="col">Acceso</th>
             <th scope="col">Datacenter</th>
             <th scope="col">Fecha expiración</th>
+            <th scope="col">Estado</th>
         </tr>
     </thead>
     <tbody>
@@ -28,7 +29,10 @@
             <td class="align-middle">{{acceso.empleado_visitante}}</td>
             <td class="align-middle">{{acceso.compania_visitante}}</td>
             <td class="align-middle text-info"><i class="fas fa-city"></i> {{acceso.viceprecidencia_ejecutiva}}</td>
-            <td class="align-middle text-success"><i class="fas fa-clock"></i> {{acceso.fecha_expiracion | date:'mediumDate'}}</td>
+            <td class="align-middle text-success"><i class="fas fa-clock"></i> {{acceso.fecha_expiracion | date: 'dd/MM/yyyy'}}</td>
+            <td *ngIf="acceso.estado=='Aprobado' || acceso.estado=='aprobado'" class="text-success align-middle">{{acceso.estado | titlecase}} <i class="fas fa-check"></i></td>
+            <td *ngIf="acceso.estado=='Solicitado' || acceso.estado=='solicitado'" class="text-warning align-middle">{{acceso.estado | titlecase}} <i class="far fa-clock"></i></td>
+            <td *ngIf="acceso.estado=='Expirado' || acceso.estado=='expirado'" class="text-success align-middle">{{acceso.estado | titlecase}} <i class="fas fa-times"></i></td>
         </tr>
         
     </tbody>
