@@ -1,9 +1,8 @@
 import { Observable, Subscription } from 'rxjs';
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { SeguridadService } from 'src/app/services/seguridad.service';
 import html2canvas from 'html2canvas';
 import QRCode from 'qrcode';
-
 
 @Component({
   selector: 'app-detalle',
@@ -20,6 +19,7 @@ export class DetalleComponent implements OnInit {
   acceso: any = [];
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
+  @Output() emitirQRCode: EventEmitter<QRCode> = new EventEmitter();
 
   constructor(private seguridadService: SeguridadService) { }
 
@@ -35,7 +35,7 @@ export class DetalleComponent implements OnInit {
   subscribeEventDetalleAcceso(): void {
     this.eventSubscription = this.events.subscribe(({detalle}) => {
       this.seguridadService.select(`sp_select_accesos_detalle('${detalle}')`).subscribe((resp: any) => {
-        console.log(resp);
+        // console.log(resp);
         this.acceso = resp.select[0];
         this.generarQR(this.acceso);
       });
@@ -62,6 +62,14 @@ export class DetalleComponent implements OnInit {
       this.downloadLinkx.nativeElement.click();
     });
     return;
+  }
+
+  // Al darle click al botón 'ver qrcode, emite los datos al componente padre 'accesos'
+  onClickemitirQRCode(): void {
+    const qrcode = this.qrcode;
+    const nombre = this.acceso.nombre_visitante;
+    const cedula = this.acceso.cedula_visitante;
+    this.emitirQRCode.emit({qrcode, nombre, cedula});
   }
 
 }
