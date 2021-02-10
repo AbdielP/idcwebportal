@@ -8,3 +8,6 @@ html, body {
     color: #424242!important;
     font-size: .9rem!important;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
