@@ -7,9 +7,10 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { ListadoComponent } from './listado/listado.component';
 import { OpcionesComponent } from './opciones/opciones.component';
 import { DetalleComponent } from './detalle/detalle.component';
+import { QrcodeComponent } from './qrcode/qrcode.component';
 
 @NgModule({
-  declarations: [AccesosComponent, BusquedaComponent, ListadoComponent, OpcionesComponent, DetalleComponent],
+  declarations: [AccesosComponent, BusquedaComponent, ListadoComponent, OpcionesComponent, DetalleComponent, QrcodeComponent],
   imports: [
     CommonModule,
     AccesosRoutingModule

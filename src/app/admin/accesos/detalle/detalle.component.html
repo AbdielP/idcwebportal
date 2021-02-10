@@ -40,6 +40,22 @@
 
         <!-- CÓDIGO QR  -->
         <div class="card">
+            <div class="card-body">
+
+                <div class="row">
+                    <div class="col-6 div-ver-qr d-flex justify-content-center align-items-center">
+                        <button class="btn btn-link btn-lg text-info btn-qr"><i class="fas fa-qrcode"></i> Ver QRCode</button>
+                    </div>
+                    <div class="col-6 d-flex justify-content-center align-items-center">
+                        <img height="120" src="{{qrcode}}" alt="QR Code">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="card">
             <div class="body-container-qr" #screen>
                 <div class="container-qr-info mt-3">
                     <p class="m-0 text-muted">Bienvenido</p>
@@ -51,12 +67,12 @@
                 </div> 
             </div>
             <button (click)="downloadImage(acceso.nombre_visitante, acceso.cedula_visitante)" class="btn btn-sm btn-block text-light btn-descargar-qr">Descargar QR</button>
-            <!-- ESTO ES PARA LA DESCARGA DEL QR -->
+            ESTO ES PARA LA DESCARGA DEL QR
             <div [hidden]="true" id="download">
                 <img #canvas>
                 <a #downloadLink></a>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div class="col-md-8">
