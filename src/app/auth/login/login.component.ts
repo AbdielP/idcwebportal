@@ -26,7 +26,6 @@ export class LoginComponent {
           this.router.navigate([`/admin`]);
         }
       }
-      console.log(resp);
     });
   }
 }

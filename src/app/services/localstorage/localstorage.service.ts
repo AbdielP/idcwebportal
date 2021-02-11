@@ -9,6 +9,10 @@ export class LocalstorageService {
     this.clearLocalstorageCategory();
   }
 
+  getToken(): string {
+    return localStorage.getItem('sti');
+  }
+
   // Guarda en localstorage el acceso seleccionado en el listado <select> del componente app-listado
   setAcceso(proyecto): void {
     delete proyecto.idproyecto;
