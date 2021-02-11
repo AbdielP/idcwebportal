@@ -3,9 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { PublicRoutingModule } from './public-routing.module';
 import { PublicComponent } from './public.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
+import { FooterComponent } from './shared/footer/footer.component';
 
 @NgModule({
-  declarations: [PublicComponent],
+  declarations: [PublicComponent, NavbarComponent, FooterComponent],
   imports: [
     CommonModule,
     PublicRoutingModule

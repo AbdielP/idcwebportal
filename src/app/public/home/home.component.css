@@ -1,0 +1,12 @@
+.bgnone {
+    background: none!important;
+    border: none;
+}
+
+.purple-font {
+    color: var(--angular-color-purple);
+}
+
+.purple-btn {
+    background-color: var(--angular-color-purple);
+}

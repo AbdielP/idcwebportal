@@ -1,0 +1,6 @@
+@import '../../../../assets/styles/general.css';
+
+.font {
+    font-size: 1.2rem!important;
+    color: var(--angular-color-purple);
+}
