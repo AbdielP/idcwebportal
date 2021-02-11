@@ -1,0 +1,39 @@
+<div *ngIf="accesos.length === 0" class="col-md-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media">
+    <i class="fas fa-box-open display-1 text-info"></i>
+    <h2 class="my-3 text-info">¡Vaya, está vacio! <hr></h2>
+    <p class="text-center lead"> Asegurese de presionar <b>'Enter'</b> para realizar una busqueda o seleccionar un <b>'Cliente'</b> o <b>'Proyecto'</b> en el listado de clientes para realizar una busqueda, o puede que los accesos <i class="text-warning">no hayan sido aprobados</i> aún.</p>
+    <br>
+    <!-- <a [routerLink]="['/']" class="text-info h5">Volver atrás <i class="fas fa-walking"></i></a> -->
+</div>
+
+<table *ngIf="accesos.length > 0" class="table table-sm">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Foto</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Cédula</th>
+            <th scope="col">Empresa</th>
+            <th scope="col">Acceso</th>
+            <th scope="col">Datacenter</th>
+            <th scope="col">Fecha expiración</th>
+            <th scope="col">Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let acceso of accesos; let i = index">
+            <th class="align-middle" scope='row'>{{i+1}}</th>
+            <td class="align-middle"> <button (click)="onClickDetalleAcceso(acceso.idseguridad)" type="button" class="btn btn-link m-0 p-0"><img src="{{acceso.foto}}" alt="Error" onerror="this.onerror=null;this.src='../../../../assets/unknown.jpg';" width="35" height="35"></button></td>
+            <td class="align-middle">{{acceso.nombre_visitante}}</td>
+            <td class="align-middle">{{acceso.cedula_visitante}}</td>
+            <td class="align-middle">{{acceso.empleado_visitante}}</td>
+            <td class="align-middle">{{acceso.compania_visitante}}</td>
+            <td class="align-middle text-info"><i class="fas fa-city"></i> {{acceso.viceprecidencia_ejecutiva}}</td>
+            <td class="align-middle text-success"><i class="fas fa-clock"></i> {{acceso.fecha_expiracion | date: 'dd/MM/yyyy'}}</td>
+            <td *ngIf="acceso.estado=='Aprobado' || acceso.estado=='aprobado'" class="text-success align-middle">{{acceso.estado | titlecase}} <i class="fas fa-check"></i></td>
+            <td *ngIf="acceso.estado=='Solicitado' || acceso.estado=='solicitado'" class="text-warning align-middle">{{acceso.estado | titlecase}} <i class="far fa-clock"></i></td>
+            <td *ngIf="acceso.estado=='Expirado' || acceso.estado=='expirado'" class="text-success align-middle">{{acceso.estado | titlecase}} <i class="fas fa-times"></i></td>
+        </tr>
+        
+    </tbody>
+</table>

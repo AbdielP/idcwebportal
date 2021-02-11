@@ -5,9 +5,10 @@ import { AccesosRoutingModule } from './accesos-routing.module';
 import { AccesosComponent } from './accesos.component';
 import { SharedModule } from '../shared/shared.module';
 import { OpcionesComponent } from './opciones/opciones.component';
+import { ListadoComponent } from './listado/listado.component';
 
 @NgModule({
-  declarations: [AccesosComponent, OpcionesComponent],
+  declarations: [AccesosComponent, OpcionesComponent, ListadoComponent],
   imports: [
     SharedModule,
     CommonModule,
