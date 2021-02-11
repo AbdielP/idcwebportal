@@ -7,6 +7,9 @@ const routes: Routes = [
   { path: '', canActivate: [LoginGuard], component: PublicComponent, children: [
     {
       path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule)
+    },
+    {
+      path: 'access', loadChildren: () => import('./accesos/accesos.module').then(m => m.AccesosModule)
     }
   ]}
 ];
