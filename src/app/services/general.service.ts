@@ -19,12 +19,4 @@ export class GeneralService {
       console.log(err)
     ])));
   }
-
-  // Verificar tokeninfo
-  getTokenInfo(token: string): Observable<any> {
-    return this.http.get(`${this.SERVER_URL}/stinfo?token=${token}`)
-    .pipe((catchError(err => [
-      console.log(err)
-    ])));
-  }
 }

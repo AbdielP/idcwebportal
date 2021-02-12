@@ -1,11 +1,17 @@
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocalstorageService {
 
-  constructor() {
+  private SERVER_URL = environment.SERVER_URL;
+
+  constructor(private http: HttpClient) {
     this.clearLocalstorageCategory();
   }
 
@@ -30,5 +36,13 @@ export class LocalstorageService {
 
   clearLocalstorageCategory(): void {
     localStorage.removeItem('accesos');
+  }
+
+  // Verificar tokeninfo
+  getTokenInfo(token: string): Observable<any> {
+    return this.http.get(`${this.SERVER_URL}/stinfo?token=${token}`)
+    .pipe((catchError(err => [
+      console.log(err)
+    ])));
   }
 }
