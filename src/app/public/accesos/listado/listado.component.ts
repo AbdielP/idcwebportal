@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Subscription, Observable } from 'rxjs';
 import { GeneralService } from 'src/app/services/general.service';
 import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
@@ -14,6 +15,8 @@ export class ListadoComponent implements OnInit {
   userInfo: any;
   userProyects: any = '';
 
+  eventSubscription: Subscription;
+  @Input() opciones: Observable<any>;
   @Output() emitirDetalleAcceso: EventEmitter<any> = new EventEmitter();
 
   constructor(private localStorageService: LocalstorageService, private generalService: GeneralService,
@@ -21,6 +24,7 @@ export class ListadoComponent implements OnInit {
 
   ngOnInit() {
     this.getTokenInfo(this.localStorageService.getToken());
+    this.subscribeEventOpciones();
   }
 
   onClickDetalleAcceso(idseguridad: number): void {
@@ -53,6 +57,25 @@ export class ListadoComponent implements OnInit {
     .subscribe((resp: any) => {
       this.accesos = resp.select;
     });
+  }
+
+  subscribeEventOpciones(): void {
+    this.eventSubscription = this.opciones.subscribe(({opciones}) => {
+      // console.log(opciones);
+      if (opciones === 'tramite') {
+        this.selectAccesos(`sp_select_accesos_pendientes_aprobacion()`);
+      } else {
+        this.selectAccesos(`sp_select_accesos_compania('${this.userProyects.nombre_empresa}', '${this.userProyects.datacenter}')`);
+      }
+    });
+  }
+
+  // Llama al servicio para obtener listado de acesos
+  selectAccesos(storedprocedure: string): void {
+    this.seguridadService.select(storedprocedure).subscribe((resp: any) => {
+        // console.log(resp);
+        this.accesos = resp.select;
+      });
   }
 
 }

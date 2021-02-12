@@ -3,8 +3,8 @@
         <app-sidebar></app-sidebar>
     </div>
     <div class="col-md-8">
-        <app-opciones></app-opciones>
-        <app-listado (emitirDetalleAcceso)="getDetallesAcceso($event)" class="card p-1 mt-1" [hidden]="!esconderDetalle"></app-listado>
+        <app-opciones (emitirOpciones)="getOpciones($event)"></app-opciones>
+        <app-listado (emitirDetalleAcceso)="getDetallesAcceso($event)" [opciones]="eventOpciones.asObservable()" class="card p-1 mt-1" [hidden]="!esconderDetalle"></app-listado>
         <app-detalle [events]="eventDetalleAcceso.asObservable()" [hidden]="esconderDetalle"></app-detalle>
 
     </div>
