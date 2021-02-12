@@ -1,0 +1,18 @@
+@import '../../../../assets/styles/general.css';
+
+.opacidad-suave {
+    background-color: var(--card-rgba-suave);
+}
+
+.opacidad-media {
+    background-color: var(--card-rgba-media);
+}
+.div-ver-qr {
+    cursor: pointer;
+}.div-ver-qr:hover {
+    background-color: var(--card-rgba-fuerte)
+}
+
+.btn-qr {
+    font-size: .9rem;
+}
