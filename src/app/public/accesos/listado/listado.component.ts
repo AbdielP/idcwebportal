@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { GeneralService } from 'src/app/services/general.service';
 import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
@@ -14,6 +14,8 @@ export class ListadoComponent implements OnInit {
   userInfo: any;
   userProyects: any = '';
 
+  @Output() emitirDetalleAcceso: EventEmitter<any> = new EventEmitter();
+
   constructor(private localStorageService: LocalstorageService, private generalService: GeneralService,
               private seguridadService: SeguridadService) { }
 
@@ -22,7 +24,7 @@ export class ListadoComponent implements OnInit {
   }
 
   onClickDetalleAcceso(idseguridad: number): void {
-    console.log(idseguridad);
+    this.emitirDetalleAcceso.emit(idseguridad);
   }
 
   // Obtiene la información del token del usuario logeado
@@ -49,7 +51,6 @@ export class ListadoComponent implements OnInit {
   selectAccesosProyecto(companiavisitante: string, datacenter: string): void {
     this.seguridadService.select(`sp_select_accesos_compania('${companiavisitante}', '${datacenter}')`)
     .subscribe((resp: any) => {
-      console.log(resp);
       this.accesos = resp.select;
     });
   }

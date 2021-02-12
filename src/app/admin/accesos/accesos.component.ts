@@ -48,7 +48,7 @@ export class AccesosComponent implements OnInit {
   // Recibe la información del acceso (ID) a mostrar (Detalles)
   getDetallesAcceso(detalle): void {
     this.esconderDetalle = false;
-    // Emite el ID del acceso hacia el componente hijo: app-detalle
+    // Emite el ID del acceso hacia el componente compartido: app-detalle
     this.eventDetalleAcceso.next({detalle});
   }
 
