@@ -1,7 +1,7 @@
 import { Observable, Subscription } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { SeguridadService } from 'src/app/services/seguridad.service';
-import { QrcodeComponent } from '../qrcode/qrcode.component';
+import { QrcodeComponent } from 'src/app/compartidos/accesos/qrcode/qrcode.component';
 
 import QRCode from 'qrcode';
 

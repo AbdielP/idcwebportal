@@ -23,8 +23,8 @@ export class QrcodeComponent {
     this.cedula = data.cedula;
   }
 
-  // Genera un CANVAS a partir del HTML con el formato de QR IDC
-  downloadImage(name: string, id: string) {
+   // Genera un CANVAS a partir del HTML con el formato de QR IDC
+   downloadImage(name: string, id: string) {
     html2canvas(this.screenx.nativeElement).then(canvas => {
       this.canvasx.nativeElement.src = canvas.toDataURL();
       this.downloadLinkx.nativeElement.href = canvas.toDataURL('image/png');
