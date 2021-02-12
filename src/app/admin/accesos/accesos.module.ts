@@ -8,14 +8,15 @@ import { AccesosComponent } from './accesos.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { ListadoComponent } from './listado/listado.component';
 import { OpcionesComponent } from './opciones/opciones.component';
-import { DetalleComponent } from './detalle/detalle.component';
-import { QrcodeComponent } from 'src/app/compartidos/accesos/qrcode/qrcode.component';
 
+import { CompartidosModule } from 'src/app/compartidos/compartidos.module';
+import { QrcodeComponent } from 'src/app/compartidos/accesos/qrcode/qrcode.component';
 import { SharedModule } from 'src/app/public/shared/shared.module';
 
 @NgModule({
-  declarations: [AccesosComponent, BusquedaComponent, ListadoComponent, OpcionesComponent, DetalleComponent, QrcodeComponent],
+  declarations: [AccesosComponent, BusquedaComponent, ListadoComponent, OpcionesComponent],
   imports: [
+    CompartidosModule,
     SharedModule,
     CommonModule,
     AccesosRoutingModule,
