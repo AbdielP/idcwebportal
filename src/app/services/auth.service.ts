@@ -5,7 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ErrorhandlerService } from './error/errorhandler.service';
+import { AutherrorService } from './error/autherror.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AuthService {
   token: string;
   SERVER_URL = environment.SERVER_URL;
 
-  constructor(private http: HttpClient, private router: Router, private errorHandler: ErrorhandlerService) {
+  constructor(private http: HttpClient, private router: Router, private errorHandler: AutherrorService) {
     this.loadSession();
   }
 
@@ -31,6 +31,7 @@ export class AuthService {
     return this.http.post(`${this.SERVER_URL}/auth/login/${storedprocedure}`, usuario)
     .pipe(map((resp: any) => {
       this.setStorage(resp.token);
+      console.log(resp);
       return resp;
     }))
     .pipe(catchError(err => of([
