@@ -1,5 +1,13 @@
 @import '../../../../assets/styles/general.css';
 
+.div-bg {
+    background-color: var(--div-grey-background);
+}
+
+.text-purple {
+    color: var(--btn-purple);
+}
+
 .opacidad-suave {
     background-color: var(--card-rgba-suave);
 }

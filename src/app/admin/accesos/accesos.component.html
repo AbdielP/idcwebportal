@@ -16,7 +16,7 @@
         <app-listado (emitirDetalleAcceso)="getDetallesAcceso($event)" [events]="eventSubject.asObservable()"
          [opciones]="eventOpciones.asObservable()" ></app-listado>
     </div>
-    <div [hidden]="esconderDetalle" class="card opacidad-fuerte col-md-12 p-2">
+    <div [hidden]="esconderDetalle" class="opacidad-fuerte col-md-12 p-2">
         <app-detalle [events]="eventDetalleAcceso.asObservable()" ></app-detalle>
     </div>
 </div>
