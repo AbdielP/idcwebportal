@@ -1,5 +1,5 @@
 import { Subject } from 'rxjs';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { SessionInactivityService } from 'src/app/services/session/session-inactivity.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { SessionInactivityService } from 'src/app/services/session/session-inact
   templateUrl: './accesos.component.html',
   styleUrls: ['./accesos.component.css']
 })
-export class AccesosComponent implements OnInit {
+export class AccesosComponent {
 
   userActivity: any;
   userInactive: Subject<any> = new Subject();
@@ -20,8 +20,6 @@ export class AccesosComponent implements OnInit {
   esconderDetalle = true;
 
   constructor(private sessionInactivity: SessionInactivityService) { }
-
-  ngOnInit() {}
 
   @HostListener('window:mousemove') refreshUserState() {
     this.sessionInactivity.resetActivity();

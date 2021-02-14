@@ -1,5 +1,6 @@
+import { SessionInactivityService } from 'src/app/services/session/session-inactivity.service';
 import { Subject } from 'rxjs';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-accesos',
@@ -14,7 +15,11 @@ export class AccesosComponent {
   esconderDetalle = true;
   esconderBusqueda = false;
 
-  constructor() { }
+  constructor(private sessionInactivity: SessionInactivityService) { }
+
+  @HostListener('window:mousemove') refreshUserState() {
+    this.sessionInactivity.resetActivity();
+  }
 
   // Recibe opciones para mostrar (Accesos aprobados o en trámite) desde el componente hijo: app-opciones
   getOpciones(opciones): void {

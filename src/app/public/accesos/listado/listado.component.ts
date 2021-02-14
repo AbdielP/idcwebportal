@@ -28,7 +28,6 @@ export class ListadoComponent implements OnInit {
     this.localStorageGetAccesos();
     this.getTokenInfo(this.localstorageService.getToken());
     this.subscribeEventOpciones();
-    console.log(this.proyecto);
   }
 
   onClickDetalleAcceso(idseguridad: number): void {
@@ -48,7 +47,6 @@ export class ListadoComponent implements OnInit {
     this.generalService.select(`sp_clientes_select_proyectos('${idusuario}')`).subscribe((resp: any) => {
       // console.log(resp);
       this.userProyects = resp.select;
-      console.log(this.userProyects);
       if (this.userProyects.lengt === 1) {
         this.selectAccesosProyecto(this.userProyects[0]);
       }
