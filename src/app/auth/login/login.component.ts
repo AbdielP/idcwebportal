@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { DateService } from 'src/app/services/date.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,9 @@ export class LoginComponent {
 
   year: number;
 
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private dateService: DateService) {
+    this.year = this.dateService.actualYear();
+  }
 
   onSubmit(form: NgForm): void {
     if (form.invalid) { return; }

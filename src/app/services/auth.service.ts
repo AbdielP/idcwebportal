@@ -5,6 +5,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ErrorhandlerService } from './error/errorhandler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   token: string;
   SERVER_URL = environment.SERVER_URL;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private errorHandler: ErrorhandlerService) {
     this.loadSession();
   }
 
@@ -33,8 +34,7 @@ export class AuthService {
       return resp;
     }))
     .pipe(catchError(err => of([
-      // this.authErrorService.handleError(err)
-      console.log(err)
+      this.errorHandler.errorHandler(err)
     ])));
   }
 
