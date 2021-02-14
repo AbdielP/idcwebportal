@@ -1,7 +1,7 @@
 @import '../../../../assets/styles/general.css';
 
 .div-bg {
-    background-color: var(--div-grey-background);
+    background-color: var(--div-background);
 }
 
 .pointer {
@@ -9,7 +9,7 @@
 }
 
 .text-purple {
-    color: var(--btn-purple);
+    color: var(--btn-default);
 }
 
 .table-font {

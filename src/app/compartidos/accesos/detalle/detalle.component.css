@@ -1,11 +1,11 @@
 @import '../../../../assets/styles/general.css';
 
 .div-bg {
-    background-color: var(--div-grey-background);
+    background-color: var(--div-background);
 }
 
 .text-purple {
-    color: var(--btn-purple);
+    color: var(--btn-default);
 }
 
 .opacidad-suave {
