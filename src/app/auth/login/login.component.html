@@ -3,26 +3,32 @@
     <div class="container main-container">
         <div class="row">
             <div class="col-md-3 d-flex flex-column justify-content-center align-items-center">
-                <div class="row">
+                <P class="lead text-center">Bienvenido al portal web IDC.</P>
+                <hr>
+                <p class='text-secondary text-center'>Inicie sesión para poder acceder al sitio web.</p>
+                <i class="fas fa-lock text-purple"></i>
+                <!-- <div class="row">
                     <div class="d-flex justify-content-center align-items-center">
-                        <i class="fas fa-exclamation-circle text-warning lead mr-2 mb-2"></i> 
-                        <p class='text-secondary text-justify'>Inicie sesión para poder acceder al sitio web.</p>
+                        <P class="lead">Bienvenido al portal web IDC Liberty Latin America.</P>
+                        <hr>
+                        <p class='text-secondary text-center'>Inicie sesión para poder acceder al sitio web.</p>
                     </div>
-                </div>
+                </div> -->
                 
             </div>
-            <div class="col-md-5 d-flex flex-column justify-content-center align-items-center">
-                <i class="fas fa-store text-primary m-3 display-2"></i>
-                <form ngNativeValidate class="form-signin" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" >
+            <div class="login-container col-md-5 d-flex flex-column justify-content-center align-items-center">
+                <img width="100" src="../../../assets/img/Logo final.png" alt="LLA IDC">
+                <p class="lead mt-4"><b class="text-lgrey">LIBERTY </b><b class="text-lorange">LATIN AMERICA</b>.</p>
+                <form ngNativeValidate class="form-signin" #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)" class="my-2">
                     <input type="text" id="usrn" name="usrn" class="form-control" autocomplete="on" placeholder="Usuario" required ngModel>
                     <input type="password" name="pswd" id="pswd" class="form-control" autocomplete="on" placeholder="Contraseña" required ngModel>
                     
-                    <button class="btn btn-sm btn-primary btn-block mt-4" type="submit">Entrar</button>
+                    <button class="btn btn-sm btn-purple btn-block text-light mt-4" type="submit">Entrar</button>
                     
                 </form>
                 <footer class="mt-4 text-center">
+                    <p class="mb-1 text-secondary">&copy; {{year}} 2021 - IDC Liberty Latin America.</p>
                     
-                    <small class="text-secondary">Sitio web con acceso restringido.</small>
                     <br>
                     <!-- <a [routerLink]="['/']" class="h6"><i class="fas fa-home"></i> Ir a inicio</a> -->
                     <hr>
@@ -31,12 +37,12 @@
                     <!-- <i class="fab fa-cc-visa text-secondary h2 m-2"></i>
                     <i class="fab fa-cc-mastercard text-secondary h2 m-2"></i>
                     <i class="fab fa-cc-paypal text-secondary h2 m-2"></i> -->
-                    <p class="mb-1 text-secondary">&copy; {{year}} - IDC Liberty Latin America.</p>
+                    <small class="text-secondary"><i class="fas fa-exclamation-circle text-warning"></i> Sitio web con acceso restringido.</small>
                 </div>
             </div>
             <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
                 <p class="lead">¿Aún no tienes cuenta?</p>
-                <p class="text-secondary text-center">- Planificar los pasos para que soliciten una cuenta -</p>
+                <p class="text-secondary text-center">Si aún no tiene una cuenta, contacte con <i class="text-purple">personal de administración</i> del IDC o solicitelo a traves de la matriz de comunicación.</p>
             </div>
             
         </div>
