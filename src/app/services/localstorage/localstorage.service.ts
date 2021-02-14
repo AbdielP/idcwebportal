@@ -27,6 +27,7 @@ export class LocalstorageService {
     delete proyecto.nivel;
     delete proyecto.rack;
     delete proyecto.tipo;
+    delete proyecto.desconectado;
     localStorage.setItem('accesos', JSON.stringify(proyecto));
   }
 

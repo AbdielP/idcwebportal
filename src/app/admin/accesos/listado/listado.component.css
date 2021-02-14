@@ -3,3 +3,7 @@
 .opacidad-media {
     background-color: var(--card-rgba-media);
 }
+
+.table-font {
+    font-size: 0.75rem;
+}

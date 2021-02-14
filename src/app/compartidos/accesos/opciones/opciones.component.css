@@ -1,0 +1,13 @@
+@import '../../../../assets/styles/general.css';
+
+.btn-purple {
+    background-color: var(--btn-purple);
+}.btn-purple:active {
+    background-color: var(--angular-color-purple);
+}.btn-purple:hover{
+    background-color: var(--btn-purple-hover);
+}
+
+.active {
+    background-color: var(--angular-color-purple)!important;
+}

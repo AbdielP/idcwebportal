@@ -1,38 +1,64 @@
-<div *ngIf="userProyects.length > 1" class="col-md-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media">
-    <ng-container *ngFor="let proyecto of userProyects; let i = index">
-        <button type="button" class="btn btn-link" (click)="selectAccesosProyecto(proyecto.nombre_empresa,proyecto.datacenter)">LOC{{proyecto.loc}} - {{proyecto.nombre_empresa}} - {{proyecto.datacenter}}</button>
-    </ng-container>
-    
-</div>
+<div class="row">
+    <div class="div-bg container-fluid">
+        <!-- TARJETAS DE PROYECTOS SI TIENE MÁS DE 1 -->
+        <div *ngIf="userProyects.length > 1" class="row d-flex p-1">
+            <div *ngFor="let proyecto of userProyects" class="card text-muted col-sm-12 col-md-6 pt-3">
+                <div class="col-12 d-flex">
+                    <img src="../../../../assets/img/Logo final.png" height="30" alt="" class="mr-2 rounded">
+                    <div class="media-body pb-2 mb-0 small lh-125 ">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong class="text-gray-dark">LOC{{proyecto.loc}} - {{proyecto.nombre_empresa}}</strong>
+                            <a class="text-purple pointer" (click)="selectAccesosProyecto(proyecto)"><i class="far fa-eye"></i> Ver accesos</a>
+                        </div>
+                        <span class="d-block">Proyecto ubicado en {{proyecto.datacenter}}</span>
+                    </div>
+                </div>
+            </div>  
+        </div>
 
-<table *ngIf="accesos.length > 0" class="table table-sm">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Foto</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Cédula</th>
-            <th scope="col">Empresa</th>
-            <th scope="col">Acceso</th>
-            <th scope="col">Datacenter</th>
-            <th scope="col">Fecha expiración</th>
-            <th scope="col">Estado</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let acceso of accesos; let i = index">
-            <th class="align-middle" scope='row'>{{i+1}}</th>
-            <td class="align-middle"> <button (click)="onClickDetalleAcceso(acceso.idseguridad)" type="button" class="btn btn-link m-0 p-0"><img src="{{acceso.foto}}" alt="Error" onerror="this.onerror=null;this.src='../../../../assets/unknown.jpg';" width="35" height="35"></button></td>
-            <td class="align-middle">{{acceso.nombre_visitante}}</td>
-            <td class="align-middle">{{acceso.cedula_visitante}}</td>
-            <td class="align-middle">{{acceso.empleado_visitante}}</td>
-            <td class="align-middle">{{acceso.compania_visitante}}</td>
-            <td class="align-middle text-info"><i class="fas fa-city"></i> {{acceso.viceprecidencia_ejecutiva}}</td>
-            <td class="align-middle text-success"><i class="fas fa-clock"></i> {{acceso.fecha_expiracion | date: 'dd/MM/yyyy'}}</td>
-            <td *ngIf="acceso.estado=='Aprobado' || acceso.estado=='aprobado'" class="text-success align-middle">{{acceso.estado | titlecase}} <i class="fas fa-check"></i></td>
-            <td *ngIf="acceso.estado=='Solicitado' || acceso.estado=='solicitado'" class="text-warning align-middle">{{acceso.estado | titlecase}} <i class="far fa-clock"></i></td>
-            <td *ngIf="acceso.estado=='Expirado' || acceso.estado=='expirado'" class="text-success align-middle">{{acceso.estado | titlecase}} <i class="fas fa-times"></i></td>
-        </tr>
         
-    </tbody>
-</table>
+        <div class="row mt-3">
+            <!-- Dialogos tipo de acceso  -->
+            <div *ngIf="userProyects.length > 1 && accesos.length == 0" class="col-12 mt-2 text-center">
+                <p class="lead" *ngIf="valoropciones == 'aprobados'"><i class="fas fa-exclamation-circle text-warning"></i> Seleccione uno de sus proyectos para listar los <b class="text-purple">accesos aprobados</b>.</p>
+                <p class="lead" *ngIf="valoropciones == 'tramite'"><i class="fas fa-exclamation-circle text-warning"></i> Seleccione uno de sus proyectos para listar los <b class="text-purple">accesos pendientes</b>.</p>
+            </div>
+            
+            <div class="container-fluid">
+                <table *ngIf="accesos.length > 0" class="table table-sm p-0">
+                    <thead class="text-secondary">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Foto</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Cédula</th>
+                            <th scope="col">Empresa</th>
+                            <th scope="col">Acceso</th>
+                            <th scope="col">Datacenter</th>
+                            <th scope="col">Fecha expiración</th>
+                            <th scope="col">Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-font " *ngFor="let acceso of accesos; let i = index">
+                            <th class="align-middle" scope='row'>{{i+1}}</th>
+                            <td class="align-middle"> <button (click)="onClickDetalleAcceso(acceso.idseguridad)" type="button" class="btn btn-link m-0 p-0"><img src="{{acceso.foto}}" alt="Error" onerror="this.onerror=null;this.src='../../../../assets/unknown.jpg';" width="35" height="35"></button></td>
+                            <td class="align-middle">{{acceso.nombre_visitante}}</td>
+                            <td class="align-middle">{{acceso.cedula_visitante}}</td>
+                            <td class="align-middle">{{acceso.empleado_visitante}}</td>
+                            <td class="align-middle">{{acceso.compania_visitante}}</td>
+                            <td class="align-middle text-purple"><i class="fas fa-city"></i> {{acceso.viceprecidencia_ejecutiva}}</td>
+                            <td class="align-middle text-success"><i class="fas fa-clock"></i> {{acceso.fecha_expiracion | date: 'dd/MM/yyyy'}}</td>
+                            <td *ngIf="acceso.estado=='Aprobado' || acceso.estado=='aprobado'" class="text-success align-middle">{{acceso.estado | titlecase}} <i class="fas fa-check"></i></td>
+                            <td *ngIf="acceso.estado=='Solicitado' || acceso.estado=='solicitado'" class="text-warning align-middle">{{acceso.estado | titlecase}} <i class="far fa-clock"></i></td>
+                            <td *ngIf="acceso.estado=='Expirado' || acceso.estado=='expirado'" class="text-success align-middle">{{acceso.estado | titlecase}} <i class="fas fa-times"></i></td>
+                        </tr>
+                            
+                    </tbody>
+                </table>
+            
+            </div>
+        </div>
+    </div>
+
+</div>

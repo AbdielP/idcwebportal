@@ -11,20 +11,22 @@ import { SeguridadService } from 'src/app/services/seguridad.service';
 })
 export class ListadoComponent implements OnInit {
 
-  accesos = [];
+  accesos: any = '';
   userInfo: any;
   userProyects: any = '';
   valoropciones = 'aprobados'; // Decide cual stored procedure llamar para listar los accesos, solicitados o en trámite.
+  proyecto: any;
 
   eventSubscription: Subscription;
   @Input() opciones: Observable<any>;
   @Output() emitirDetalleAcceso: EventEmitter<any> = new EventEmitter();
 
-  constructor(private localStorageService: LocalstorageService, private generalService: GeneralService,
+  constructor(private localstorageService: LocalstorageService, private generalService: GeneralService,
               private seguridadService: SeguridadService) { }
 
   ngOnInit() {
-    this.getTokenInfo(this.localStorageService.getToken());
+    this.localStorageGetAccesos();
+    this.getTokenInfo(this.localstorageService.getToken());
     this.subscribeEventOpciones();
   }
 
@@ -34,7 +36,7 @@ export class ListadoComponent implements OnInit {
 
   // Obtiene la información del token del usuario logeado
   getTokenInfo(token: string) {
-    this.localStorageService.getTokenInfo(token).subscribe((resp: any) => {
+    this.localstorageService.getTokenInfo(token).subscribe((resp: any) => {
       this.userInfo = resp.tokeninfo;
       this.getUsuarioProyectos(this.userInfo.idusuario);
     });
@@ -45,20 +47,24 @@ export class ListadoComponent implements OnInit {
     this.generalService.select(`sp_clientes_select_proyectos('${idusuario}')`).subscribe((resp: any) => {
       // console.log(resp);
       this.userProyects = resp.select;
+      console.log(this.userProyects);
       if (this.userProyects.lengt === 1) {
-        this.selectAccesosProyecto(this.userProyects[0].compania_visitante, this.userProyects[0].datacenter);
+        this.selectAccesosProyecto(this.userProyects[0]);
       }
     });
   }
 
   // LLama los accesos del proyecto indicado
-  selectAccesosProyecto(companiavisitante: string, datacenter: string): void {
+  selectAccesosProyecto(proyecto: any): void {
+    this.proyecto = proyecto;
+    console.log(this.proyecto);
+    this.localstorageService.setAcceso(this.proyecto);
     let sp = '';
     if (this.valoropciones === 'aprobados') {
-      sp = `sp_select_accesos_compania('${companiavisitante}', '${datacenter}')`;
+      sp = `sp_select_accesos_compania('${proyecto.nombre_empresa}', '${proyecto.datacenter}')`;
     } else {
-      sp = `sp_clientes_accesos_pendientes_aprobacion('${companiavisitante}',
-      '${datacenter}')`;
+      sp = `sp_clientes_accesos_pendientes_aprobacion('${proyecto.nombre_empresa}',
+      '${proyecto.datacenter}')`;
     }
     this.seguridadService.select(sp).subscribe((resp: any) => {
       this.accesos = resp.select;
@@ -70,11 +76,11 @@ export class ListadoComponent implements OnInit {
       // console.log(opciones);
       if (opciones === 'tramite') {
         this.valoropciones = 'tramite';
-        this.selectAccesos(`sp_clientes_accesos_pendientes_aprobacion('${this.userProyects.nombre_empresa}',
-         '${this.userProyects.datacenter}')`);
+        this.selectAccesos(`sp_clientes_accesos_pendientes_aprobacion('${this.proyecto.nombre_empresa}',
+         '${this.proyecto.datacenter}')`);
       } else {
         this.valoropciones = 'aprobados';
-        this.selectAccesos(`sp_select_accesos_compania('${this.userProyects.nombre_empresa}', '${this.userProyects.datacenter}')`);
+        this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
       }
     });
   }
@@ -85,6 +91,14 @@ export class ListadoComponent implements OnInit {
         // console.log(resp);
         this.accesos = resp.select;
       });
+  }
+
+  // Si existe un acceso seleccionado en localstorage, lo lee y lo coloca en html.
+  localStorageGetAccesos(): void {
+    if (this.localstorageService.getProyecto() != null) {
+      this.proyecto = JSON.parse(this.localstorageService.getProyecto());
+      this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
+    }
   }
 
 }

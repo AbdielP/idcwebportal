@@ -3,5 +3,9 @@
     --card-rgba-media: rgba(255, 255, 255, .4);
     --card-rgba-fuerte: rgba(255, 255, 255, .2);
 
+    --div-grey-background: #f2f2f2;
     --angular-color-purple: #673ab7;
+    
+    --btn-purple: #8d4dff;
+    --btn-purple-hover: #7f48e0;
 }

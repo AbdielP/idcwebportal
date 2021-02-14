@@ -1,0 +1,17 @@
+@import '../../../../assets/styles/general.css';
+
+.div-bg {
+    background-color: var(--div-grey-background);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.text-purple {
+    color: var(--btn-purple);
+}
+
+.table-font {
+    font-size: 0.75rem;
+}
