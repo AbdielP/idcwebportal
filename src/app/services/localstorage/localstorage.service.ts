@@ -23,7 +23,6 @@ export class LocalstorageService {
   setAcceso(proyecto): void {
     delete proyecto.idproyecto;
     delete proyecto.jaula;
-    delete proyecto.loc;
     delete proyecto.nivel;
     delete proyecto.rack;
     delete proyecto.tipo;

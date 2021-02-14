@@ -28,6 +28,7 @@ export class ListadoComponent implements OnInit {
     this.localStorageGetAccesos();
     this.getTokenInfo(this.localstorageService.getToken());
     this.subscribeEventOpciones();
+    console.log(this.proyecto);
   }
 
   onClickDetalleAcceso(idseguridad: number): void {
@@ -57,6 +58,7 @@ export class ListadoComponent implements OnInit {
   // LLama los accesos del proyecto indicado
   selectAccesosProyecto(proyecto: any): void {
     this.proyecto = proyecto;
+    console.log(this.proyecto);
     this.localstorageService.setAcceso(this.proyecto);
     let sp = '';
     if (this.valoropciones === 'aprobados') {
