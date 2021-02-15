@@ -8,10 +8,9 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ClienteGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
 
   token: any;
-
   constructor(private localstorageService: LocalstorageService) {}
 
   canActivate(
@@ -20,7 +19,7 @@ export class ClienteGuard implements CanActivate {
     this.token = this.localstorageService.getToken();
     return this.localstorageService.getTokenInfo(this.token).pipe(map((results: any) => {
 
-      if (results.tokeninfo.idroll !== 2) {
+      if (results.tokeninfo.idroll !== 1) {
         // Podría crear un servicio, componente o alguna manera de redireccionar según su roll a su 'homepage'
         return false;
       }

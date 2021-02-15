@@ -31,7 +31,6 @@ export class AuthService {
     return this.http.post(`${this.SERVER_URL}/auth/login/${storedprocedure}`, usuario)
     .pipe(map((resp: any) => {
       this.setStorage(resp.token);
-      console.log(resp);
       return resp;
     }))
     .pipe(catchError(err => of([
