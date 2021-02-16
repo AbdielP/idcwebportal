@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
 
 @Injectable({
@@ -14,12 +16,19 @@ export class ErrorhandlerService {
     backdrop: `rgba(0,0,0,0.4)`
   };
 
-  constructor() { }
+  router: any;
+
+  constructor(private authService: AuthService, private injector: Injector) { }
 
   errorHandler(error: any): Promise<any> {
+    this.router = this.injector.get(Router);
     console.log(error);
     if (error.status === 0) {
       return Swal.fire('Server Down.', `Servidor fuera de servicio.`, 'question');
+    }
+    if (error.status === 401) {
+      this.authService.clearStorage();
+      return this.router.navigate(['/auth/login']);
     }
     // Forbidden -> El cliente no posee los permisos necesarios para cierto contenido
     if (error.status === 403) {
