@@ -44,7 +44,7 @@ export class ListadoComponent implements OnInit {
 
   // Lista los proyectos relacionados con el usuario logeado
   getUsuarioProyectos(idusuario: number): void {
-    this.generalService.select(`sp_clientes_select_proyectos('${idusuario}')`).subscribe((resp: any) => {
+    this.generalService.select('ggggwwwwpppp', `sp_clientes_select_proyectos('${idusuario}')`).subscribe((resp: any) => {
       // console.log(resp);
       this.userProyects = resp.select;
       if (this.userProyects.lengt === 1) {

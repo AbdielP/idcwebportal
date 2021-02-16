@@ -2,6 +2,8 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import { GeneralService } from 'src/app/services/general.service';
+import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 
 /** Constants used to fill up our data base. */
 const COLORS: string[] = [
@@ -25,7 +27,10 @@ export class BitacoraComponent implements OnInit, AfterViewInit  {
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
 
-  constructor() {
+  userInfo: any;
+  userProyects: any = '';
+
+  constructor(private generalService: GeneralService, private localstorageService: LocalstorageService) {
      // Create 100 users
      const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
@@ -34,7 +39,35 @@ export class BitacoraComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit() {
+    this.getTokenInfo(this.localstorageService.getToken());
   }
+
+  // NO BORRAR ---------------------------------->
+
+  // Obtiene la información del token del usuario logeado
+  getTokenInfo(token: string) {
+    this.localstorageService.getTokenInfo(token).subscribe((resp: any) => {
+      this.userInfo = resp.tokeninfo;
+      this.getUsuarioProyectos(this.userInfo.idusuario);
+    });
+  }
+
+  // Lista los proyectos relacionados con el usuario logeado
+  getUsuarioProyectos(idusuario: number): void {
+    this.generalService.select('ggggwwwwpppp', `sp_clientes_select_proyectos('${idusuario}')`).subscribe((resp: any) => {
+      console.log(resp);
+      this.userProyects = resp.select;
+      if (this.userProyects.lengt === 1) {
+        // Llamar aquí
+      }
+    });
+  }
+
+  getBitacoraCliente() {
+  // CONSEGUIR los proyectos donde el usuario esté relacionado
+  }
+
+  // HASTA AQUÍ NO BORRAR ----------------------->
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;

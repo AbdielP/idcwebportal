@@ -13,8 +13,8 @@ export class GeneralService {
 
   constructor(private http: HttpClient) { }
 
-  select(storedprocedure: string): Observable<any> {
-    return this.http.get(`${this.SERVER_URL}/ggggwwwwpppp/${storedprocedure}`)
+  select(url: string, storedprocedure: string): Observable<any> {
+    return this.http.get(`${this.SERVER_URL}/${url}/${storedprocedure}`)
     .pipe((catchError(err => [
       console.log(err)
     ])));
