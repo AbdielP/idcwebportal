@@ -22,3 +22,7 @@ table {
   td, th {
     width: 25%;
   }
+
+  .table-font {
+    font-size: 0.75rem;
+}

@@ -10,40 +10,71 @@
             <small class="text-purple"><i class="fas fa-exclamation-circle text-warning"></i> La bitacora muestra unicamente el historial de visitas a los centro de datos del año vigente.</small>
         </div>
 
+        <div *ngIf="userProyects.length > 1" class="container-fluid div-bg border-bottom px-3">
+          <div class="row d-flex p-1">
+            <div *ngFor="let proyecto of userProyects" class="card text-muted col-sm-12 col-md-6 pt-3">
+                <div class="col-12 d-flex">
+                    <img src="../../../../assets/img/Logo final.png" height="30" alt="" class="mr-2 rounded">
+                    <div class="media-body pb-2 mb-0 small lh-125 ">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong class="text-gray-dark">LOC{{proyecto.loc}} - {{proyecto.nombre_empresa}}</strong>
+                            <a class="text-purple pointer" (click)="selectBitacoraProyecto(proyecto)"><i class="far fa-eye"></i> Ver bitacora</a>
+                        </div>
+                        <span class="d-block">Bitacora {{proyecto.datacenter}}</span>
+                    </div>
+                </div>
+            </div>  
+          </div>
+        </div>
 
         <!-- tabla -->
-        <div class="container-fluid div-bg mb-5">
+        <div [hidden]="proyecto.length < 1" class="container-fluid div-bg mb-5">
             <mat-form-field>
-                <mat-label>Filter</mat-label>
-                <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+                <mat-label>Filtrar</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Busqueda" #input>
             </mat-form-field>
               
-              <div class="mat-elevation-z8">
-                <table mat-table [dataSource]="dataSource" matSort>
+              <div class="mat-elevation-z8 table-font">
+                <table mat-table [dataSource]="dataSource" matSort class="table-font">
               
                   <!-- ID Column -->
-                  <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
-                    <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+                  <ng-container matColumnDef="nombre_visitante">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre</th>
+                    <td mat-cell *matCellDef="let row"> {{row.nombre_visitante}}</td>
                   </ng-container>
               
                   <!-- Progress Column -->
-                  <ng-container matColumnDef="progress">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Progress </th>
-                    <td mat-cell *matCellDef="let row"> {{row.progress}}% </td>
+                  <ng-container matColumnDef="check_in_out">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Entrada</th>
+                    <td mat-cell *matCellDef="let row" class="text-info"> {{row.check_in_out }}</td>
                   </ng-container>
               
                   <!-- Name Column -->
-                  <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
+                  <ng-container matColumnDef="empleado_visitante">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa</th>
+                    <td mat-cell *matCellDef="let row"> {{row.empleado_visitante}}</td>
                   </ng-container>
               
                   <!-- Color Column -->
-                  <ng-container matColumnDef="color">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Color </th>
+                  <!-- <ng-container matColumnDef="color">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Acceso </th>
                     <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
                   </ng-container>
+
+                  <ng-container matColumnDef="colorx">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Datacenter </th>
+                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="color4">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Salida </th>
+                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+                  </ng-container>
+
+                  <ng-container matColumnDef="color5">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+                  </ng-container> -->
               
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
