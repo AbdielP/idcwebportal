@@ -22,7 +22,7 @@ import { LocalstorageService } from 'src/app/services/localstorage/localstorage.
 })
 export class BitacoraComponent implements OnInit, AfterViewInit  {
   displayedColumns: string[] = ['nombre_visitante', 'check_in_out', 'empleado_visitante'];
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any> = null;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
@@ -30,14 +30,13 @@ export class BitacoraComponent implements OnInit, AfterViewInit  {
   userInfo: any;
   userProyects: any = '';
   proyecto: any = '';
-  bitacora: any = '';
+  bitacora: Bitacora[] = [];
 
   constructor(private generalService: GeneralService, private localstorageService: LocalstorageService) {
      // Create 100 users
     //  const users = Array.from({length: 100}, (_, k) => createNewUser(k + 1));
 
      // Assign the data to the data source for the table to render
-     this.dataSource = new MatTableDataSource(this.bitacora);
   }
 
   ngOnInit() {
@@ -69,10 +68,10 @@ export class BitacoraComponent implements OnInit, AfterViewInit  {
     this.generalService.select('ggggwwwwpppp', `check_in_out.sp_select_bitacora_compania('${proyecto.nombre_empresa}',
     '${proyecto.datacenter}','2021')`).subscribe((resp: any) => { // LLAMAR FECHA SERVICE PARA EL AÑO ACTUAL
       console.log(resp);
+      this.bitacora = resp.select;
+      this.dataSource = new MatTableDataSource<Bitacora>(this.bitacora);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      this.bitacora = resp.select;
-      this.dataSource = new MatTableDataSource(this.bitacora);
     });
   }
 
@@ -92,6 +91,10 @@ export class BitacoraComponent implements OnInit, AfterViewInit  {
     }
   }
 
+}
+
+export class Bitacora {
+  constructor(public nombre_visitante: string, public check_in_out: any, public empleado_visitante: string) {}
 }
 
 /** Builds and returns a new User. */
