@@ -4,7 +4,7 @@
     </div>
     <div class="col-md-9">
         <div class="container-fluid div-bg border-bottom p-3">
-            <h4 class="text-purple"><i class="fas fa-book"></i> Bitacora de accesos</h4>
+            <h4 class="text-purple text-center"><i class="fas fa-book"></i> Bitacora de accesos {{nombreproyecto}} - {{nombreidc}}</h4>
             <hr>
             <p class="text-secondary mb-0">Consulte el historial de visitas de personal a los centros de datos donde tiene contratados servicios.</p>
             <small class="text-purple"><i class="fas fa-exclamation-circle text-warning"></i> La bitacora muestra unicamente el historial de visitas a los centro de datos del año vigente.</small>
@@ -34,53 +34,68 @@
                 <input matInput (keyup)="applyFilter($event)" placeholder="Busqueda" #input>
             </mat-form-field>
               
-              <div class="mat-elevation-z8 table-font">
-                <table mat-table [dataSource]="dataSource" matSort class="table-font">
+              <div class="mat-elevation-z8 ">
+                <table mat-table [dataSource]="dataSource" matSort >
+
+                   <!-- Index -->
+                   <ng-container matColumnDef="index">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> #</th>
+                    <td mat-cell *matCellDef="let row; let i = index"> {{i+1}}</td>
+                  </ng-container>
               
-                  <!-- ID Column -->
+                  <!-- Nombre -->
                   <ng-container matColumnDef="nombre_visitante">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre</th>
                     <td mat-cell *matCellDef="let row"> {{row.nombre_visitante}}</td>
                   </ng-container>
-              
-                  <!-- Progress Column -->
-                  <ng-container matColumnDef="check_in_out">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Entrada</th>
-                    <td mat-cell *matCellDef="let row" class="text-info"> {{row.check_in_out }}</td>
+
+                  <!-- Cédula -->
+                  <ng-container matColumnDef="cedula_visitante">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cédula</th>
+                    <td mat-cell *matCellDef="let row"> {{row.cedula_visitante}}</td>
                   </ng-container>
               
-                  <!-- Name Column -->
+                  <!-- Entrada Column -->
+                  <ng-container matColumnDef="check_in_out">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Entrada (yyyy-MM-dd)</th>
+                    <td mat-cell *matCellDef="let row" class="text-info"> {{row.check_in_out | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                  </ng-container>
+
+                  <!-- Compañia visitante Column -->
                   <ng-container matColumnDef="empleado_visitante">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Empleado</th>
                     <td mat-cell *matCellDef="let row"> {{row.empleado_visitante}}</td>
                   </ng-container>
               
-                  <!-- Color Column -->
-                  <!-- <ng-container matColumnDef="color">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Acceso </th>
-                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+                  <!-- PROYECTO A VISITAR Column -->
+                  <ng-container matColumnDef="compania_visitante">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa</th>
+                    <td mat-cell *matCellDef="let row"> {{row.compania_visitante}}</td>
+                  </ng-container>
+              
+                  <!-- Datacenter Column -->
+                  <ng-container matColumnDef="idc">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Datacenter</th>
+                    <td mat-cell *matCellDef="let row"> {{row.idc}}</td>
                   </ng-container>
 
-                  <ng-container matColumnDef="colorx">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Datacenter </th>
-                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+                  <!-- Salida Column -->
+                  <ng-container matColumnDef="check_out">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Salida (yyyy-MM-dd)</th>
+                    <td mat-cell *matCellDef="let row" class="text-success"> {{row.check_out | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
                   </ng-container>
 
-                  <ng-container matColumnDef="color4">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Salida </th>
-                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
+                   <!-- Estado -->
+                   <ng-container matColumnDef="estado">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado</th>
+                    <td mat-cell *matCellDef="let row"> {{row.estado}}</td>
                   </ng-container>
-
-                  <ng-container matColumnDef="color5">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-                    <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </td>
-                  </ng-container> -->
               
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
               
                   <!-- Row shown when there is no matching data. -->
-                  <tr class="mat-row" *matNoDataRow>
+                  <tr class="mat-row" *matNoDataRow> <!-- FUNCIONA SOLO EN ANGULAR 10+ -->
                     <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
                   </tr>
                 </table>
