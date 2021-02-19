@@ -15,7 +15,8 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class BitacoraComponent implements OnInit  {
   displayedColumns: string[] = ['index', 'nombre_visitante', 'cedula_visitante', 'check_in_out', 'empleado_visitante',
-  'compania_visitante', 'idc', 'check_out', 'estado'];
+  // 'compania_visitante', 'idc', 'check_out', 'estado'];
+  'check_out', 'duracion', 'estado'];
   dataSource: MatTableDataSource<any> = null;
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
@@ -35,8 +36,6 @@ export class BitacoraComponent implements OnInit  {
   ngOnInit() {
     this.getTokenInfo(this.localstorageService.getToken());
   }
-
-  // NO BORRAR ---------------------------------->
 
   // Obtiene la información del token del usuario logeado
   getTokenInfo(token: string) {
@@ -63,7 +62,7 @@ export class BitacoraComponent implements OnInit  {
     this.nombreidc = proyecto.datacenter;
     this.generalService.select('ggggwwwwpppp', `check_in_out.sp_select_bitacora_compania('${proyecto.nombre_empresa}',
     '${proyecto.datacenter}','${this.dateService.actualYear()}')`).subscribe((resp: any) => {
-      // console.log(resp);
+      console.log(resp);
       this.bitacora = resp.select;
       this.dataSource = new MatTableDataSource<any>(this.bitacora);
       this.dataSource.paginator = this.paginator;

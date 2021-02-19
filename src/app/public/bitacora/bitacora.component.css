@@ -5,6 +5,10 @@
     width: 100%;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .text-purple {
     color: var(--angular-color-purple);
 }
@@ -20,6 +24,5 @@ table {
   }
   
   td, th {
-    /* width: 25%; */
-    font-size: 0.75rem!important;
+    font-size: 0.75rem!important
   }

@@ -1,31 +1,31 @@
 <div class="row">
-    <div class="col-md-3">
-        <app-sidebar></app-sidebar>
+  <div class="col-md-3">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="col-md-9">
+    <div class="container-fluid div-bg border-bottom p-3">
+      <h4 class="text-purple text-center"><i class="fas fa-book"></i> Bitacora de accesos {{nombreproyecto}} - {{nombreidc}}</h4>
+      <hr>
+      <p class="text-secondary mb-0">Consulte el historial de visitas de personal a los centros de datos donde tiene contratados servicios.</p>
+      <small class="text-purple"><i class="fas fa-exclamation-circle text-warning"></i> La bitacora muestra unicamente el historial de visitas a los centro de datos del año vigente.</small>
     </div>
-    <div class="col-md-9">
-        <div class="container-fluid div-bg border-bottom p-3">
-            <h4 class="text-purple text-center"><i class="fas fa-book"></i> Bitacora de accesos {{nombreproyecto}} - {{nombreidc}}</h4>
-            <hr>
-            <p class="text-secondary mb-0">Consulte el historial de visitas de personal a los centros de datos donde tiene contratados servicios.</p>
-            <small class="text-purple"><i class="fas fa-exclamation-circle text-warning"></i> La bitacora muestra unicamente el historial de visitas a los centro de datos del año vigente.</small>
-        </div>
 
-        <div *ngIf="userProyects.length > 1" class="container-fluid div-bg border-bottom px-3">
-          <div class="row d-flex p-1">
-            <div *ngFor="let proyecto of userProyects" class="card text-muted col-sm-12 col-md-6 pt-3">
-                <div class="col-12 d-flex">
-                    <img src="../../../../assets/img/Logo final.png" height="30" alt="" class="mr-2 rounded">
-                    <div class="media-body pb-2 mb-0 small lh-125 ">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <strong class="text-gray-dark">LOC{{proyecto.loc}} - {{proyecto.nombre_empresa}}</strong>
-                            <a class="text-purple pointer" (click)="selectBitacoraProyecto(proyecto)"><i class="far fa-eye"></i> Ver bitacora</a>
-                        </div>
-                        <span class="d-block">Bitacora {{proyecto.datacenter}}</span>
-                    </div>
+    <div *ngIf="userProyects.length > 1" class="container-fluid div-bg border-bottom px-3">
+      <div class="row d-flex p-1">
+        <div *ngFor="let proyecto of userProyects" class="card text-muted col-sm-12 col-md-6 pt-3">
+          <div class="col-12 d-flex">
+            <img src="../../../../assets/img/Logo final.png" height="30" alt="" class="mr-2 rounded">
+            <div class="media-body pb-2 mb-0 small lh-125 ">
+              <div class="d-flex justify-content-between align-items-center">
+                <strong class="text-gray-dark">LOC{{proyecto.loc}} - {{proyecto.nombre_empresa}}</strong>
+                  <a class="text-purple pointer" (click)="selectBitacoraProyecto(proyecto)"><i class="far fa-eye"></i> Ver bitacora</a>
                 </div>
-            </div>  
-          </div>
+                <span class="d-block">Bitacora {{proyecto.datacenter}}</span>
+              </div>
+            </div>
+          </div>  
         </div>
+      </div>
 
         <!-- tabla -->
         <div [hidden]="proyecto.length < 1" class="container-fluid div-bg mb-5">
@@ -37,58 +37,64 @@
               <div class="mat-elevation-z8 ">
                 <table mat-table [dataSource]="dataSource" matSort >
 
-                   <!-- Index -->
-                   <ng-container matColumnDef="index">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> #</th>
-                    <td mat-cell *matCellDef="let row; let i = index"> {{i+1}}</td>
+                  <!-- Index -->
+                  <ng-container matColumnDef="index">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+                    <td width="50" mat-cell *matCellDef="let row; let i = index"><b class="text-purple">{{i+1}}</b> </td>
                   </ng-container>
               
                   <!-- Nombre -->
                   <ng-container matColumnDef="nombre_visitante">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
                     <td mat-cell *matCellDef="let row"> {{row.nombre_visitante}}</td>
                   </ng-container>
 
                   <!-- Cédula -->
                   <ng-container matColumnDef="cedula_visitante">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cédula</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Cédula</th>
                     <td mat-cell *matCellDef="let row"> {{row.cedula_visitante}}</td>
                   </ng-container>
               
                   <!-- Entrada Column -->
                   <ng-container matColumnDef="check_in_out">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Entrada (yyyy-MM-dd)</th>
-                    <td mat-cell *matCellDef="let row" class="text-info"> {{row.check_in_out | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Entrada (yyyy-MM-dd)</th>
+                    <td mat-cell *matCellDef="let row" class="text-primary"> {{row.check_in_out | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
                   </ng-container>
 
                   <!-- Compañia visitante Column -->
                   <ng-container matColumnDef="empleado_visitante">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Empleado</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Empleado</th>
                     <td mat-cell *matCellDef="let row"> {{row.empleado_visitante}}</td>
                   </ng-container>
               
                   <!-- PROYECTO A VISITAR Column -->
-                  <ng-container matColumnDef="compania_visitante">
+                  <!-- <ng-container matColumnDef="compania_visitante">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Empresa</th>
                     <td mat-cell *matCellDef="let row"> {{row.compania_visitante}}</td>
-                  </ng-container>
+                  </ng-container> -->
               
                   <!-- Datacenter Column -->
-                  <ng-container matColumnDef="idc">
+                  <!-- <ng-container matColumnDef="idc">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Datacenter</th>
                     <td mat-cell *matCellDef="let row"> {{row.idc}}</td>
-                  </ng-container>
+                  </ng-container> -->
 
                   <!-- Salida Column -->
                   <ng-container matColumnDef="check_out">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Salida (yyyy-MM-dd)</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Salida (yyyy-MM-dd)</th>
                     <td mat-cell *matCellDef="let row" class="text-success"> {{row.check_out | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+                  </ng-container>
+
+                  <!-- Duración Column -->
+                  <ng-container matColumnDef="duracion">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Duración visita</th>
+                    <td mat-cell *matCellDef="let row" class="text-purple h6"> {{row.duracion}}</td>
                   </ng-container>
 
                    <!-- Estado -->
                    <ng-container matColumnDef="estado">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado</th>
-                    <td mat-cell *matCellDef="let row"> {{row.estado}}</td>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                    <td mat-cell *matCellDef="let row">{{row.estado}} <i class="fas fa-arrow-right text-success"></i></td>
                   </ng-container>
               
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -100,7 +106,7 @@
                   </tr>
                 </table>
               
-                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                <mat-paginator [pageSize]="15" [pageSizeOptions]="[5, 15, 25, 100]"></mat-paginator>
               </div>
         </div>
 
