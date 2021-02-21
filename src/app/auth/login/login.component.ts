@@ -23,6 +23,10 @@ export class LoginComponent {
     const usuario = new Usuario(form.value.usrn, form.value.pswd);
     this.authService.login(usuario, `sp_select_datos_usuario('${usuario.usrn}')`).subscribe((resp: any) => {
       if (resp.ok) {
+        // console.log(resp);
+        if (resp.usuario.checked === 0) {
+          return this.router.navigate([`/auth/initlogin`]);
+        }
         if (resp.usuario.roll === 'cliente') {
           this.router.navigate([`/`]);
         } else if (resp.usuario.roll === 'idc') {
