@@ -20,8 +20,8 @@ export class GeneralService {
     ])));
   }
 
-  update(url: string, storedprocedure: string, form: any, token: any): Observable<any> {
-    return this.http.post(`${this.SERVER_URL}/${url}/${storedprocedure}?token=${token}`, form)
+  update(url: string, form: any, token: any): Observable<any> {
+    return this.http.post(`${this.SERVER_URL}/${url}?token=${token}`, form)
     .pipe((catchError(err => [
       console.log(err)
     ])));
