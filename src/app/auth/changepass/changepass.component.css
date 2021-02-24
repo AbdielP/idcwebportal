@@ -1,0 +1,35 @@
+@import '../../../assets/styles/general.css';
+
+.text-purple {
+  color: var(--angular-color-purple);
+}
+
+.btn-purple {
+    background-color: var(--angular-color-purple);
+  }.btn-purple:hover{
+    background-color: var(--btn-default);
+  }.btn-purple:disabled {
+      background-color: none;
+  }
+
+.main {
+    
+    background-color:#E6E6E6!important;
+    height: 100vh;
+    
+    display: -ms-flexbox;
+    display: -webkit-box;
+    display: flex;
+    -ms-flex-align: center;
+    -ms-flex-pack: center;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+/* .error-container {
+    width: 50%;
+} */
