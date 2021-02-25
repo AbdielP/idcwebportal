@@ -47,7 +47,7 @@ export class ListadoComponent implements OnInit {
     this.generalService.select('ggggwwwwpppp', `sp_clientes_select_proyectos('${idusuario}')`).subscribe((resp: any) => {
       // console.log(resp);
       this.userProyects = resp.select;
-      if (this.userProyects.lengt === 1) {
+      if (this.userProyects.length === 1) {
         this.selectAccesosProyecto(this.userProyects[0]);
       }
     });
