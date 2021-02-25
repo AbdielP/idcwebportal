@@ -49,8 +49,11 @@ export class BitacoraComponent implements OnInit  {
   getUsuarioProyectos(idusuario: number): void {
     this.generalService.select('ggggwwwwpppp', `sp_clientes_select_proyectos('${idusuario}')`).subscribe((resp: any) => {
       this.userProyects = resp.select;
-      if (this.userProyects.lengt === 1) {
+      // CUANDO EL CLIENTE TIENE 1 SOLO PROYECTO
+      if (this.userProyects.length === 1) {
         this.selectBitacoraProyecto(this.userProyects[0]);
+        this.nombreproyecto = this.userProyects[0].nombre_empresa;
+        this.nombreidc = this.userProyects[0].datacenter;
       }
     });
   }
@@ -62,7 +65,6 @@ export class BitacoraComponent implements OnInit  {
     this.nombreidc = proyecto.datacenter;
     this.generalService.select('ggggwwwwpppp', `check_in_out.sp_select_bitacora_compania('${proyecto.nombre_empresa}',
     '${proyecto.datacenter}','${this.dateService.actualYear()}')`).subscribe((resp: any) => {
-      console.log(resp);
       this.bitacora = resp.select;
       this.dataSource = new MatTableDataSource<any>(this.bitacora);
       this.dataSource.paginator = this.paginator;
