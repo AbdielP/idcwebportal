@@ -9,7 +9,7 @@ import { GeneralService } from 'src/app/services/general.service';
 export class BusquedaComponent implements OnInit {
 
   proyectos = [];
-  @ViewChild('test', {static: false}) test: ElementRef;
+  @ViewChild('test') test: ElementRef;
   @Output() emitirProyecto: EventEmitter<any> = new EventEmitter();
 
   constructor(private generalService: GeneralService) { }

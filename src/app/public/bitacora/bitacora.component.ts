@@ -19,8 +19,8 @@ export class BitacoraComponent implements OnInit  {
   'check_out', 'duracion', 'estado'];
   dataSource: MatTableDataSource<any> = null;
 
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   userInfo: any;
   userProyects: any = '';

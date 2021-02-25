@@ -13,9 +13,9 @@ export class QrcodeComponent {
   nombre = '';
   cedula = '';
 
-  @ViewChild('screen', { static: false}) screenx: ElementRef;
-  @ViewChild('canvas', { static: false}) canvasx: ElementRef;
-  @ViewChild('downloadLink', { static: false}) downloadLinkx: ElementRef;
+  @ViewChild('screen') screenx: ElementRef;
+  @ViewChild('canvas') canvasx: ElementRef;
+  @ViewChild('downloadLink') downloadLinkx: ElementRef;
 
   constructor(public dialogRef: MatDialogRef<QrcodeComponent>, @Inject(MAT_DIALOG_DATA) public data: any) {
     this.qrcode = data.qrcode;
