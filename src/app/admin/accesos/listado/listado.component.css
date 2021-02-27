@@ -7,3 +7,7 @@
 .table-font {
     font-size: 0.75rem;
 }
+
+.text-purple {
+    color: var(--angular-color-purple);
+}

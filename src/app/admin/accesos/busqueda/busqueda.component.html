@@ -13,7 +13,7 @@
               <span class="input-group-text text-info"><i class="fas fa-angle-down mr-1"></i> Listado</span>
             </div>
             <select #test class="form-control text-secondary" (change)="onChangeProyecto($event)">
-                <option value="" disabled>Seleccione un cliente</option>
+                <option value="" disabled selected>Seleccione un cliente</option>
                 <option *ngFor="let proyecto of proyectos" value="{{proyecto | json}}">{{proyecto.nombre_empresa}} - LOC{{proyecto.loc}} - {{proyecto.datacenter}}</option>    
             </select>
         </div>
