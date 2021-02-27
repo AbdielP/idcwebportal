@@ -1,0 +1,21 @@
+@import '../../../../assets/styles/general.css';
+
+.div-bg {
+    background-color: var(--div-background);
+}
+
+.text-purple {
+    color: var(--angular-color-purple);
+}
+
+.btn-purple {
+    color: var(--angular-color-purple);
+    border: 1px solid var(--angular-color-purple);
+}.btn-purple:hover {
+    color: #fff;
+    background-color: var(--angular-color-purple);
+}
+
+.opacidad-suave {
+    background-color: var(--card-rgba-suave);
+}
