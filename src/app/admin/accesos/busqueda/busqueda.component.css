@@ -1,0 +1,5 @@
+@import '../../../../assets/styles/general.css';
+
+.text-purple {
+    color: var(--angular-color-purple);
+}

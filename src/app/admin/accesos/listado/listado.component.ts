@@ -12,6 +12,7 @@ export class ListadoComponent implements OnInit {
 
   accesos = [];
   proyecto: any = [];
+  mnsgtramite = true;
 
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
@@ -43,7 +44,9 @@ export class ListadoComponent implements OnInit {
   subscribeEventOpciones(): void {
     this.eventSubscription = this.opciones.subscribe(({opciones}) => {
       // console.log(opciones);
+      this.mnsgtramite = true;
       if (opciones === 'tramite') {
+        this.mnsgtramite = false;
         this.selectAccesos(`sp_select_accesos_pendientes_aprobacion()`);
       } else {
         this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
