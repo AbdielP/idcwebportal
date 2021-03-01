@@ -1,1 +1,29 @@
-<p>mdc works!</p>
+<div class="row">
+    <div class="col-12 card">
+        <div class="mb-3 p-3 rounded opaco">
+            <div class="border-bottom border-gray pb-2 mb-0">
+                <h6 class="pb-2 mb-0 text-purple">Matrices de comunicación</h6>
+                <small class="text-muted pb-2 mb-0">Modulo para añadir personal a las matrices de comunicación y creación de cuentas de usuario del portal IDC.</small>
+            </div>
+
+            <div class="row d-flex">
+                <div class="col-md-4 d-flex flex-column justify-content-center pt-2">
+                    <div class="d-flex">
+                        <i class="fas fa-user-plus lead text-purple mt-1 mr-2"></i>
+                        <button class="btn btn-purple2 btn-sm text-light"> Añadir personal</button>
+                    </div>
+                    <!-- <a class="lead text-info d-flex align-items-center" [routerLink]="['/ofertas']"><i class="{{category.icono}} lead text-success mr-2"></i> {{category.catg}}</a> -->
+                    <small class="d-block text-justify"><b class="text-purple">@</b>Añade personal a la matriz de comunicación de un cliente/proyecto.</small>
+                </div>
+               
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row card">
+    <div class="card-body">
+        <app-mdcform></app-mdcform>
+    </div>
+</div>
