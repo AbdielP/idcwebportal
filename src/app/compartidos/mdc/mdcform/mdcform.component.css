@@ -1,0 +1,10 @@
+@import '../../../../assets/styles/general.css';
+
+.text-purple {
+  color: var(--angular-color-purple);
+}
+
+.form-border {
+  border: 1px solid #D8D8D8;
+  border-radius: 4px;
+}
