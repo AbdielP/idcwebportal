@@ -1,0 +1,6 @@
+@import '../../../assets/styles/general.css';
+
+.div-bg {
+  background-color: var(--div-background);
+  width: 100%;
+}
