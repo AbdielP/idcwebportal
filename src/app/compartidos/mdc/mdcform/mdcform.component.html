@@ -1,126 +1,262 @@
-<form [formGroup]="mdcForm" class="form-container ">
-  <div class="d-flex justify-content-center align-items-center p-2">
-    <i class="fas fa-pen-alt h3 text-purple mr-3"></i> 
-    <p class="text-secondary lead m-0">Información personal</p>
-  </div>
-  <!-- PRIMERA FILA -->
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <div class="d-flex">
-        <label for="username" class="text-purple lead font-weight-bold">Usuario</label>
-        <div *ngIf="mdcForm.controls['username'].errors?.required" class="form-control-feedback lead text-danger mx-3">
-          Campo requerido.
+<form [formGroup]="mdcForm" class="mb-5">
+  <div class="row">
+
+    <div class="col-12 card">
+      <div class="card-body form-border mx-1 my-4">
+    
+        <div class="d-flex justify-content-center align-items-center p-2">
+          <i class="fas fa-pen-alt h3 text-purple mr-3"></i> 
+          <p class="text-secondary lead m-0">Información personal</p>
+        </div>
+        <!-- PRIMERA FILA -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <div class="d-flex">
+              <label for="username" class="text-purple lead font-weight-bold">Usuario</label>
+              <div *ngIf="mdcForm.controls['username'].errors?.required" class="form-control-feedback lead text-danger mx-3">
+                Campo requerido.
+              </div>
+            </div>
+            <input type="text" class="form-control form-control-sm" formControlName="username" id="username" placeholder="Ejemplo: nombre.apellido">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="password" class="lead text-secondary">Contraseña: <small class="text-secondary">"welcome"</small></label>
+            <input type="password" class="form-control form-control-sm" formControlName="password" id="password" placeholder="Escriba contraseña" autocomplete="on">
+          </div>
+        </div>
+      
+         <!-- SEGUNDA FILA -->
+         <div class="form-row">
+          <div class="form-group col-md-6">
+            <div class="d-flex">
+              <label for="nombre" class="text-purple lead font-weight-bold">Nombre</label>
+              <div *ngIf="mdcForm.controls['nombre'].errors?.required" class="form-control-feedback lead text-danger mx-3">
+                Campo requerido.
+              </div>
+            </div>
+            <input type="text" class="form-control form-control-sm" formControlName="nombre" id="nombre" placeholder="">
+          </div>
+          <div class="form-group col-md-6">
+            <div class="d-flex">
+              <label for="apellido" class="text-purple lead font-weight-bold">Apellido</label>
+              <div *ngIf="mdcForm.controls['apellido'].errors?.required" class="form-control-feedback lead text-danger mx-3">
+                Campo requerido.
+              </div>
+            </div>
+            <input type="text" class="form-control form-control-sm" formControlName="apellido" id="apellido" placeholder="">
+          </div>
+        </div>
+      
+      <!-- TERCERA FILA -->
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <div class="error-container">
+            <label for="cedula" class="lead text-secondary">Cédula</label>
+            <!-- <div *ngIf="registerForm.controls['cedula'].errors?.required" class="form-control-feedback">
+              El campo Cédula es requerido.
+            </div> -->
+          </div>
+          <input type="text" class="form-control form-control-sm" formControlName="cedula" id="cedula" placeholder="Ejemplo: PE-000-0000">
+        </div>
+        <div class="form-group col-md-6">
+          <div class="d-flex">
+            <label for="correo" class="text-purple lead font-weight-bold">Correo</label>
+            <div *ngIf="mdcForm.controls['correo'].errors?.required" class="form-control-feedback lead text-danger mx-3">
+              Campo requerido.
+            </div>
+          </div>
+          <input type="text" class="form-control form-control-sm" formControlName="correo" id="correo" placeholder="ejemplo@correo.com">
         </div>
       </div>
-      <input type="text" class="form-control form-control-sm" formControlName="username" id="username" placeholder="Ejemplo: nombre.apellido">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="password" class="lead text-secondary">Contraseña: <small class="text-secondary">"welcome"</small></label>
-      <input type="password" class="form-control form-control-sm" formControlName="password" id="password" placeholder="Escriba contraseña" autocomplete="on">
-    </div>
-  </div>
-
-   <!-- SEGUNDA FILA -->
-   <div class="form-row">
-    <div class="form-group col-md-6">
-      <div class="d-flex">
-        <label for="nombre" class="text-purple lead font-weight-bold">Nombre</label>
-        <div *ngIf="mdcForm.controls['nombre'].errors?.required" class="form-control-feedback lead text-danger mx-3">
-          Campo requerido.
+      
+      <!-- CUARTA FILA -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="telefono" class="lead text-secondary">Teléfono</label>
+            <input type="text" class="form-control form-control-sm" formControlName="telefono" placeholder="Ejemplo: 830-0000">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="celular" class="lead text-secondary">Celular</label>
+            <input type="text" class="form-control form-control-sm" formControlName="celular" placeholder="Ejemplo: 6000-0000">
+          </div>
+        </div>
+      
+        <!-- QUINTA FILA -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <div class="d-flex">
+              <label for="rollId" class="lead text-purple">Tipo de cuenta</label>
+              <div *ngIf="mdcForm.controls['rollId'].errors?.required" class="form-control-feedback lead text-danger mx-3">
+                Campo requerido.
+              </div>
+            </div>
+            <select id="rollId" formControlName="rollId" class="form-control form-control-sm" (change)="onChange($event)" required>
+              <option value="" disabled>Escoger...</option>
+              <option value="1">Especialista</option>
+              <option value="2">Cliente</option>
+                  <!-- <option *ngFor="let rol of roles" value="{{rol.idroll}}">{{rol.roll | titlecase}}</option> -->
+            </select>
+          </div>
+      
+          <div class="form-group col-md-6">
+            <label for="direccion" class="lead text-secondary">Dirección</label>
+            <input type="text" class="form-control form-control-sm" formControlName="direccion" placeholder="Ejemplo: 1234 Main St.">
+          </div>
+        </div>
+      
+        <!-- SEXTA FILA -->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="cargo" class="lead text-secondary">Cargo o puesto de la persona</label>
+            <input type="text" class="form-control form-control-sm" formControlName="cargo" placeholder="Ejemplo: Administrador de redes">
+          </div>
+      
+          <div class="form-group col-md-6">
+            <label for="departamento" class="lead text-secondary">Departamento</label>
+            <input type="text" class="form-control form-control-sm" formControlName="departamento" placeholder="Ejemplo: Tecnología">
+          </div>
+        </div>
+        <!-- SEPTIMA FILA  -->  
+        <div class="form-check">
+          <div>
+            <input class="form-check-input" formControlName="check_activo" type="checkbox" id="gridCheck">
+            <label class="form-check-label text-purple" for="check_activo">
+              Habilitar cuenta en el portal web.
+            </label>
+      
+          </div>
+          <p class="text-muted pb-2 mb-0"><i class="fas fa-exclamation-triangle text-warning"></i> Marque esta casilla para permitir que este usuario pueda iniciar sesión en el portal de clientes web.</p>
         </div>
       </div>
-      <input type="text" class="form-control form-control-sm" formControlName="nombre" id="nombre" placeholder="">
     </div>
-    <div class="form-group col-md-6">
-      <div class="d-flex">
-        <label for="apellido" class="text-purple lead font-weight-bold">Apellido</label>
-        <div *ngIf="mdcForm.controls['apellido'].errors?.required" class="form-control-feedback lead text-danger mx-3">
-          Campo requerido.
+  </div>
+  <!-- MATRICES -->
+  <div class="row">
+    <div class="card col-12">
+      <div class="card-body form-border mx-1 my-4">
+        <div class="d-flex justify-content-center align-items-center p-2">
+          <i class="fas fa-address-book h3 text-purple mr-3"></i> 
+          <p class="text-secondary lead m-0">Matrices de comunicación</p>
+        </div>
+        <!-- BOTÓN AÑADIR MDC ADICIONAL -->
+        <div class="form-group">
+          <button type="button" class="btn btn-sm btn-purple2 text-light" (click)="agregarMDC()"><i class="fas fa-plus"></i> Añadir Matriz Adicional</button>
+        </div>
+
+        <div class="form-border mdc-background py-2 px-3">
+          <!-- tabla matriz -->
+          <div class="form-row">
+            <div class="form-group col-md-9">
+              <div class="d-flex">
+                <label for="proyecto" class="text-purple lead">Escoga un cliente/proyecto</label>
+                <div *ngIf="mdcForm.controls['proyecto'].errors?.required" class="form-control-feedback lead text-danger mx-3">
+                  Campo requerido.
+                </div>
+              </div>
+              <select formControlName="proyecto" class="form-control form-control-sm">
+                <option value="" disabled>Escoger...</option>
+                <!-- <ng-container *ngIf="clientes != ''">
+                  <option *ngFor="let cliente of clientes" value="{{cliente.idproyecto}}">{{cliente.nombre_empresa}} - LOC{{cliente.loc}} - {{cliente.datacenter}}</option>
+                </ng-container>
+                <ng-container *ngIf="proveedores != ''">
+                  <option *ngFor="let proveedor of proveedores" value="{{proveedor.idproveedor}}">{{proveedor.nombre_proveedor}} - Datacenter - {{proveedor.datacenter}}</option>
+                </ng-container> -->
+              </select>
+            </div>
+
+            <div class="form-group col-md-3">
+              <div class="error-container">
+                <div *ngIf="mdcForm.controls['version'].errors?.required" class="form-control-feedback">
+                  La fecha del documento de matriz de comunicación es requerida.
+                </div>
+              </div>
+              <label for="version" class="lead text-secondary">Fecha</label>
+              <input type="date" class="form-control form-control-sm" formControlName="version" placeholder="dd/mm/yyyy">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-12">
+              <div class="d-flex">
+                <label for="link" class="lead text-purple">Link del formulario de matriz de comunicación </label>
+                <div *ngIf="mdcForm.controls['link'].errors?.required" class="form-control-feedback lead text-danger mx-3">
+                  Campo requerido.
+                </div>
+              </div>
+              <input type="text" class="form-control form-control-sm" formControlName="link" placeholder="Si no lleva formulario, escribir: N/A">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <table>
+                <thead class="text-light">
+                    <tr>
+                        <th colspan="3">Solicitud de permiso</th>
+                        <th rowspan="2">Manos remotas *</th>
+                        <th colspan="3">Notificación de alertas</th>
+                    </tr>
+                    <tr>
+                        <th>Solicitar</th>
+                        <th>Actualizar</th>
+                        <th>Eliminar</th>
+            
+                        <th>Baja</th>
+                        <th>Media</th>
+                        <th>Alta</th>
+                    </tr>
+    
+                </thead>
+    
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" formControlName="solicitar_acceso">
+                        </td>
+                        <td>
+                            <input type="checkbox" formControlName="actualizar_acceso" >
+                        </td>
+                        <td>
+                            <input type="checkbox" formControlName="eliminar_acceso" >
+                        </td>
+                        <td>
+                            <input type="checkbox" formControlName="manos_remotas" >
+                        </td>
+                        <td>
+                            <input type="checkbox" formControlName="alertas_baja" >
+                        </td>
+                        <td>
+                            <input type="checkbox" formControlName="alertas_media" >
+                        </td>
+                        <td>
+                            <input type="checkbox" formControlName="alertas_alta" >
+                        </td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+    
+            <div class="form-group">
+                <div class="form-check">
+                  <div>
+                    <input class="form-check-input" formControlName="editar_matriz" type="checkbox">
+                    <label class="form-check-label text-purple" for="editar_matriz">
+                        ¿Permitir a este usuario editar la matríz de comunicación?
+                    </label>
+                  </div>
+                  <p class="text-muted pb-2 mb-0"><i class="fas fa-exclamation-triangle text-warning"></i> Marque esta casilla para permitir que el usuario creado pueda editar esta matriz de comunicación.</p>
+
+                </div>
+            </div>
+          </div>
+
         </div>
       </div>
-      <input type="text" class="form-control form-control-sm" formControlName="apellido" id="apellido" placeholder="">
-    </div>
-  </div>
-
-<!-- TERCERA FILA -->
-<div class="form-row">
-  <div class="form-group col-md-6">
-    <div class="error-container">
-      <label for="cedula" class="lead text-secondary">Cédula</label>
-      <!-- <div *ngIf="registerForm.controls['cedula'].errors?.required" class="form-control-feedback">
-        El campo Cédula es requerido.
-      </div> -->
-    </div>
-    <input type="text" class="form-control form-control-sm" formControlName="cedula" id="cedula" placeholder="Ejemplo: PE-000-0000">
-  </div>
-  <div class="form-group col-md-6">
-    <div class="d-flex">
-      <label for="correo" class="text-purple lead font-weight-bold">Correo</label>
-      <div *ngIf="mdcForm.controls['correo'].errors?.required" class="form-control-feedback lead text-danger mx-3">
-        Campo requerido.
+      <div class="form-group">
+        <button [disabled]="!mdcForm.valid" type="submit" class="btn btn-purple btn-block">Crear Usuario</button>
       </div>
     </div>
-    <input type="text" class="form-control form-control-sm" formControlName="correo" id="correo" placeholder="ejemplo@correo.com">
-  </div>
-</div>
-
-<!-- CUARTA FILA -->
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="telefono" class="lead text-secondary">Teléfono</label>
-      <input type="text" class="form-control form-control-sm" formControlName="telefono" placeholder="Ejemplo: 830-0000">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="celular" class="lead text-secondary">Celular</label>
-      <input type="text" class="form-control form-control-sm" formControlName="celular" placeholder="Ejemplo: 6000-0000">
-    </div>
+    
   </div>
 
-  <!-- QUINTA FILA -->
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <div class="d-flex">
-        <label for="rollId" class="lead text-purple">Tipo de cuenta</label>
-        <div *ngIf="mdcForm.controls['rollId'].errors?.required" class="form-control-feedback lead text-danger mx-3">
-          Campo requerido.
-        </div>
-      </div>
-      <select id="rollId" formControlName="rollId" class="form-control form-control-sm" (change)="onChange($event)" required>
-        <option value="" disabled>Escoger...</option>
-        <option value="1">Especialista</option>
-        <option value="2">Cliente</option>
-            <!-- <option *ngFor="let rol of roles" value="{{rol.idroll}}">{{rol.roll | titlecase}}</option> -->
-      </select>
-    </div>
-
-    <div class="form-group col-md-6">
-      <label for="direccion" class="lead text-secondary">Dirección</label>
-      <input type="text" class="form-control form-control-sm" formControlName="direccion" placeholder="Ejemplo: 1234 Main St.">
-    </div>
-  </div>
-
-  <!-- SEXTA FILA -->
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="cargo" class="lead text-secondary">Cargo o puesto de la persona</label>
-      <input type="text" class="form-control form-control-sm" formControlName="cargo" placeholder="Ejemplo: Administrador de redes">
-    </div>
-
-    <div class="form-group col-md-6">
-      <label for="departamento" class="lead text-secondary">Departamento</label>
-      <input type="text" class="form-control form-control-sm" formControlName="departamento" placeholder="Ejemplo: Tecnología">
-    </div>
-  </div>
-  <!-- SEPTIMA FILA  -->  
-  <div class="form-check">
-    <div>
-      <input class="form-check-input" formControlName="check_activo" type="checkbox" id="gridCheck">
-      <label class="form-check-label text-purple" for="check_activo">
-        Habilitar cuenta en el portal web.
-      </label>
-
-    </div>
-    <small class="text-muted pb-2 mb-0"><i class="fas fa-exclamation-triangle text-warning"></i> Marque esta casilla para permitir que este usuario pueda iniciar sesión en el portal de clientes web.</small>
-  </div>
-
+  
 </form>

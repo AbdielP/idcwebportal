@@ -4,14 +4,6 @@
     color: var(--angular-color-purple);
 }
 
-/* .btn-purple {
-    color: var(--angular-color-purple);
-    border: 1px solid var(--angular-color-purple);
-}.btn-purple:hover {
-    color: #fff;
-    background-color: var(--angular-color-purple);
-} */
-
 .btn-purple2 {
     background-color: var(--angular-color-purple);
     border: 1px solid var(--angular-color-purple);

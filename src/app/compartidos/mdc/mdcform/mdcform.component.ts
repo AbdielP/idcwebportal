@@ -48,4 +48,6 @@ export class MdcformComponent implements OnInit {
   onChange(event: any): void {
   }
 
+  agregarMDC() {}
+
 }

@@ -8,3 +8,41 @@
   border: 1px solid #D8D8D8;
   border-radius: 4px;
 }
+
+.btn-purple {
+    color: var(--angular-color-purple);
+    border: 1px solid var(--angular-color-purple);
+}.btn-purple:hover {
+    color: #fff;
+    background-color: var(--angular-color-purple);
+}
+
+.btn-purple2 {
+  background-color: var(--angular-color-purple);
+  border: 1px solid var(--angular-color-purple);
+}.btn-purple2:hover {
+  color: var(--angular-color-purple)!important;
+  background-color: #fff;
+}
+
+table{
+  width: 100%;
+  border: 1px solid #D8D8D8;
+  margin: 1% 0;
+ 
+}
+
+thead {
+  background-color: var(--angular-color-purple);
+  font-size: .8rem;
+}
+
+th,tr,td{
+  border: 1px solid #D8D8D8;
+  text-align: center;
+  padding: .5%;
+}
+
+.mdc-background {
+  background-color: #FAFAFA;
+}
