@@ -130,6 +130,7 @@
       </div>
     </div>
   </div>
+
   <!-- MATRICES -->
   <div class="row">
     <div class="card col-12">
@@ -147,10 +148,11 @@
           <!-- tabla matriz -->
           <div class="form-row">
             <div class="form-group col-md-9">
-              <div class="d-flex">
+              <div class="d-flex align-items-center">
+                <span class="badge badge-pill rounded-circle badge-primary py-1 mx-1 mr-3">1</span>
                 <label for="proyecto" class="text-purple lead">Escoga un cliente/proyecto</label>
                 <div *ngIf="mdcForm.controls['proyecto'].errors?.required" class="form-control-feedback lead text-danger mx-3">
-                  Campo requerido.
+                  <label> Campo requerido.</label>
                 </div>
               </div>
               <select formControlName="proyecto" class="form-control form-control-sm">
@@ -254,11 +256,12 @@
              
               <div class="form-row">
                 <div class="form-group col-md-9">
-                  <div class="d-flex">
+                  <div class="d-flex align-items-center">
+                    <span class="badge badge-pill rounded-circle badge-primary py-1 mx-1 mr-3">{{i + 2}}</span>
                     <label for="proyecto" class="text-purple lead">Escoga un cliente/proyecto</label>
                     <!-- <div *ngIf="registerForm.controls['proyecto'].errors?.required" class="form-control-feedback"> -->
                     <div *ngIf="proyectos.controls[i].get('proyecto').errors?.required" class="form-control-feedback lead text-danger mx-3">
-                      Campo requerido.
+                      <label> Campo requerido.</label>
                     </div>
                   </div>
                   <select [attr.id]="'proyecto'  +i" formControlName="proyecto" class="form-control form-control-sm">

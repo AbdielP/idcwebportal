@@ -46,3 +46,7 @@ th,tr,td{
 .mdc-background {
   background-color: #FAFAFA;
 }
+
+.badge {
+  font-size: 1rem;
+}
