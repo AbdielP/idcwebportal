@@ -236,27 +236,145 @@
             </table>
     
             <div class="form-group">
-                <div class="form-check">
-                  <div>
-                    <input class="form-check-input" formControlName="editar_matriz" type="checkbox">
-                    <label class="form-check-label text-purple" for="editar_matriz">
-                        ¿Permitir a este usuario editar la matríz de comunicación?
-                    </label>
-                  </div>
-                  <p class="text-muted pb-2 mb-0"><i class="fas fa-exclamation-triangle text-warning"></i> Marque esta casilla para permitir que el usuario creado pueda editar esta matriz de comunicación.</p>
-
+              <div class="form-check">
+                <div>
+                  <input class="form-check-input" formControlName="editar_matriz" type="checkbox">
+                  <label class="form-check-label text-purple" for="editar_matriz">
+                    ¿Permitir a este usuario editar la matríz de comunicación?
+                  </label>
                 </div>
+                <p class="text-muted pb-2 mb-0"><i class="fas fa-exclamation-triangle text-warning"></i> Marque esta casilla para permitir que el usuario creado pueda editar esta matriz de comunicación.</p>
+              </div>
             </div>
           </div>
+        </div>
+        <!-- FORMARRAY [] -->
+          <div [hidden]="proyectos.length < 1" formArrayName='proyectos' *ngFor="let proy of proyectos.controls; let i = index" class="form-border mdc-background py-2 px-3 mt-2">
+            <div [formGroupName]=i class="contenedor-matriz">
+             
+              <div class="form-row">
+                <div class="form-group col-md-9">
+                  <div class="d-flex">
+                    <label for="proyecto" class="text-purple lead">Escoga un cliente/proyecto</label>
+                    <!-- <div *ngIf="registerForm.controls['proyecto'].errors?.required" class="form-control-feedback"> -->
+                    <div *ngIf="proyectos.controls[i].get('proyecto').errors?.required" class="form-control-feedback lead text-danger mx-3">
+                      Campo requerido.
+                    </div>
+                  </div>
+                  <select [attr.id]="'proyecto'  +i" formControlName="proyecto" class="form-control form-control-sm">
+                    <option value="" disabled>Escoger...</option>
+                    <!-- <ng-container *ngIf="clientes != ''">
+                      <option *ngFor="let cliente of clientes" value="{{cliente.idproyecto}}">{{cliente.nombre_empresa}} - LOC{{cliente.loc}} - {{cliente.datacenter}}</option>
+                    </ng-container>
+                    <ng-container *ngIf="proveedores != ''">
+                      <option *ngFor="let proveedor of proveedores" value="{{proveedor.idproveedor}}">{{proveedor.nombre_proveedor}} - Datacenter - {{proveedor.datacenter}}</option>
+                    </ng-container> -->
+                  </select>
+                </div>
 
+                <div class="form-group col-md-3">
+                  <div class="error-container">
+                    <div *ngIf="proyectos.controls[i].get('version').errors?.required" class="form-control-feedback">
+                      La versión de la matriz de comunicación es requerida.
+                    </div>
+                  </div>
+                  <label for="version" class="lead text-secondary" >Fecha</label>
+                  <input type="date" class="form-control form-control-sm" formControlName="version" placeholder="Año: 20XX">
+                </div>
+              </div>
+  
+              <div class="form-row">
+                <div class="form-group col-md-12">
+                  <div class="d-flex">
+                    <label for="link" class="lead text-purple">Link del formulario de matriz de comunicación </label>
+                    <div *ngIf="proyectos.controls[i].get('link').errors?.required" class="form-control-feedback lead text-danger mx-3">
+                      Campo requerido.
+                    </div>
+                  </div>
+                  <input type="text" class="form-control form-control-sm" formControlName="link" placeholder="Si no lleva formulario, escribir: N/A">
+                </div>
+              </div>
+      
+              <!-- <div class="form-group row">
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-danger btn-block" (click)="removerMDC(i)">- Remover Matriz</button>
+                </div>
+              </div> -->
+  
+              <div class="form-row">
+                <table>
+                    <thead class="text-light">
+                        <tr>
+                            <th colspan="3">Solicitud de permiso</th>
+                            <th rowspan="2">Manos remotas *</th>
+                            <th colspan="3">Notificación de alertas</th>
+                        </tr>
+                        <tr>
+                            <th>Solicitar</th>
+                            <th>Actualizar</th>
+                            <th>Eliminar</th>
+                
+                            <th>Baja</th>
+                            <th>Media</th>
+                            <th>Alta</th>
+                        </tr>
+        
+                    </thead>
+        
+                    <tbody>
+                        <tr>
+                            <td>
+                                <input type="checkbox" [attr.id]="'solicitar_acceso'  +i" formControlName="solicitar_acceso">
+                            </td>
+                            <td>
+                                <input type="checkbox" [attr.id]="'actualizar_acceso'  +i" formControlName="actualizar_acceso" >
+                            </td>
+                            <td>
+                                <input type="checkbox" [attr.id]="'eliminar_acceso'  +i" formControlName="eliminar_acceso" >
+                            </td>
+                            <td>
+                                <input type="checkbox" [attr.id]="'manos_remotas'  +i" formControlName="manos_remotas" >
+                            </td>
+                            <td>
+                                <input type="checkbox" [attr.id]="'alertas_baja'  +i" formControlName="alertas_baja" >
+                            </td>
+                            <td>
+                                <input type="checkbox" [attr.id]="'alertas_media'  +i" formControlName="alertas_media" >
+                            </td>
+                            <td>
+                                <input type="checkbox" [attr.id]="'alertas_alta'  +i" formControlName="alertas_alta" >
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+        
+                <div class="form-group">
+                  <div class="form-check">
+                    <div>
+                      <input class="form-check-input" formControlName="editar_matriz" type="checkbox">
+                      <label class="form-check-label text-purple" for="editar_matriz">
+                        ¿Permitir a este usuario editar la matríz de comunicación?
+                      </label>
+                    </div>
+                    <p class="text-muted pb-2 mb-0"><i class="fas fa-exclamation-triangle text-warning"></i> Marque esta casilla para permitir que el usuario creado pueda editar esta matriz de comunicación.</p>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <button type="button" class="btn btn-danger btn-sm btn-block" (click)="removerMDC(i)"><i class="fas fa-eraser"></i> Remover Matriz adicional</button>
+                </div>
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="form-group">
+          <button [disabled]="!mdcForm.valid" type="submit" class="btn btn-purple btn-block">Crear Usuario</button>
         </div>
       </div>
-      <div class="form-group">
-        <button [disabled]="!mdcForm.valid" type="submit" class="btn btn-purple btn-block">Crear Usuario</button>
       </div>
-    </div>
-    
-  </div>
 
   
 </form>

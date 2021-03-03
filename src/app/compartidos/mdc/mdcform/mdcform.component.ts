@@ -45,9 +45,33 @@ export class MdcformComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get proyectos(){
+    return this.mdcForm.get('proyectos') as FormArray;
+  }
+
   onChange(event: any): void {
   }
 
-  agregarMDC() {}
+  agregarMDC() {
+    const mdcFormGroup = this.formBuilder.group({
+      proyecto: ['', {validators: [Validators.required]}],
+      link: ['', {validators: [Validators.required]}],
+      version: [this.dateService.actualYear(), {validators: [Validators.required, Validators.min(2000),
+        Validators.max(this.dateService.actualYear() + 1)]}],
+      solicitar_acceso: [false],
+      actualizar_acceso: [false],
+      eliminar_acceso: [false],
+      manos_remotas: [false],
+      alertas_baja: [false],
+      alertas_media: [false],
+      alertas_alta: [false],
+      editar_matriz: [false]
+    });
+    this.proyectos.push(mdcFormGroup);
+  }
+
+  removerMDC(indice: number){
+    this.proyectos.removeAt(indice);
+  }
 
 }
