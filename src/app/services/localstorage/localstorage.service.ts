@@ -39,6 +39,10 @@ export class LocalstorageService {
     localStorage.removeItem('accesos');
   }
 
+  getUserRoll(): number {
+    return parseInt(localStorage.getItem('type'), 10) ;
+  }
+
   // Verificar tokeninfo
   getTokenInfo(token: string): Observable<any> {
     return this.http.get(`${this.SERVER_URL}/stinfo?token=${token}`)

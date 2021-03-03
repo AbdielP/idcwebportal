@@ -30,7 +30,7 @@ export class AuthService {
   login(usuario: Usuario, storedprocedure: string): Observable<any> {
     return this.http.post(`${this.SERVER_URL}/auth/login/${storedprocedure}`, usuario)
     .pipe(map((resp: any) => {
-      this.setStorage(resp.token);
+      this.setStorage(resp);
       return resp;
     }))
     .pipe(catchError(err => of([
@@ -38,9 +38,10 @@ export class AuthService {
     ])));
   }
 
-  setStorage(token: any) {
-    localStorage.setItem('sti', token);
-    this.token  = token;
+  setStorage(resp: any) {
+    localStorage.setItem('sti', resp.token);
+    localStorage.setItem('type', resp.usuario.idroll);
+    this.token  = resp.token;
   }
 
   isLogedIn(): boolean {

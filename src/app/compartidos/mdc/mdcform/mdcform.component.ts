@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { DateService } from 'src/app/services/date.service';
+import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 
 @Component({
   selector: 'app-mdcform',
@@ -9,7 +10,9 @@ import { DateService } from 'src/app/services/date.service';
 })
 export class MdcformComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private dateService: DateService) { }
+  userroll: number;
+
+  constructor(private formBuilder: FormBuilder, private dateService: DateService, private localstorageService: LocalstorageService) { }
 
   mdcForm = this.formBuilder.group({
     username: ['', {validators: [Validators.required]}],
@@ -43,10 +46,16 @@ export class MdcformComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.getUserRoll();
   }
 
   get proyectos(){
     return this.mdcForm.get('proyectos') as FormArray;
+  }
+
+  getUserRoll() {
+    this.userroll = this.localstorageService.getUserRoll();
+    console.log(this.userroll);
   }
 
   onChange(event: any): void {
