@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
+import { SessionInactivityService } from 'src/app/services/session/session-inactivity.service';
 
 @Component({
   selector: 'app-mdc',
   templateUrl: './mdc.component.html',
   styleUrls: ['./mdc.component.css']
 })
-export class MdcComponent implements OnInit {
+export class MdcComponent {
 
-  constructor() { }
+  constructor(private sessionInactivity: SessionInactivityService) { }
 
-  ngOnInit(): void {
+  @HostListener('window:mousemove') refreshUserState() {
+    this.sessionInactivity.resetActivity();
   }
 
 }

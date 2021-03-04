@@ -26,7 +26,7 @@ export class ListadoComponent implements OnInit {
 
   ngOnInit() {
     this.localStorageGetAccesos();
-    this.getTokenInfo(this.localstorageService.getToken());
+    this.getUsuarioProyectos();
     this.subscribeEventOpciones();
   }
 
@@ -34,17 +34,10 @@ export class ListadoComponent implements OnInit {
     this.emitirDetalleAcceso.emit(idseguridad);
   }
 
-  // Obtiene la información del token del usuario logeado
-  getTokenInfo(token: string) {
-    this.localstorageService.getTokenInfo(token).subscribe((resp: any) => {
-      this.userInfo = resp.tokeninfo;
-      this.getUsuarioProyectos(this.userInfo.idusuario);
-    });
-  }
-
   // Lista los proyectos relacionados con el usuario logeado
-  getUsuarioProyectos(idusuario: number): void {
-    this.generalService.select('ggggwwwwpppp', `sp_clientes_select_proyectos('${idusuario}')`).subscribe((resp: any) => {
+  getUsuarioProyectos(): void {
+    this.generalService.selectWithToken('ggggwwwwpppptoken', `sp_clientes_select_proyectos`, this.localstorageService.getToken())
+    .subscribe((resp: any) => {
       // console.log(resp);
       this.userProyects = resp.select;
       if (this.userProyects.length === 1) {
