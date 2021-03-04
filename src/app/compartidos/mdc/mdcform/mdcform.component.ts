@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { DateService } from 'src/app/services/date.service';
 import { GeneralService } from 'src/app/services/general.service';
 import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
+import { CustomValidators } from 'src/app/utils/custom-validators';
 
 @Component({
   selector: 'app-mdcform',
@@ -51,7 +52,7 @@ export class MdcformComponent implements OnInit {
       editar_matriz: [false],
       proyectos: this.formBuilder.array([]), // FormArray
       link: ['', {validators: [Validators.required]}]
-    });
+    }, { validators: [CustomValidators.noRepeatMDC, CustomValidators.noRepeatExtraMDC] });
 
     this.getUserRoll();
     if (this.userroll === 1) {

@@ -159,6 +159,9 @@
                 <div *ngIf="mdcForm.controls['proyecto'].errors?.required" class="form-control-feedback lead text-danger mx-3">
                   <label> Campo requerido.</label>
                 </div>
+                <div *ngIf="mdcForm.getError('noRepeatMDC') as error" class="form-control-feedback lead text-danger mx-3">
+                  <label> Los proyectos no deben ser iguales.</label>
+                </div>
               </div>
               <select formControlName="proyecto" class="form-control form-control-sm">
                 <option value="" disabled>Escoger...</option>
@@ -264,6 +267,9 @@
                     <!-- <div *ngIf="registerForm.controls['proyecto'].errors?.required" class="form-control-feedback"> -->
                     <div *ngIf="proyectos.controls[i].get('proyecto').errors?.required" class="form-control-feedback lead text-danger mx-3">
                       <label> Campo requerido.</label>
+                    </div>
+                    <div *ngIf="mdcForm.getError('noRepeatExtraMDC') as error" class="form-control-feedback lead text-danger mx-3">
+                      <label> Los proyectos no deben ser iguales.</label>
                     </div>
                   </div>
                   <select [attr.id]="'proyecto'  +i" formControlName="proyecto" class="form-control form-control-sm">
