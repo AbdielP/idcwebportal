@@ -162,14 +162,9 @@
               </div>
               <select formControlName="proyecto" class="form-control form-control-sm">
                 <option value="" disabled>Escoger...</option>
-                <option value="PRUEBA">Proyecto de Prueba</option>
-                <option value="PRUEBA2">Proyecto de Prueba 2</option>
-                <!-- <ng-container *ngIf="clientes != ''">
-                  <option *ngFor="let cliente of clientes" value="{{cliente.idproyecto}}">{{cliente.nombre_empresa}} - LOC{{cliente.loc}} - {{cliente.datacenter}}</option>
+                <ng-container *ngIf="projects != ''">
+                  <option *ngFor="let cliente of projects" value="{{cliente.idproyecto}}">{{cliente.nombre_empresa}} - LOC{{cliente.loc}} - {{cliente.datacenter}}</option>
                 </ng-container>
-                <ng-container *ngIf="proveedores != ''">
-                  <option *ngFor="let proveedor of proveedores" value="{{proveedor.idproveedor}}">{{proveedor.nombre_proveedor}} - Datacenter - {{proveedor.datacenter}}</option>
-                </ng-container> -->
               </select>
             </div>
 
@@ -273,14 +268,9 @@
                   </div>
                   <select [attr.id]="'proyecto'  +i" formControlName="proyecto" class="form-control form-control-sm">
                     <option value="" disabled>Escoger...</option>
-                    <option value="PRUEBA">Proyecto de Prueba</option>
-                    <option value="PRUEBA2">Proyecto de Prueba 2</option>
-                    <!-- <ng-container *ngIf="clientes != ''">
-                      <option *ngFor="let cliente of clientes" value="{{cliente.idproyecto}}">{{cliente.nombre_empresa}} - LOC{{cliente.loc}} - {{cliente.datacenter}}</option>
+                    <ng-container *ngIf="projects != ''">
+                      <option *ngFor="let cliente of projects" value="{{cliente.idproyecto}}">{{cliente.nombre_empresa}} - LOC{{cliente.loc}} - {{cliente.datacenter}}</option>
                     </ng-container>
-                    <ng-container *ngIf="proveedores != ''">
-                      <option *ngFor="let proveedor of proveedores" value="{{proveedor.idproveedor}}">{{proveedor.nombre_proveedor}} - Datacenter - {{proveedor.datacenter}}</option>
-                    </ng-container> -->
                   </select>
                 </div>
 
