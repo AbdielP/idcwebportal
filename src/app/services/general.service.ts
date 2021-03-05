@@ -27,6 +27,13 @@ export class GeneralService {
     ])));
   }
 
+  insertNewUser(form: any): Observable<any> {
+    return this.http.post(`${this.SERVER_URL}/ppppccccnewuser`, form)
+    .pipe((catchError(err => [
+      console.log(err)
+    ])));
+  }
+
   // CUIDADO: ACTUALIZA EL LOCALSTORAGE, USAR SOLO PARA CAMBIAR PRIMERA PASSWORD
   update(url: string, form: any, token: any): Observable<any> {
     return this.http.post(`${this.SERVER_URL}/${url}?token=${token}`, form)

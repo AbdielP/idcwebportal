@@ -102,20 +102,25 @@ export class MdcformComponent implements OnInit {
       alert('Fomulario no válido');
       return;
     }
-    // this.agregarUsuarioMatriz(this.token,this.mdcForm.getRawValue());
-    console.log(this.mdcForm.getRawValue());
+    this.agregarUsuarioMatriz(this.mdcForm.getRawValue());
+    // console.log(this.mdcForm.getRawValue());
   }
 
+  agregarUsuarioMatriz(form: any) {
+    this.generalService.insertNewUser(form).subscribe((resp: any) => {
+      console.log(resp);
+    });
+  }
 
   onChange(event: any): void {
+    // Creo que aquí no va nada? Borrar...
   }
 
   agregarMDC() {
     const mdcFormGroup = this.formBuilder.group({
       proyecto: ['', {validators: [Validators.required]}],
       link: ['', {validators: [Validators.required]}],
-      version: [this.hoy, {validators: [Validators.required, Validators.min(2000),
-        Validators.max(this.dateService.actualYear() + 1)]}],
+      version: [this.hoy, {validators: [Validators.required]}],
       solicitar_acceso: [false],
       actualizar_acceso: [false],
       eliminar_acceso: [false],
