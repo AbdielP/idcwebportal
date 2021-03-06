@@ -58,7 +58,7 @@
     <div class="col-md-8">
         <div class="card opacidad-media">
             <div class="card-body">
-                <h5 class="mb-1 lead"><i class="fas fa-male"></i><i class="fas fa-female"></i> Información personal</h5>
+                <h5 class="mb-1 lead text-secondary"><i class="fas fa-male"></i><i class="fas fa-female"></i> Información personal</h5>
 
                 <div class="row">
                     <div class='col-6'>
@@ -92,7 +92,7 @@
 
         <div class="card opacidad-media">
             <div class="card-body">
-                <h5 class="mb-1 lead"><i class="fas fa-industry"></i> Datacenter</h5>
+                <h5 class="mb-1 lead text-secondary"><i class="fas fa-industry"></i> Datacenter</h5>
 
                 <div class="row">
                     <div class='col-6'>
@@ -131,7 +131,7 @@
 
         <div class="card opacidad-suave">
             <div class="card-body">
-                <h5 class="mb-1 lead"><i class="fas fa-clipboard"></i> Notas</h5>
+                <h5 class="mb-1 lead text-secondary"><i class="fas fa-clipboard"></i> Notas</h5>
 
                 <div class="row">
                     <div class='col-12'>
@@ -149,7 +149,7 @@
             </div>
         </div>
         
-        <div class="col-12">
+        <div *ngIf="userroll === 1" class="col-12">
             <div class="row p-2 d-flex justify-content-end">
                 <a *ngIf="acceso.gerencia !=''" class="btn btn-secondary btn-sm" href="{{acceso.gerencia}}" target="_blank"><i class="fas fa-file-pdf"></i> Formulario</a>
                 <p *ngIf="acceso.gerencia ==''" class="text-danger"><i class="fas fa-exclamation-circle text-warning"></i> No hay formulario disponible para este acceso.</p>

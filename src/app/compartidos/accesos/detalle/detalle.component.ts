@@ -1,7 +1,8 @@
 import { Observable, Subscription } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
-import { SeguridadService } from 'src/app/services/seguridad.service';
 import { QrcodeComponent } from 'src/app/compartidos/accesos/qrcode/qrcode.component';
+import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 
 import QRCode from 'qrcode';
 
@@ -16,10 +17,13 @@ export class DetalleComponent implements OnInit {
 
   qrcode: any = '';
   acceso: any = [];
+  userroll: number;
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
 
-  constructor(private seguridadService: SeguridadService, public dialog: MatDialog) { }
+  constructor(private seguridadService: SeguridadService, public dialog: MatDialog, private localstorageService: LocalstorageService) { 
+    this.getUserRoll();
+  }
 
   ngOnInit() {
     this.subscribeEventDetalleAcceso();
@@ -61,6 +65,11 @@ export class DetalleComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // console.log(`Dialog result: ${result}`); NO HACE NADA A PROPOSITO
     });
+  }
+
+  // Obtiene del localstorage el roll del usuario logeado
+  getUserRoll() {
+    this.userroll = this.localstorageService.getUserRoll();
   }
 
 }
