@@ -4,6 +4,7 @@ import { DateService } from 'src/app/services/date.service';
 import { GeneralService } from 'src/app/services/general.service';
 import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 import { CustomValidators } from 'src/app/utils/custom-validators';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mdcform',
@@ -11,6 +12,15 @@ import { CustomValidators } from 'src/app/utils/custom-validators';
   styleUrls: ['./mdcform.component.css']
 })
 export class MdcformComponent implements OnInit {
+
+  SwalParameters: any = {
+    icon: 'success',
+    title: 'Personal agregado.',
+    text: '',
+    footer: '',
+    backdrop: `rgba(0,0,0,0.4)`,
+    timer: 5000
+  };
 
   hoy: any;
   mdcForm: any;
@@ -74,6 +84,7 @@ export class MdcformComponent implements OnInit {
     if (this.userroll === 2) {
       this.mdcForm.patchValue({
         rollId: 2,
+        link: 'na'
       });
     }
   }
@@ -108,7 +119,10 @@ export class MdcformComponent implements OnInit {
 
   agregarUsuarioMatriz(form: any) {
     this.generalService.insertNewUser(form).subscribe((resp: any) => {
-      console.log(resp);
+      if (resp.ok) {
+        this.SwalParameters.text = `${resp.message}`;
+        Swal.fire(this.SwalParameters);
+      }
     });
   }
 

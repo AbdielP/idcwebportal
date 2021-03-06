@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { ErrorhandlerService } from 'src/app/services/error/errorhandler.service';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -11,7 +12,7 @@ export class GeneralService {
 
   private SERVER_URL = environment.SERVER_URL;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private errorHandler: ErrorhandlerService) { }
 
   select(url: string, storedprocedure: string): Observable<any> {
     return this.http.get(`${this.SERVER_URL}/${url}/${storedprocedure}`)
@@ -30,7 +31,7 @@ export class GeneralService {
   insertNewUser(form: any): Observable<any> {
     return this.http.post(`${this.SERVER_URL}/ppppccccnewuser`, form)
     .pipe((catchError(err => [
-      console.log(err)
+      this.errorHandler.errorHandler(err)
     ])));
   }
 

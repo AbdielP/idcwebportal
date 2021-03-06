@@ -12,7 +12,7 @@
         <div class="form-row">
           <div class="form-group col-md-6">
             <div class="d-flex">
-              <label for="username" class="text-purple lead font-weight-bold">Usuario</label>
+              <label for="username" class="text-purple lead font-weight-bold"><i class="fas fa-user"></i> Usuario</label>
               <div *ngIf="mdcForm.controls['username'].errors?.required" class="form-control-feedback lead text-danger mx-3">
                 Campo requerido.
               </div>
@@ -60,7 +60,7 @@
         </div>
         <div class="form-group col-md-6">
           <div class="d-flex">
-            <label for="correo" class="text-purple lead font-weight-bold">Correo</label>
+            <label for="correo" class="text-purple lead font-weight-bold"><i class="fas fa-at"></i> Correo</label>
             <div *ngIf="mdcForm.controls['correo'].errors?.required" class="form-control-feedback lead text-danger mx-3">
               Campo requerido.
             </div>
@@ -72,11 +72,11 @@
       <!-- CUARTA FILA -->
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="telefono" class="lead text-secondary">Teléfono</label>
+            <label for="telefono" class="lead text-secondary"><i class="fas fa-phone"></i> Teléfono</label>
             <input type="text" class="form-control form-control-sm" formControlName="telefono" placeholder="Ejemplo: 830-0000">
           </div>
           <div class="form-group col-md-6">
-            <label for="celular" class="lead text-secondary">Celular</label>
+            <label for="celular" class="lead text-secondary"><i class="fas fa-mobile-alt"></i> Celular</label>
             <input type="text" class="form-control form-control-sm" formControlName="celular" placeholder="Ejemplo: 6000-0000">
           </div>
         </div>
@@ -100,11 +100,11 @@
           </div>
           <!-- CONDICIONES PARA ALARGAR CAMPO DIRECCIÓN SEGÚN EL ROL  -->
           <div *ngIf="userroll === 1" class="form-group col-md-6">
-            <label for="direccion" class="lead text-secondary">Dirección</label>
+            <label for="direccion" class="lead text-secondary"><i class="fas fa-map-marked"></i> Dirección</label>
             <input type="text" class="form-control form-control-sm" formControlName="direccion" placeholder="Ejemplo: 1234 Main St.">
           </div>
           <div *ngIf="userroll !== 1" class="form-group col-12">
-            <label for="direccion" class="lead text-secondary">Dirección</label>
+            <label for="direccion" class="lead text-secondary"><i class="fas fa-map-marked"></i> Dirección</label>
             <input type="text" class="form-control form-control-sm" formControlName="direccion" placeholder="Ejemplo: 1234 Main St.">
           </div>
         </div>
@@ -122,7 +122,7 @@
           </div>
         </div>
         <!-- SEPTIMA FILA  -->  
-        <div class="form-check">
+        <div *ngIf="userroll !== 2" class="form-check">
           <div>
             <input class="form-check-input" formControlName="check_activo" type="checkbox" id="gridCheck">
             <label class="form-check-label text-purple" for="check_activo">
@@ -177,12 +177,12 @@
                   La fecha del documento de matriz de comunicación es requerida.
                 </div>
               </div>
-              <label for="version" class="lead text-secondary">Fecha</label>
+              <label for="version" class="lead text-secondary"><i class="far fa-calendar"></i> Fecha</label>
               <input type="date" class="form-control form-control-sm" formControlName="version" placeholder="dd/mm/yyyy" min="{{hoy}}" max="{{dateService.lastDayYear()}}">
             </div>
           </div>
 
-          <div class="form-row">
+          <div *ngIf="userroll !== 2" class="form-row">
             <div class="form-group col-12">
               <div class="d-flex">
                 <label for="link" class="lead text-purple">Link del formulario de matriz de comunicación </label>
@@ -286,12 +286,12 @@
                       La versión de la matriz de comunicación es requerida.
                     </div>
                   </div>
-                  <label for="version" class="lead text-secondary" >Fecha</label>
+                  <label for="version" class="lead text-secondary"><i class="far fa-calendar"></i> Fecha</label>
                   <input type="date" class="form-control form-control-sm" formControlName="version" placeholder="Año: 20XX"  max="maxdate">
                 </div>
               </div>
   
-              <div class="form-row">
+              <div *ngIf="userroll !== 2" class="form-row">
                 <div class="form-group col-md-12">
                   <div class="d-flex">
                     <label for="link" class="lead text-purple">Link del formulario de matriz de comunicación </label>
@@ -377,7 +377,7 @@
         </div>
       </div>
       <div class="form-group">
-        <button [disabled]="!mdcForm.valid" type="submit" class="btn btn-purple btn-block">Crear Usuario</button>
+        <button [disabled]="!mdcForm.valid" type="submit" class="btn btn-purple btn-block"><i class="fas fa-check"></i> Crear Usuario</button>
       </div>
     </div>
   </div>

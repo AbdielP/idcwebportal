@@ -23,6 +23,7 @@ export class ErrorhandlerService {
   errorHandler(error: any): Promise<any> {
     this.router = this.injector.get(Router);
     console.log(error);
+    // console.log(error.error.error.code)
     if (error.status === 0) {
       return Swal.fire('Server Down.', `Servidor fuera de servicio.`, 'question');
     }
@@ -36,7 +37,13 @@ export class ErrorhandlerService {
       this.SwalParameters.footer = `${error.error.footerMessage}`;
       return Swal.fire(this.SwalParameters);
     }
+
+    if (error.error.error.code === 'ER_DUP_ENTRY') {
+      this.SwalParameters.text = `${error.error.error.sqlMessage}`;
+      this.SwalParameters.footer = `Error, campo duplicado en la base de datos.`;
+      return Swal.fire(this.SwalParameters);
+    }
     // Se podría definir cuando usar 'error' o 'question' según el tipo de error? probablemente desde el backend?
-    return Swal.fire('Error', `${error.error.message}`, 'error');
+    // return Swal.fire('Error', `${error.error.message}`, 'error');
   }
 }
