@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { QrcodeComponent } from './accesos/qrcode/qrcode.component';
@@ -12,6 +13,7 @@ import { MdcListComponent } from './mdc/mdc-list/mdc-list.component';
   imports: [
     CommonModule,
     FormsModule,
+    RouterModule,
     ReactiveFormsModule
   ], exports: [QrcodeComponent, DetalleComponent, OpcionesComponent, MdcformComponent, MdcListComponent]
 })

@@ -18,4 +18,6 @@ export class MdcListComponent implements OnInit {
 
   getVersion(event: any) {}
 
+  redirect(link: string) {}
+
 }

@@ -3,3 +3,38 @@
 .text-purple {
   color: var(--angular-color-purple);
 }
+
+.cwb-background {
+    background-color: var(--cwb-color-purple);
+}
+
+/* TABLA DETALLES  */
+.tabla-detalles {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+.tabla-detalles-th, .tabla-detalles-td {
+    border: none;
+    text-align: left;
+    padding: 8px;
+}
+  
+/* .tabla-detalles-tr:nth-child(even){background-color: #f2f2f2}  */
+  
+.tabla-detalles-th {
+    background-color: #8970a8;
+}
+
+/* TABLA PERMISOS  */
+/* .container-tabla-matriz table{
+    width: 100%;
+    border: 1px solid #ffbf97;
+    margin: 1% 0;
+} */
+
+/* .container-tabla-matriz tr,th,td{
+    border: 1px solid #ffbf97;
+    text-align: center;
+    padding: .5%;
+} */
