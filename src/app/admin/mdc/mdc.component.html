@@ -10,7 +10,7 @@
                 <div class="col-md-4 d-flex flex-column justify-content-center pt-2">
                     <div class="d-flex">
                         <i class="fas fa-user-plus lead text-purple mt-1 mr-2"></i>
-                        <button class="btn btn-purple2 btn-sm text-light"> Añadir personal</button>
+                        <button class="btn btn-purple2 btn-sm text-light" (click)="mostrarForm()" > Añadir personal</button>
                     </div>
                     <!-- <a class="lead text-info d-flex align-items-center" [routerLink]="['/ofertas']"><i class="{{category.icono}} lead text-success mr-2"></i> {{category.catg}}</a> -->
                     <small class="d-block text-justify"><b class="text-purple">@</b>Añade personal a la matriz de comunicación de un cliente/proyecto.</small>
@@ -20,7 +20,7 @@
                     <div class="d-flex">
                         <i class="far fa-eye lead text-purple mt-1 mr-2"></i>
                         <!-- <i class="fas fa-user-plus lead text-purple mt-1 mr-2"></i> -->
-                        <button class="btn btn-purple2 btn-sm text-light"> Consultar Matriz</button>
+                        <button class="btn btn-purple2 btn-sm text-light" (click)="mostrarMDCList()"> Consultar Matriz</button>
                     </div>
                     <!-- <a class="lead text-info d-flex align-items-center" [routerLink]="['/ofertas']"><i class="{{category.icono}} lead text-success mr-2"></i> {{category.catg}}</a> -->
                     <small class="d-block text-justify"><b class="text-purple">@</b>Consulta el personal listado en la matriz de comunicación actual.</small>
@@ -31,11 +31,6 @@
     </div>
 </div>
 
-<!-- <div class="row"> -->
-    <!-- <div class="col-12 card"> -->
-        <!-- <div class="card-body form-border mx-1 my-4"> -->
-            <app-mdcform></app-mdcform>
-        <!-- </div> -->
 
-    <!-- </div> -->
-<!-- </div> -->
+<app-mdcform [hidden]="!showForm"></app-mdcform>
+<app-mdc-list [hidden]="!showMDCList"></app-mdc-list>

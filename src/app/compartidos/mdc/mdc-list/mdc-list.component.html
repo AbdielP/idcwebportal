@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-12 card">
+        <div class="card-body">
+
+            <div class="d-flex">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="../../../../assets/img/cwb_logo.png" width="175" alt="cwb.logo">
+                </div>
+            
+                <div class="container-leyenda">
+                    <div class="d-flex flex-column container-titulo align-items-center justify-content-center">
+                        <h5 class="lead">International Data Center</h5>
+                        <h5 class="lead">Control de Registro</h5>
+                        <h5 class="lead">Matriz de comunicación</h5>
+                    </div>
+                    <div class="container-descripcion text-secondary text-center">
+                        <p>Sección de matriz de comunicación. Muestra el listado de personal de la empresa <b>{{nombreEmpresa}}</b> y los privilegios asociados para solicitar
+                            Editar, o eliminar accesos, o solicitar manos remotas.</p>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-end">
+                        <!-- <div class="form-group col-md-9">
+                            <a [hidden]="proyecto == null" class="btn btn-warning" [routerLink]="['/camdc',proyecto]">Actualizar Matriz Actual de {{nombreEmpresa}}</a>
+                        </div> -->
+                        <!-- ESCOGER VERSIÓN DE LA MATRIZ -->
+                        <div class="form-group col-md-1.5">
+                            <h6 class="text-purple"><b>Fecha matriz:</b></h6>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <select class="form-control form-control-sm" [disabled]="!usuarios || usuarios < 1" id="version" (change)="getVersion($event)">
+                                <option *ngFor="let version of versionesMatriz" value="{{version.version}}">{{version.version | date:'yyyy/MM/dd'}}</option>
+                            </select>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

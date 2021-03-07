@@ -8,10 +8,25 @@ import { SessionInactivityService } from 'src/app/services/session/session-inact
 })
 export class MdcComponent {
 
-  constructor(private sessionInactivity: SessionInactivityService) { }
+  showForm = false;
+  showMDCList = true;
+
+  constructor(private sessionInactivity: SessionInactivityService) { 
+    // this.showForm = true;
+  }
 
   @HostListener('window:mousemove') refreshUserState() {
     this.sessionInactivity.resetActivity();
+  }
+
+  mostrarForm(): void {
+    this.showForm = true;
+    this.showMDCList = false;
+  }
+
+  mostrarMDCList(): void {
+    this.showMDCList = true;
+    this.showForm = false;
   }
 
 }
