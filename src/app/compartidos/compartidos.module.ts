@@ -7,14 +7,15 @@ import { OpcionesComponent } from './accesos/opciones/opciones.component';
 import { MdcformComponent } from './mdc/mdcform/mdcform.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MdcListComponent } from './mdc/mdc-list/mdc-list.component';
+import { ProyectosComponent } from './proyectos/proyectos.component';
 
 @NgModule({
-  declarations: [QrcodeComponent, DetalleComponent, OpcionesComponent, MdcformComponent, MdcListComponent],
+  declarations: [QrcodeComponent, DetalleComponent, OpcionesComponent, MdcformComponent, MdcListComponent, ProyectosComponent],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
     ReactiveFormsModule
-  ], exports: [QrcodeComponent, DetalleComponent, OpcionesComponent, MdcformComponent, MdcListComponent]
+  ], exports: [QrcodeComponent, DetalleComponent, OpcionesComponent, MdcformComponent, MdcListComponent, ProyectosComponent]
 })
 export class CompartidosModule { }

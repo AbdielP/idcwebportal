@@ -1,13 +1,14 @@
-<div class="row">
-    <div class="col-12 card">
-        <div class="card-body">
 
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+                
             <div class="d-flex">
                 <div class="d-flex justify-content-center align-items-center">
                     <img src="../../../../assets/img/cwb_logo.png" width="175" alt="cwb.logo">
                 </div>
-            
-                <div class="container-leyenda">
+                
+                <div>
                     <div class="d-flex flex-column container-titulo align-items-center justify-content-center">
                         <h5 class="lead">International Data Center</h5>
                         <h5 class="lead">Control de Registro</h5>
@@ -17,24 +18,37 @@
                         <p>Sección de matriz de comunicación. Muestra el listado de personal de la empresa <b>{{nombreEmpresa}}</b> y los privilegios asociados para solicitar
                             Editar, o eliminar accesos, o solicitar manos remotas.</p>
                     </div>
-                    <div class="d-flex align-items-center justify-content-end">
-                        <!-- <div class="form-group col-md-9">
-                            <a [hidden]="proyecto == null" class="btn btn-warning" [routerLink]="['/camdc',proyecto]">Actualizar Matriz Actual de {{nombreEmpresa}}</a>
-                        </div> -->
-                        <!-- ESCOGER VERSIÓN DE LA MATRIZ -->
-                        <div class="form-group col-md-1.5">
+                </div>
+                   
+            </div>
+
+            <div class="row">
+                <div class="col-7">
+                    <app-proyectos></app-proyectos>
+                </div>
+                <div class="col-5">
+                    <div class="d-flex justify-content-center align-items-center">
+                        <div class="col-5">
                             <h6 class="text-purple"><b>Fecha matriz:</b></h6>
+
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="col-7">
+
                             <select class="form-control form-control-sm" [disabled]="!usuarios || usuarios < 1" id="version" (change)="getVersion($event)">
                                 <option *ngFor="let version of versionesMatriz" value="{{version.version}}">{{version.version | date:'yyyy/MM/dd'}}</option>
                             </select>
                         </div>
-            
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
 
+
+<div class="row">
+    <div class="col-12 card">
+        <div class="card-body">
             <div class="d-flex flex-column">
                 <div class="text-center cwb-background text-light p-1">
                     Datos del solicitante
@@ -71,16 +85,16 @@
                 <a class="agregar-link" *ngIf="editar_matriz" [routerLink]="['/matrizadd']">Agregar personal <i class="fas fa-plus"></i></a>
             </div> -->
 
-            <div class="container-tabla-matriz">
-                <table>
+            <!-- <div class=""> -->
+                <table class="col-12">
                     <thead class="text-secondary">
-                        <tr>
-                            <th rowspan="2">Nombre</th>
-                            <th colspan="3">Solicitud de permiso</th>
-                            <th rowspan="2">Manos remotas *</th>
-                            <th colspan="3">Notificación de alertas</th>
-                            <th rowspan="2">Edit. Matriz</th>
-                            <th rowspan="2">Fecha Matriz</th>
+                        <tr class="border p-1">
+                            <th class="border p-1" rowspan="2">Nombre</th>
+                            <th class="border p-1" colspan="3">Solicitud de permiso</th>
+                            <th class="border p-1" rowspan="2">Manos remotas *</th>
+                            <th class="border p-1" colspan="3">Notificación de alertas</th>
+                            <th class="border p-1" rowspan="2">Edit. Matriz</th>
+                            <th class="border p-1" rowspan="2">Fecha Matriz</th>
                         </tr>
                         <tr>
                             <th>Solicitar</th>
@@ -145,7 +159,7 @@
                         
                     </tbody>
                 </table>
-            </div>
+            <!-- </div> -->
 
         </div>
     </div>

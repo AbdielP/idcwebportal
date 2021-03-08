@@ -26,6 +26,10 @@
     background-color: #8970a8;
 }
 
+.bgred {
+    background-color: red;
+}
+
 /* TABLA PERMISOS  */
 /* .container-tabla-matriz table{
     width: 100%;
