@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,13 +11,21 @@ export class MdcListComponent implements OnInit {
   nombreEmpresa = '';
   usuarios: any;
   versionesMatriz = '';
+  eventSubject: Subject<any> = new Subject<any>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  getVersion(event: any) {}
+   // Recibe el proyecto emitido desde el componmente hijo: app-proyectos cuando se usa el <select>
+   getProyecto(proyecto): void {
+    this.getVersion(JSON.parse(proyecto).idproyecto);
+  }
+
+  getVersion(idproyecto: any) {
+    console.log(idproyecto);
+  }
 
   redirect(link: string) {}
 
