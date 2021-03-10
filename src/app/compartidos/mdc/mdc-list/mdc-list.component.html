@@ -45,48 +45,121 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-12 card">
+        <div class="d-flex flex-column my-2">
+            <div class="text-center cwb-background text-light p-1">
+                Datos del solicitante
+            </div>
+            <div class="d-flex">
+                <div class="col-2 border text-secondary text-center"><b>Compañía</b></div>
+                <div class="col-10 border"><p class="m-0 text-secondary">{{nombreEmpresa}}</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="row">
     <div class="col-12 card">
         <div class="card-body">
-            <div class="d-flex flex-column">
-                <div class="text-center cwb-background text-light p-1">
-                    Datos del solicitante
-                </div>
-                <div class="d-flex">
-                    <div class="col-2 border text-secondary text-center"><b>Compañía</b></div>
-                    <div class="col-10 border"><p class="m-0 text-secondary">{{nombreEmpresa}}</p></div>
-                </div>
-            </div>
-
-            <h6 class="text-secondary mt-2">Detalle del personal:</h6>
-            <!-- <div class=""> -->
+                
+            <div class="row">
+                <h6 class="text-secondary mt-2">Detalle del personal:</h6>
                 <table class="tabla-detalles text-secondary">
                     <tr class="cwb-background text-light">
-                      <th class="p-1">Nombre</th>
-                      <th class="p-1">Cargo</th>
-                      <th class="p-1">Teléfono</th>
-                      <th class="p-1">Celular</th>
-                      <th class="p-1">Email</th>
+                        <th class="p-1">Nombre</th>
+                        <th class="p-1">Cargo</th>
+                        <th class="p-1">Teléfono</th>
+                        <th class="p-1">Celular</th>
+                        <th class="p-1">Email</th>
                     </tr>
                     <tr *ngFor="let usuario of usuarios" class="tabla-detalles-tr">
-                      <td class="tabla-detalles-td">{{usuario.nombre}} {{usuario.apellido}}</td>
-                      <td class="tabla-detalles-td">{{usuario.cargo}}</td>
-                      <td class="tabla-detalles-td">{{usuario.telefono}}</td>
-                      <td class="tabla-detalles-td">{{usuario.celular}}</td>
-                      <td class="tabla-detalles-td">{{usuario.correo}}</td>
+                        <td class="tabla-detalles-td">{{usuario.nombre}} {{usuario.apellido}}</td>
+                        <td class="tabla-detalles-td">{{usuario.cargo}}</td>
+                        <td class="tabla-detalles-td">{{usuario.telefono}}</td>
+                        <td class="tabla-detalles-td">{{usuario.celular}}</td>
+                        <td class="tabla-detalles-td">{{usuario.correo}}</td>
                     </tr>
-                    
-                  </table>
-            <!-- </div> -->
+                        
+                </table>
+            </div>
 
             <!-- <div class="container-enlaces">
                 <hr>
                 <a class="agregar-link" *ngIf="editar_matriz" [routerLink]="['/matrizadd']">Agregar personal <i class="fas fa-plus"></i></a>
             </div> -->
 
-            <!-- <div class=""> -->
-                <table class="col-12 mt-2">
+
+            <div class="row mt-2">
+
+                <table class="table table-striped table-font">
+                    <thead class="text-secondary text-center">
+                      <tr>
+                        <th class="align-middle" rowspan="2">Nombre</th>
+                        <th colspan="3">Solicitud de permiso</th>
+                        <th class="align-middle" rowspan="2">Manos remotas *</th>
+                        <th colspan="3">Notificación de alertas</th>
+                        <th class="align-middle" rowspan="2">Edit. Matriz</th>
+                        <th class="align-middle" rowspan="2">Fecha Matriz</th>
+                      </tr>
+                      <tr>
+                        <th>Solicitar</th>
+                        <th>Actualizar</th>
+                        <th>Eliminar</th>
+            
+                        <th>Baja</th>
+                        <th>Media</th>
+                        <th>Alta</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let usuario of usuarios">
+                            <th class="text-purple">{{usuario.nombre}} {{usuario.apellido}} <a class="edit-link"  [routerLink]="['/editar',usuario.version,usuario.idproyecto,usuario.idusuario]">Editar <i class="far fa-edit"></i></a></th>
+                            <td>
+                                <input *ngIf="usuario.solicitar_acceso" type="checkbox" value="{{usuario.solicitar_acceso}}" checked disabled>
+                                <input *ngIf="!usuario.solicitar_acceso" type="checkbox" value="{{usuario.solicitar_acceso}}" disabled>
+                            </td>
+                            <td>
+                                <input *ngIf="usuario.actualizar_acceso" type="checkbox" value="{{usuario.actualizar_acceso}}" checked disabled>
+                                <input *ngIf="!usuario.actualizar_acceso" type="checkbox" value="{{usuario.actualizar_acceso}}" disabled>
+                            </td>
+                            <td>
+                                <input *ngIf="usuario.eliminar_acceso" type="checkbox" value="{{usuario.eliminar_acceso}}" checked disabled>
+                                <input *ngIf="!usuario.eliminar_acceso" type="checkbox" value="{{usuario.eliminar_acceso}}" disabled>
+                            </td>
+                            <td>
+                                <input *ngIf="usuario.manos_remotas" type="checkbox" value="{{usuario.manos_remotas}}" checked disabled>
+                                <input *ngIf="!usuario.manos_remotas" type="checkbox" value="{{usuario.manos_remotas}}" disabled>
+                            </td>
+                            <td>
+                                <input *ngIf="usuario.alertas_baja" type="checkbox" value="{{usuario.alertas_baja}}" checked disabled>
+                                <input *ngIf="!usuario.alertas_baja" type="checkbox" value="{{usuario.alertas_baja}}" disabled>
+                            </td>
+                            <td>
+                                <input *ngIf="usuario.alertas_media" type="checkbox" value="{{usuario.alertas_media}}" checked disabled>
+                                <input *ngIf="!usuario.alertas_media" type="checkbox" value="{{usuario.alertas_media}}" disabled>
+                            </td>
+                            <td>
+                                <input *ngIf="usuario.alertas_alta" type="checkbox" value="{{usuario.alertas_alta}}" checked disabled>
+                                <input *ngIf="!usuario.alertas_alta" type="checkbox" value="{{usuario.alertas_alta}}" disabled>
+                            </td>
+                            <td>
+                                <h5 *ngIf="usuario.editar_matriz" class="text-danger">SI</h5>
+                                <h5 *ngIf="!usuario.editar_matriz">NO</h5>
+                                <!-- <input *ngIf="usuario.editar_matriz" type="checkbox" value="{{usuario.editar_matriz}}" checked disabled>
+                                <input *ngIf="!usuario.editar_matriz" type="checkbox" value="{{usuario.editar_matriz}}" disabled> -->
+                            </td>
+                            <td>
+                                <a class="btn btn-link" (click)="redirect(usuario.link_formulario)">{{usuario.version | date:'yyyy/MM/dd'}}</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                  </table>
+            </div>
+
+            
+                <!-- <table class="col-12 mt-2">
                     <thead class="text-secondary">
                         <tr class="border p-1">
                             <th class="border p-1" rowspan="2">Nombre</th>
@@ -105,16 +178,16 @@
                             <th>Media</th>
                             <th>Alta</th>
                         </tr>
-                        <!-- <tr>
+                        <tr>
                             <th>Tabla Avanzada 2</th>
                             <th>Cabecera Múltiples Columnas</th>
-                        </tr> -->
+                        </tr>
                     </thead>
-                    <!-- <tfoot>
+                    <tfoot>
                         <tr>
                             <td colspan="4">Pie de tabla.</td>
                         </tr>
-                    </tfoot> -->
+                    </tfoot>
                     <tbody>
                         <tr *ngFor="let usuario of usuarios">
                             <th class="table-names">{{usuario.nombre}} {{usuario.apellido}} <a class="edit-link"  [routerLink]="['/editar',usuario.version,usuario.idproyecto,usuario.idusuario]">Editar <i class="far fa-edit"></i></a></th>
@@ -149,8 +222,8 @@
                             <td>
                                 <h5 *ngIf="usuario.editar_matriz" class="h5-editar-matriz">SI</h5>
                                 <h5 *ngIf="!usuario.editar_matriz">NO</h5>
-                                <!-- <input *ngIf="usuario.editar_matriz" type="checkbox" value="{{usuario.editar_matriz}}" checked disabled> -->
-                                <!-- <input *ngIf="!usuario.editar_matriz" type="checkbox" value="{{usuario.editar_matriz}}" disabled> -->
+                                <input *ngIf="usuario.editar_matriz" type="checkbox" value="{{usuario.editar_matriz}}" checked disabled>
+                                <input *ngIf="!usuario.editar_matriz" type="checkbox" value="{{usuario.editar_matriz}}" disabled>
                             </td>
                             <td>
                                 <a class="link-version" (click)="redirect(usuario.link_formulario)">{{usuario.version | date:'yyyy/MM/dd'}}</a>
@@ -158,8 +231,7 @@
                         </tr>
                         
                     </tbody>
-                </table>
-            <!-- </div> -->
+                </table> -->
 
         </div>
     </div>
