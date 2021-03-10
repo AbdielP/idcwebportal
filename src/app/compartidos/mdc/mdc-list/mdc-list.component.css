@@ -20,7 +20,7 @@
     padding: 8px;
 }
   
-/* .tabla-detalles-tr:nth-child(even){background-color: #f2f2f2}  */
+.tabla-detalles-tr:nth-child(even){background-color: #f2f2f2} 
   
 .tabla-detalles-th {
     background-color: #8970a8;
@@ -31,14 +31,14 @@
 }
 
 /* TABLA PERMISOS  */
-/* .container-tabla-matriz table{
+.container-tabla-matriz table{
     width: 100%;
-    border: 1px solid #ffbf97;
+    border: 1px solid #E6E6E6;
     margin: 1% 0;
-} */
+} 
 
-/* .container-tabla-matriz tr,th,td{
-    border: 1px solid #ffbf97;
+.container-tabla-matriz tr,th,td{
+    border: 1px solid #E6E6E6;
     text-align: center;
     padding: .5%;
-} */
+}
