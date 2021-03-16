@@ -4,7 +4,8 @@
     </div>
 
     <div class="col-md-9">
-        <!-- <app-mdcform></app-mdcform> -->
-       <app-mdc-list></app-mdc-list>
+        <app-mdc-opciones (showMDCForm)="mostrarMDCForm($event)" (showMDCList)="mostrarMDCList($event)"></app-mdc-opciones>
+        <app-mdcform [hidden]="!showForm"></app-mdcform>
+       <app-mdc-list [hidden]="!showList"></app-mdc-list>
     </div>
 </div>
