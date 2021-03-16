@@ -23,8 +23,19 @@
             </div>
 
             <div class="row">
+                <!-- LISTADO DE PROYECTOS  -->
                 <div class="col-7">
-                    <app-proyectos (emitirProyecto)="getProyecto($event)"></app-proyectos>
+                    <app-proyectos *ngIf="userroll === 1" (emitirProyecto)="getProyecto($event)"></app-proyectos>
+                    
+                    <div *ngIf="userroll === 2" class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text text-purple"><i class="fas fa-angle-down mr-1"></i> Listado</span>
+                        </div>
+                        <select #test class="form-control text-secondary" (change)="onChangeProyecto($event)">
+                            <option value="" disabled selected>Seleccione uno de sus proyectos</option>
+                            <option *ngFor="let proyecto of proyectos" value="{{proyecto | json}}">{{proyecto.nombre_empresa}} - LOC{{proyecto.loc}} - {{proyecto.datacenter}}</option>    
+                        </select>
+                    </div>
                 </div>
                 <div class="col-5">
                     <div class="d-flex justify-content-center align-items-center">

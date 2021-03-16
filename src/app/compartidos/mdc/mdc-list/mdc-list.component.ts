@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Subject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { GeneralService } from 'src/app/services/general.service';
+import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 
 @Component({
   selector: 'app-mdc-list',
@@ -15,11 +16,23 @@ export class MdcListComponent implements OnInit {
   nombreEmpresa = '';
   usuarios: any;
   versionesMatriz = '';
+
+  userroll: number;
+  proyectos: any;
   eventSubject: Subject<any> = new Subject<any>();
 
-  constructor(private generalService: GeneralService, public datePipe: DatePipe) { }
+  constructor(private generalService: GeneralService, private localstorageService: LocalstorageService , public datePipe: DatePipe) { }
 
   ngOnInit(): void {
+    this.getUserRoll();
+  }
+
+  // Obtiene del localstorage el roll del usuario logeado
+  getUserRoll() {
+    this.userroll = this.localstorageService.getUserRoll();
+    if (this.userroll === 2) {
+      this.selectProyectos();
+    }
   }
 
   // Recibe el proyecto emitido desde el componmente hijo: app-proyectos cuando se usa el <select>
@@ -30,9 +43,16 @@ export class MdcListComponent implements OnInit {
     this.getListadoMDC(this.proyecto.idproyecto);
   }
 
+  // Obtiene los proyectos del cliente
+  selectProyectos(): void {
+    this.generalService.selectWithToken('ggggwwwwpppptoken', 'sp_clientes_select_proyectos', this.localstorageService.getToken())
+    .subscribe((resp: any) => {
+      this.proyectos = resp.select;
+    });
+  }
+
   // Obtiene las versiones de MDC del proyecto del usuario
   getVersiones(idproyecto: any) {
-    console.log(idproyecto);
     this.generalService.select('ppppccccc', `select_versiones_matrices(${idproyecto})`).subscribe((resp: any) => {
       // console.log(resp.select);
       this.versionesMatriz = resp.select;
@@ -42,11 +62,9 @@ export class MdcListComponent implements OnInit {
   // Obtiene LA versión seleccionada de MDC
   getVersion(event: any) {
     // console.log(this.datePipe.transform(event.target.value, 'yyyy-MM-dd'));
-    console.log(this.proyecto.idproyecto)
     const fecha = this.datePipe.transform(event.target.value, 'yyyy-MM-dd');
     this.generalService.select('ppppccccc', `sp_select_mdc_proyecto_version(${this.proyecto.idproyecto},'${fecha}')`)
     .subscribe((resp: any) => {
-      console.log(resp);
       this.usuarios = resp.select;
     });
   }
@@ -57,6 +75,14 @@ export class MdcListComponent implements OnInit {
       // console.log(resp);
       this.usuarios = resp.select;
     });
+  }
+
+  // Obtiene el IDPROYECTO del select cuando usuario es cliente
+  onChangeProyecto(event: any) {
+    this.proyecto = JSON.parse(event.target.value);
+    this.nombreEmpresa = this.proyecto.nombre_empresa;
+    this.getVersiones(this.proyecto.idproyecto);
+    this.getListadoMDC(this.proyecto.idproyecto);
   }
 
   redirect(link: string) {
