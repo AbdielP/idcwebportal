@@ -9,7 +9,7 @@ import { SessionInactivityService } from 'src/app/services/session/session-inact
 export class MdcComponent {
 
   showForm = false;
-  showMDCList = true;
+  showList = false;
 
   constructor(private sessionInactivity: SessionInactivityService) { 
     // this.showForm = true;
@@ -19,14 +19,16 @@ export class MdcComponent {
     this.sessionInactivity.resetActivity();
   }
 
-  mostrarForm(): void {
-    this.showForm = true;
-    this.showMDCList = false;
+  // Muestra el componente listado de MDC
+  mostrarMDCList(event: any) {
+    this.showList = event;
+    this.showForm = !event;
   }
 
-  mostrarMDCList(): void {
-    this.showMDCList = true;
-    this.showForm = false;
+  // Muestra el componente de formulario para añadir usuario a la MDC
+  mostrarMDCForm(event: any) {
+    this.showForm = event;
+    this.showList = !event;
   }
 
 }
