@@ -23,15 +23,20 @@
                     <input type="text" id="usrn" name="usrn" class="form-control" autocomplete="on" placeholder="Usuario" required ngModel>
                     <input type="password" name="pswd" id="pswd" class="form-control" autocomplete="on" placeholder="Contraseña" required ngModel>
                     
-                    <button class="btn btn-sm btn-purple btn-block text-light mt-4" type="submit">Entrar</button>
+                    <button [disabled]="showSpinner" class="btn btn-sm btn-purple btn-block text-light mt-4" type="submit">Entrar</button>
                     
                 </form>
+               
                 <footer class="mt-4 text-center">
                     <p class="mb-1 text-secondary">&copy; {{year}} - IDC Liberty Latin America.</p>
                     
                     <br>
-                    <!-- <a [routerLink]="['/']" class="h6"><i class="fas fa-home"></i> Ir a inicio</a> -->
+                    <!-- SPINNER -->
+                    <div [hidden]="!showSpinner" class="spinner-border text-purple" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                     <hr>
+                   
                 </footer>
                 <div class="row d-flex">
                     <!-- <i class="fab fa-cc-visa text-secondary h2 m-2"></i>
