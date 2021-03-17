@@ -1,11 +1,11 @@
-<div *ngIf="proyecto.length === 0 && mnsgtramite" class="col-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media">
+<div *ngIf="proyecto.length === 0 && mnsgtramite && !showSpinner" class="col-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media">
     <h5 class="my-3 text-purple lead">Seleccione un cliente de la lista para mostrar sus accesos aprobados <i class="fas fa-angle-down"></i><hr></h5>
     <!-- <p class="text-center lead"> Asegurese de presionar <b>'Enter'</b> para realizar una busqueda o seleccionar un <b>'Cliente'</b> o <b>'Proyecto'</b> en el listado de clientes para realizar una busqueda, o puede que los accesos <i class="text-warning">no hayan sido aprobados</i> aún.</p>
     <br> -->
 </div>
 
 <!-- MENSAJE ACCESOS APROBADOS -->
-<div *ngIf="proyecto.length !== 0 && accesos.length === 0 && !showSpinner" class="col-md-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media">
+<div *ngIf="proyecto.length !== 0 && accesos.length === 0 && !showSpinner" class="col-md-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media animate__animated animate__fadeIn">
     <i class="fas fa-box-open display-1 text-info"></i>
     <h2 class="my-3 text-info">No hay accesos aprobados para {{proyecto.nombre_empresa}} <hr></h2>
     <p class="text-center lead"> Asegurese de presionar <b>'Enter'</b> para realizar una busqueda o seleccionar un <b>'Cliente'</b> o <b>'Proyecto'</b> en el listado de clientes para realizar una busqueda, o puede que los accesos <i class="text-warning">no hayan sido aprobados</i> aún.</p>
@@ -18,7 +18,7 @@
     </div>
 </div>
 <!-- TABLA -->
-<table *ngIf="accesos.length > 0" class="table table-sm">
+<table *ngIf="accesos.length > 0 && !showSpinner" class="table table-sm animate__animated animate__fadeIn">
     
     <thead>
         <tr>
@@ -51,7 +51,7 @@
     </tbody>
 </table>
 
-<div *ngIf="accesos.length === 0 && !mnsgtramite && !showSpinner" class="col-md-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media">
+<div *ngIf="accesos.length === 0 && !mnsgtramite && !showSpinner" class="col-md-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media animate__animated animate__fadeIn">
     <i class="fas fa-box-open display-1 text-info"></i>
     <h2 class="my-3 text-info">No hay accesos en trámite<hr></h2>
     <br>

@@ -23,9 +23,16 @@
                 <p class="lead" *ngIf="valoropciones == 'aprobados'"><i class="fas fa-exclamation-circle text-warning"></i> Seleccione uno de sus proyectos para listar los <b class="text-purple">accesos aprobados</b>.</p>
                 <p class="lead" *ngIf="valoropciones == 'tramite'"><i class="fas fa-exclamation-circle text-warning"></i> Seleccione uno de sus proyectos para listar los <b class="text-purple">accesos pendientes</b>.</p>
             </div>
+
+            <!-- SPINNER  -->
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <div [hidden]="!showSpinner" class="spinner-border text-purple p-2  m-3" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
             
-            <div class="container-fluid">
-                <table *ngIf="accesos != null && accesos.length > 0" class="table table-sm p-0">
+            <div class="container-fluid animate__animated animate__fadeIn">
+                <table *ngIf="accesos != null && accesos.length > 0 && !showSpinner" class="table table-sm p-0 animate__animated animate__fadeInUp">
                     <thead class="text-secondary">
                         <tr>
                             <th scope="col">#</th>
@@ -57,11 +64,11 @@
                     </tbody>
                 </table>
 
-                <div *ngIf="accesos != null && accesos.length == 0 && proyecto != ''" class="col-md-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media">
+                <div *ngIf="accesos != null && accesos.length == 0 && proyecto != '' && !showSpinner" class="col-md-12 d-flex flex-column justify-content-center align-items-center my-4 opacidad-media animate__animated animate__fadeIn">
                     <i class="fas fa-box-open display-1 text-purple"></i>
                     <h2 class="my-2 text-purple">¡Está vacio! <hr></h2>
                     <!-- <p *ngIf="valoropciones == 'tramite'" class="lead text-center text-muted"><i class="fas fa-check"></i> No hay acceso pendientes o en trámite para <b>{{proyecto.nombre_empresa}}</b> en <b>{{proyecto.datacenter}}</b>.</p> -->
-                    <div >
+                    <div class="">
                         <p *ngIf="valoropciones == 'tramite'" class="lead text-center text-secondary"><i class="far fa-times-circle text-warning"></i> No hay accesos en trámite para <b>{{proyecto.nombre_empresa}}</b> en <b>{{proyecto.datacenter}}</b>.</p>
 
                         <p *ngIf="valoropciones !== 'tramite'" class="lead text-center text-secondary"><i class="far fa-times-circle text-warning"></i> No hay accesos aprobados para <b>{{proyecto.nombre_empresa}}</b> en <b>{{proyecto.datacenter}}</b>.</p>

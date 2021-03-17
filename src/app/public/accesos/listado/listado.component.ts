@@ -16,6 +16,7 @@ export class ListadoComponent implements OnInit {
   userProyects: any = '';
   valoropciones = 'aprobados'; // Decide cual stored procedure llamar para listar los accesos, solicitados o en trámite.
   proyecto: any = '';
+  showSpinner = false;
 
   eventSubscription: Subscription;
   @Input() opciones: Observable<any>;
@@ -48,6 +49,7 @@ export class ListadoComponent implements OnInit {
 
   // LLama los accesos del proyecto indicado
   selectAccesosProyecto(proyecto: any): void {
+    this.showSpinner = true;
     this.proyecto = proyecto;
     this.localstorageService.setAcceso(this.proyecto);
     let sp = '';
@@ -59,6 +61,7 @@ export class ListadoComponent implements OnInit {
     }
     this.seguridadService.select(sp).subscribe((resp: any) => {
       this.accesos = resp.select;
+      this.showSpinner = false;
     });
   }
 
@@ -78,9 +81,11 @@ export class ListadoComponent implements OnInit {
 
   // Llama al servicio para obtener listado de acesos
   selectAccesos(storedprocedure: string): void {
+    this.showSpinner = true;
     this.seguridadService.select(storedprocedure).subscribe((resp: any) => {
         // console.log(resp);
         this.accesos = resp.select;
+        this.showSpinner = false;
       });
   }
 
