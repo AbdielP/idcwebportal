@@ -11,3 +11,7 @@
 .text-purple {
     color: var(--angular-color-purple);
 }
+
+.red{
+    background-color: red;
+}

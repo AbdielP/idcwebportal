@@ -13,6 +13,7 @@ export class ListadoComponent implements OnInit {
   accesos = [];
   proyecto: any = [];
   mnsgtramite = true;
+  showSpinner = false;
 
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
@@ -44,6 +45,7 @@ export class ListadoComponent implements OnInit {
   subscribeEventOpciones(): void {
     this.eventSubscription = this.opciones.subscribe(({opciones}) => {
       // console.log(opciones);
+      this.showSpinner = true;
       this.mnsgtramite = true;
       if (opciones === 'tramite') {
         this.mnsgtramite = false;
@@ -56,9 +58,11 @@ export class ListadoComponent implements OnInit {
 
   // Llama al servicio para obtener listado de acesos
   selectAccesos(storedprocedure: string): void {
+    this.showSpinner = true;
     this.seguridadService.select(storedprocedure).subscribe((resp: any) => {
         // console.log(resp);
         this.accesos = resp.select;
+        this.showSpinner = false;
       });
   }
 
