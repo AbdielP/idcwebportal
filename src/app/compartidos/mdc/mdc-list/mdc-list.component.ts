@@ -20,6 +20,7 @@ export class MdcListComponent implements OnInit {
   userroll: number;
   proyectos: any;
   eventSubject: Subject<any> = new Subject<any>();
+  showSpinner = false;
 
   constructor(private generalService: GeneralService, private localstorageService: LocalstorageService , public datePipe: DatePipe) { }
 
@@ -37,6 +38,7 @@ export class MdcListComponent implements OnInit {
 
   // Recibe el proyecto emitido desde el componmente hijo: app-proyectos cuando se usa el <select>
   getProyecto(proyecto): void {
+    this.showSpinner = true;
     this.proyecto = JSON.parse(proyecto);
     this.nombreEmpresa = this.proyecto.nombre_empresa;
     this.getVersiones(this.proyecto.idproyecto);
@@ -61,11 +63,13 @@ export class MdcListComponent implements OnInit {
 
   // Obtiene LA versión seleccionada de MDC
   getVersion(event: any) {
+    this.showSpinner = true;
     // console.log(this.datePipe.transform(event.target.value, 'yyyy-MM-dd'));
     const fecha = this.datePipe.transform(event.target.value, 'yyyy-MM-dd');
     this.generalService.select('ppppccccc', `sp_select_mdc_proyecto_version(${this.proyecto.idproyecto},'${fecha}')`)
     .subscribe((resp: any) => {
       this.usuarios = resp.select;
+      this.showSpinner = false;
     });
   }
 
@@ -74,11 +78,13 @@ export class MdcListComponent implements OnInit {
     this.generalService.select('ppppccccc', `sp_select_mdc_proyecto(${idproyecto})`).subscribe((resp: any) => {
       // console.log(resp);
       this.usuarios = resp.select;
+      this.showSpinner = false;
     });
   }
 
   // Obtiene el IDPROYECTO del select cuando usuario es cliente
   onChangeProyecto(event: any) {
+    this.showSpinner = true;
     this.proyecto = JSON.parse(event.target.value);
     this.nombreEmpresa = this.proyecto.nombre_empresa;
     this.getVersiones(this.proyecto.idproyecto);

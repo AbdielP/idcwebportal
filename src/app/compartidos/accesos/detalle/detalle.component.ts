@@ -20,6 +20,7 @@ export class DetalleComponent implements OnInit {
   userroll: number;
   eventSubscription: Subscription;
   @Input() events: Observable<any>;
+  showSpinner = true;
 
   constructor(private seguridadService: SeguridadService, public dialog: MatDialog, private localstorageService: LocalstorageService) { 
     this.getUserRoll();
@@ -40,6 +41,7 @@ export class DetalleComponent implements OnInit {
         // console.log(resp);
         this.acceso = resp.select[0];
         this.generarQR(this.acceso);
+        this.showSpinner = false;
       });
     });
   }

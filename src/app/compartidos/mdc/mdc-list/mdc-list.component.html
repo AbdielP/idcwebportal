@@ -45,7 +45,7 @@
                         </div>
                         <div class="col-7">
 
-                            <select class="form-control form-control-sm" [disabled]="!usuarios || usuarios < 1" id="version" (change)="getVersion($event)">
+                            <select class="form-control form-control-sm"  id="version" (change)="getVersion($event)">
                                 <option *ngFor="let version of versionesMatriz" value="{{version.version}}">{{version.version | date:'yyyy/MM/dd'}}</option>
                             </select>
                         </div>
@@ -85,7 +85,15 @@
                         <th class="p-1">Celular</th>
                         <th class="p-1">Email</th>
                     </tr>
-                    <tr *ngFor="let usuario of usuarios" class="tabla-detalles-tr">
+                    <tr [hidden]="!showSpinner">
+                        <!-- SPINNER  -->
+                        <td colspan="5">
+                            <div  class="spinner-border text-purple" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr [hidden]="showSpinner" *ngFor="let usuario of usuarios" class="tabla-detalles-tr">
                         <td class="tabla-detalles-td">{{usuario.nombre}} {{usuario.apellido}}</td>
                         <td class="tabla-detalles-td">{{usuario.cargo}}</td>
                         <td class="tabla-detalles-td">{{usuario.telefono}}</td>
@@ -125,7 +133,15 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let usuario of usuarios">
+                        <tr [hidden]="!showSpinner">
+                            <!-- SPINNER  -->
+                            <td colspan="10">
+                                <div class="spinner-border text-purple" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr [hidden]="showSpinner" *ngFor="let usuario of usuarios">
                             <th class="text-purple">{{usuario.nombre}} {{usuario.apellido}} <a class="edit-link"  [routerLink]="['/editar',usuario.version,usuario.idproyecto,usuario.idusuario]">Editar <i class="far fa-edit"></i></a></th>
                             <td>
                                 <input *ngIf="usuario.solicitar_acceso" type="checkbox" value="{{usuario.solicitar_acceso}}" checked disabled>
@@ -168,81 +184,6 @@
                     </tbody>
                   </table>
             </div>
-
-            
-                <!-- <table class="col-12 mt-2">
-                    <thead class="text-secondary">
-                        <tr class="border p-1">
-                            <th class="border p-1" rowspan="2">Nombre</th>
-                            <th class="border p-1" colspan="3">Solicitud de permiso</th>
-                            <th class="border p-1" rowspan="2">Manos remotas *</th>
-                            <th class="border p-1" colspan="3">Notificación de alertas</th>
-                            <th class="border p-1" rowspan="2">Edit. Matriz</th>
-                            <th class="border p-1" rowspan="2">Fecha Matriz</th>
-                        </tr>
-                        <tr>
-                            <th>Solicitar</th>
-                            <th>Actualizar</th>
-                            <th>Eliminar</th>
-                
-                            <th>Baja</th>
-                            <th>Media</th>
-                            <th>Alta</th>
-                        </tr>
-                        <tr>
-                            <th>Tabla Avanzada 2</th>
-                            <th>Cabecera Múltiples Columnas</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td colspan="4">Pie de tabla.</td>
-                        </tr>
-                    </tfoot>
-                    <tbody>
-                        <tr *ngFor="let usuario of usuarios">
-                            <th class="table-names">{{usuario.nombre}} {{usuario.apellido}} <a class="edit-link"  [routerLink]="['/editar',usuario.version,usuario.idproyecto,usuario.idusuario]">Editar <i class="far fa-edit"></i></a></th>
-                            <td>
-                                <input *ngIf="usuario.solicitar_acceso" type="checkbox" value="{{usuario.solicitar_acceso}}" checked disabled>
-                                <input *ngIf="!usuario.solicitar_acceso" type="checkbox" value="{{usuario.solicitar_acceso}}" disabled>
-                            </td>
-                            <td>
-                                <input *ngIf="usuario.actualizar_acceso" type="checkbox" value="{{usuario.actualizar_acceso}}" checked disabled>
-                                <input *ngIf="!usuario.actualizar_acceso" type="checkbox" value="{{usuario.actualizar_acceso}}" disabled>
-                            </td>
-                            <td>
-                                <input *ngIf="usuario.eliminar_acceso" type="checkbox" value="{{usuario.eliminar_acceso}}" checked disabled>
-                                <input *ngIf="!usuario.eliminar_acceso" type="checkbox" value="{{usuario.eliminar_acceso}}" disabled>
-                            </td>
-                            <td>
-                                <input *ngIf="usuario.manos_remotas" type="checkbox" value="{{usuario.manos_remotas}}" checked disabled>
-                                <input *ngIf="!usuario.manos_remotas" type="checkbox" value="{{usuario.manos_remotas}}" disabled>
-                            </td>
-                            <td>
-                                <input *ngIf="usuario.alertas_baja" type="checkbox" value="{{usuario.alertas_baja}}" checked disabled>
-                                <input *ngIf="!usuario.alertas_baja" type="checkbox" value="{{usuario.alertas_baja}}" disabled>
-                            </td>
-                            <td>
-                                <input *ngIf="usuario.alertas_media" type="checkbox" value="{{usuario.alertas_media}}" checked disabled>
-                                <input *ngIf="!usuario.alertas_media" type="checkbox" value="{{usuario.alertas_media}}" disabled>
-                            </td>
-                            <td>
-                                <input *ngIf="usuario.alertas_alta" type="checkbox" value="{{usuario.alertas_alta}}" checked disabled>
-                                <input *ngIf="!usuario.alertas_alta" type="checkbox" value="{{usuario.alertas_alta}}" disabled>
-                            </td>
-                            <td>
-                                <h5 *ngIf="usuario.editar_matriz" class="h5-editar-matriz">SI</h5>
-                                <h5 *ngIf="!usuario.editar_matriz">NO</h5>
-                                <input *ngIf="usuario.editar_matriz" type="checkbox" value="{{usuario.editar_matriz}}" checked disabled>
-                                <input *ngIf="!usuario.editar_matriz" type="checkbox" value="{{usuario.editar_matriz}}" disabled>
-                            </td>
-                            <td>
-                                <a class="link-version" (click)="redirect(usuario.link_formulario)">{{usuario.version | date:'yyyy/MM/dd'}}</a>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
-                </table> -->
 
         </div>
     </div>

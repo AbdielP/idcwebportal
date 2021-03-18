@@ -27,6 +27,7 @@ export class MdcformComponent implements OnInit {
   projects: any;
   userroll: number;
   roles = [];
+  showSpinner = false;
 
   constructor(private formBuilder: FormBuilder, public dateService: DateService, private localstorageService: LocalstorageService,
               private generalService: GeneralService) {
@@ -113,6 +114,7 @@ export class MdcformComponent implements OnInit {
       alert('Fomulario no válido');
       return;
     }
+    this.showSpinner = true;
     this.agregarUsuarioMatriz(this.mdcForm.getRawValue());
     // console.log(this.mdcForm.getRawValue());
   }
@@ -123,6 +125,7 @@ export class MdcformComponent implements OnInit {
         this.SwalParameters.text = `${resp.message}`;
         Swal.fire(this.SwalParameters);
       }
+      this.showSpinner = false;
     });
   }
 

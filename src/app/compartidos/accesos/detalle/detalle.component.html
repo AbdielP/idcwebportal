@@ -1,4 +1,11 @@
-<div class="row div-bg p-2 border-top">
+<!-- SPINNER  -->
+<div class="col-12 d-flex align-items-center justify-content-center">
+    <div [hidden]="!showSpinner" class="spinner-border text-purple p-2  m-3" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div [hidden]="showSpinner" class="row div-bg p-2 border-top">
     <div class="col-md-4">
         <div class="d-flex justify-content-center align-items-center">
             <img class="rounded img-thumbnail" src="{{acceso.foto}}" alt="Error" onerror="this.onerror!=null;this.src='../../../../assets/unknown.jpg';">

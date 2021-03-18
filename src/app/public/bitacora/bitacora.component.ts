@@ -29,6 +29,7 @@ export class BitacoraComponent implements OnInit  {
 
   nombreproyecto = '';
   nombreidc = '';
+  showSpinner = false;
 
   constructor(private generalService: GeneralService, private localstorageService: LocalstorageService,
               private dateService: DateService) {}
@@ -59,6 +60,7 @@ export class BitacoraComponent implements OnInit  {
   }
 
   selectBitacoraProyecto(proyecto: any): void {
+    this.showSpinner = true;
     this.proyecto = proyecto;
     // console.log(this.proyecto);
     this.nombreproyecto = proyecto.nombre_empresa;
@@ -66,6 +68,7 @@ export class BitacoraComponent implements OnInit  {
     this.generalService.select('ggggwwwwpppp', `check_in_out.sp_select_bitacora_compania('${proyecto.nombre_empresa}',
     '${proyecto.datacenter}','${this.dateService.actualYear()}')`).subscribe((resp: any) => {
       this.bitacora = resp.select;
+      this.showSpinner = false;
       this.dataSource = new MatTableDataSource<any>(this.bitacora);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

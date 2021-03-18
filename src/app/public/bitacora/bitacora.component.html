@@ -27,8 +27,15 @@
         </div>
       </div>
 
+      <!-- SPINNER  -->
+      <div class="col-12 d-flex align-items-center justify-content-center">
+        <div [hidden]="!showSpinner" class="spinner-border text-purple p-2 m-1" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+
         <!-- tabla -->
-        <div [hidden]="proyecto.length < 1" class="container-fluid div-bg mb-5">
+        <div [hidden]="proyecto.length < 1 && !showSpinner" class="container-fluid div-bg mb-5">
             <mat-form-field>
                 <mat-label>Filtrar</mat-label>
                 <input matInput (keyup)="applyFilter($event)" placeholder="Busqueda" #input>
