@@ -26,8 +26,8 @@ export class AuthService {
     }
   }
   // Función para realizar login
-  login(usuario: Usuario, storedprocedure: string): Observable<any> {
-    return this.http.post(`${this.SERVER_URL}/auth/login/${storedprocedure}`, usuario)
+  login(usuario: Usuario): Observable<any> {
+    return this.http.post(`${this.SERVER_URL}/api/cwpidc/auth/login`, usuario)
     .pipe(map((resp: any) => {
       this.setStorage(resp);
       return resp;

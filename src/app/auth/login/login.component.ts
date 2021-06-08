@@ -25,20 +25,21 @@ export class LoginComponent {
     if (form.invalid) { return; }
     const usuario = new Usuario(form.value.usrn, form.value.pswd);
     this.showSpinner = true;
-    this.authService.login(usuario, `sp_select_datos_usuario('${usuario.usrn}')`).subscribe((resp: any) => {
+    this.authService.login(usuario).subscribe((resp: any) => {
       if (resp.ok) {
         if (resp.usuario.checked === 0) {
           return this.router.navigate([`/auth/initlogin`]);
         }
-        if (resp.usuario.roll === 'cliente') {
+        if (resp.usuario.idroll === 2) {
           this.router.navigate([`/`]);
-        } else if (resp.usuario.roll === 'idc') {
+        } else if (resp.usuario.idroll === 1) {
           this.router.navigate([`/admin`]);
         }
       }
     }, (error) => {
       this.showSpinner = false;
       this.errorHandler.errorHandler(error);
+      // console.log(error);
     });
   }
 }
