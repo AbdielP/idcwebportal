@@ -23,7 +23,7 @@ export class ChangepassComponent {
 
   onSubmit() {
     // console.log(this.form.value);
-    this.updatePassword('cfp', this.form.value);
+    this.updatePassword('api/cwpidc/cfp', this.form.value);
   }
 
   updatePassword(url: string, form: any): void {

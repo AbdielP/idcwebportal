@@ -19,7 +19,7 @@ export class AdminGuard implements CanActivate {
     this.token = this.localstorageService.getToken();
     return this.localstorageService.getTokenInfo(this.token).pipe(map((results: any) => {
 
-      if (results.tokeninfo.idroll !== 1) {
+      if (results.tokeninfo.rollid !== 1) {
         // Podría crear un servicio, componente o alguna manera de redireccionar según su roll a su 'homepage'
         return false;
       }

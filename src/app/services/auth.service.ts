@@ -36,7 +36,7 @@ export class AuthService {
 
   setStorage(resp: any) {
     localStorage.setItem('sti', resp.token);
-    localStorage.setItem('type', resp.usuario.idroll);
+    localStorage.setItem('type', resp.usuario.rollid);
     this.token  = resp.token;
   }
 

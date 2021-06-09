@@ -30,10 +30,10 @@ export class LoginComponent {
         if (resp.usuario.checked === 0) {
           return this.router.navigate([`/auth/initlogin`]);
         }
-        if (resp.usuario.idroll === 2) {
-          this.router.navigate([`/`]);
-        } else if (resp.usuario.idroll === 1) {
-          this.router.navigate([`/admin`]);
+        if (resp.usuario.rollid === 2) {
+          return this.router.navigate([`/`]);
+        } else if (resp.usuario.rollid === 1) {
+          return this.router.navigate([`/admin`]);
         }
       }
     }, (error) => {
