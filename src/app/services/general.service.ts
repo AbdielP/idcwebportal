@@ -42,7 +42,8 @@ export class GeneralService {
       // this.updateStorage(resp.token); Deberia actualizar el storage con el nuevo token (no funciona por los guards)
       return resp;
     }), catchError(err => [
-      console.log(err)
+      console.log(err.error.errors)
+      // Mostrar estos errores en 'snackbars' de angualar material
     ]));
   }
 }

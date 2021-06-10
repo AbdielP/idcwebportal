@@ -16,13 +16,14 @@ export class ChangepassComponent {
 
   constructor(private router: Router, private localstorageservice: LocalstorageService , private generalService: GeneralService) {
     this.form = new FormGroup({
-      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*\d)/),
+        CustomValidators.lowerCase]),
       re_password: new FormControl('', [Validators.required, Validators.minLength(8)])
     }, { validators: [CustomValidators.equalValues]});
   }
 
   onSubmit() {
-    // console.log(this.form.value);
+    console.log(this.form);
     this.updatePassword('api/cwpidc/cfp', this.form.value);
   }
 

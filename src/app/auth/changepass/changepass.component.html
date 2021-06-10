@@ -16,6 +16,13 @@
                         <div *ngIf="form.controls['password'].errors?.minlength" class="text-danger text-center form-control-feedback m-2">
                             La contraseña debe contener al menos 8 caracteres.
                         </div>
+                        <div *ngIf="form.controls['password'].errors?.pattern" class="text-danger text-center form-control-feedback m-2">
+                            La contraseña debe contener al menos un (1) número.
+                        </div>
+                        <div *ngIf="form.controls.password.hasError('lowerCase')" class="text-danger text-center form-control-feedback m-2">
+                            La contraseña debe contener al menos una (1) minúscula.
+                        </div>
+                         <!-- {{ form.controls['password'].errors | json}} -->
                     </div>
                     <input type="password" class="form-control btn-sm mb-1" placeholder="Contraseña nueva" formControlName="password" autocomplete="on">
                     
