@@ -13,22 +13,40 @@
   }
 
 .main {
-    
-    background-color:#E6E6E6!important;
-    height: 100vh;
-    
-    display: -ms-flexbox;
-    display: -webkit-box;
-    display: flex;
-    -ms-flex-align: center;
-    -ms-flex-pack: center;
-    -webkit-box-align: center;
-    align-items: center;
-    -webkit-box-pack: center;
-    justify-content: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+
+  width: 100%;
+  height: 100vh;
+  background-color:#E6E6E6!important;
 }
+
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.form-container {
+  width: 100%;
+  height: 100%;
+}
+
+form {
+  max-width: 65%;
+}
+
+.container-requisitos {
+  width: 100%;
+}
+
+.list {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+
+/* input {
+  width: 100%;
+  background-color: red;
+} */
 
 /* .error-container {
     width: 50%;

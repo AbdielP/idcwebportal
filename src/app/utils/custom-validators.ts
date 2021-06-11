@@ -36,7 +36,7 @@ export class CustomValidators {
     }
 
     /**
-     * Validaciones para cambiar contraseña
+     * Validaciones para cambiar primera password
      */
 
     // Valida que los campos 'changepassword' tengan el mismo valor
@@ -47,10 +47,42 @@ export class CustomValidators {
         return null;
     }
 
+    // Longitud de caracteres
+    static longitud(control: AbstractControl) {
+        if (control.value.length < 8) {
+            return { longitud: true };
+        }
+        return null;
+    }
+
+     // Valida que la contraseña tenga al menos 1 número
+     static number(control: AbstractControl) {
+        if ( !control.value.match(/^(?=.*\d)/)) {
+            return { number: true };
+        }
+        return null;
+    }
+
     // Valida que la contraseña tenga al menos 1 minúscula
     static lowerCase(control: AbstractControl) {
         if ( !control.value.match(/(?=.*[a-z])/)) {
             return { lowerCase: true };
+        }
+        return null;
+    }
+
+    // Valida que la contraseña tenga al menos 1 mayúscula
+     static uppercase(control: AbstractControl) {
+        if ( !control.value.match(/(?=.*[A-Z])/)) {
+            return { uppercase: true };
+        }
+        return null;
+    }
+
+    // Valida que la contraseña tenga al menos 1 carácter especial
+    static specialCharacter(control: AbstractControl) {
+        if ( !control.value.match(/(?=.*[^a-zA-Z0-9])/)) {
+            return { specialCharacter: true };
         }
         return null;
     }

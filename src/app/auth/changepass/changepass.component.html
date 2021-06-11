@@ -1,8 +1,68 @@
 <div class="main">
+    <div class="container">
+        <div class="form-container d-flex flex-column justify-content-center align-items-center">
+            <img class="m-3" width="50" src="../../../assets/img/Logo final.png" alt="LLA IDC">
+            <div>
+                <h3 class="lead text-purple"><b>Cree una contraseña para su cuenta</b></h3>
+                <hr>
+            </div>
+            <form class="form-group" [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="error-container">
+                    <div *ngIf="form.controls['password'].errors?.required" class="text-danger text-center form-control-feedback m-2">
+                        Este campo es requerido.
+                    </div>
+                </div>
+                <input type="password" class="form-control btn-sm mb-1" placeholder="Contraseña nueva" formControlName="password" autocomplete="on">
+                
+                <div class="error-container">
+                    <!-- <div *ngIf="form.controls['re_password'].errors?.required" class="text-danger text-center form-control-feedback m-2">
+                        Este campo es requerido.
+                    </div> -->
+                </div>
+               
+                <div *ngIf="form.getError('equalValues') as error" class="text-danger text-center form-control-feedback m-2">
+                    Las contraseñas deben ser iguales.
+                </div>
+                <input type="password" class="form-control btn-sm" placeholder="Repetir contraseña nueva" formControlName="re_password" autocomplete="on">
+                <div class="container-requisitos d-flex flex-column justify-content-center align-items-center pt-3">
+                    <p class="text-muted text-center">La contraseña debe cumplir con los siguientes requisitos</p>
+                    <ul class="list text-muted small text-justify">
+                        <li>
+                            <p *ngIf="form.controls.password.hasError('longitud')" class="m-0"><i class="fas fa-times-circle text-danger"></i> La contraseña debe tener al menos 8 caracteres.</p>
+                            <p *ngIf="!form.controls.password.hasError('longitud')" class="m-0"><i class="fas fa-check-circle text-success"></i> La contraseña debe tener al menos 8 caracteres.</p>
+                        </li>
+                        <li>
+                            <p *ngIf="form.controls.password.hasError('number')" class="m-0"><i class="fas fa-times-circle text-danger"></i> La contraseña debe tener al menos un (1) <b>número.</b></p>
+                            <p *ngIf="!form.controls.password.hasError('number')" class="m-0"><i class="fas fa-check-circle text-success"></i> La contraseña debe tener al menos un (1) <b>número.</b></p>
+
+                        </li>
+                        <li>
+                            <p *ngIf="form.controls.password.hasError('lowerCase')" class="m-0"><i class="fas fa-times-circle text-danger"></i> La contraseña debe contener al menos una (1) <b>minúscula.</b></p>
+                            <p *ngIf="!form.controls.password.hasError('lowerCase')" class="m-0"><i class="fas fa-check-circle text-success"></i> La contraseña debe contener al menos una (1) <b>minúscula.</b></p>
+                        </li>
+                        <li>
+                            <p *ngIf="form.controls.password.hasError('uppercase')" class="m-0"><i class="fas fa-times-circle text-danger"></i> La contraseña debe contener al menos una (1) <b>mayúscula.</b></p>
+                            <p *ngIf="!form.controls.password.hasError('uppercase')" class="m-0"><i class="fas fa-check-circle text-success"></i> La contraseña debe contener al menos una (1) <b>mayúscula.</b></p>
+                        </li>
+                        <li>
+                            <p *ngIf="form.controls.password.hasError('specialCharacter')" class="m-0"><i class="fas fa-times-circle text-danger"></i> La contraseña debe contener al menos un (1) <b>caracter especial.</b></p>
+                            <p *ngIf="!form.controls.password.hasError('specialCharacter')" class="m-0"><i class="fas fa-check-circle text-success"></i> La contraseña debe contener al menos un (1) <b>caracter especial.</b></p>
+                        </li>
+                    </ul>
+               </div>
+                <button class="btn btn-block btn-sm btn-purple text-light mt-3" [disabled]="!form.valid" type="submit">Cambiar contraseña</button>
+            </form>
+            <br>
+            <p class="text-purple"><i class="fas fa-exclamation-triangle text-warning"></i> Por favor, no recargue esta página.</p>
+           
+        </div>
+    </div>
+</div>
+<!-- <div class="main">
 
     <div class="container">
         <div class="row">
-            <div class="col-12 d-flex flex-column justify-content-center align-items-center">
+            <div class="col-12 d-flex flex-column justify-content-center align-items-center form-container">
                 <img class="m-3" width="50" src="../../../assets/img/Logo final.png" alt="LLA IDC">
                 <div>
                     <h3 class="lead text-purple"><b>Cree una contraseña para su cuenta</b></h3>
@@ -22,7 +82,6 @@
                         <div *ngIf="form.controls.password.hasError('lowerCase')" class="text-danger text-center form-control-feedback m-2">
                             La contraseña debe contener al menos una (1) minúscula.
                         </div>
-                         <!-- {{ form.controls['password'].errors | json}} -->
                     </div>
                     <input type="password" class="form-control btn-sm mb-1" placeholder="Contraseña nueva" formControlName="password" autocomplete="on">
                     
@@ -43,4 +102,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

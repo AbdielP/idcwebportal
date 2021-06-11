@@ -16,8 +16,8 @@ export class ChangepassComponent {
 
   constructor(private router: Router, private localstorageservice: LocalstorageService , private generalService: GeneralService) {
     this.form = new FormGroup({
-      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*\d)/),
-        CustomValidators.lowerCase]),
+      password: new FormControl('', [Validators.required, CustomValidators.longitud, CustomValidators.number,
+        CustomValidators.lowerCase, CustomValidators.uppercase, CustomValidators.specialCharacter]),
       re_password: new FormControl('', [Validators.required, Validators.minLength(8)])
     }, { validators: [CustomValidators.equalValues]});
   }
