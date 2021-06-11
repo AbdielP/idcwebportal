@@ -22,7 +22,7 @@ export class DetalleComponent implements OnInit {
   @Input() events: Observable<any>;
   showSpinner = true;
 
-  constructor(private seguridadService: SeguridadService, public dialog: MatDialog, private localstorageService: LocalstorageService) { 
+  constructor(private seguridadService: SeguridadService, public dialog: MatDialog, private localstorageService: LocalstorageService) {
     this.getUserRoll();
   }
 

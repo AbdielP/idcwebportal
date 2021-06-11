@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component } from '@angular/core';
 import { CustomValidators } from 'src/app/utils/custom-validators';
 import { GeneralService } from 'src/app/services/general.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-changepass',
@@ -12,6 +13,7 @@ import { GeneralService } from 'src/app/services/general.service';
 })
 export class ChangepassComponent {
 
+  eventError: Subject<any> = new Subject();
   form: FormGroup;
 
   constructor(private router: Router, private localstorageservice: LocalstorageService , private generalService: GeneralService) {
@@ -39,7 +41,8 @@ export class ChangepassComponent {
         this.router.navigate([`/admin`]);
       }
     }, (err) => {
-      console.log(err);
+      // console.log(err);
+      this.eventError.next(err);
     });
   }
 }
