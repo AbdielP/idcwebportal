@@ -28,8 +28,8 @@
                     <p class="text-muted text-center">La contraseña debe cumplir con los siguientes requisitos</p>
                     <ul class="list text-muted small text-justify">
                         <li>
-                            <p *ngIf="form.controls.password.hasError('longitud')" class="m-0"><i class="fas fa-times-circle text-danger"></i> La contraseña debe tener al menos 8 caracteres.</p>
-                            <p *ngIf="!form.controls.password.hasError('longitud')" class="m-0"><i class="fas fa-check-circle text-success"></i> La contraseña debe tener al menos 8 caracteres.</p>
+                            <p *ngIf="form.controls.password.hasError('longitud')" class="m-0"><i class="fas fa-times-circle text-danger"></i> La contraseña debe contener 8 caracteres como <b>mínimo</b>, y un <b>máximo</b> de 20.</p>
+                            <p *ngIf="!form.controls.password.hasError('longitud')" class="m-0"><i class="fas fa-check-circle text-success"></i> La contraseña debe contener 8 caracteres como mínimo, y un máximo de 20.</p>
                         </li>
                         <li>
                             <p *ngIf="form.controls.password.hasError('number')" class="m-0"><i class="fas fa-times-circle text-danger"></i> La contraseña debe tener al menos un (1) <b>número.</b></p>
