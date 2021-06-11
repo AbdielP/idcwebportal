@@ -49,7 +49,6 @@ export class CustomValidators {
 
     // Longitud de caracteres
     static longitud(control: AbstractControl) {
-        console.log(control.value.length)
         if (control.value.length < 8 || control.value.length > 20) {
             return { longitud: true };
         }

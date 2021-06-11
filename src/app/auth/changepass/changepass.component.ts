@@ -15,15 +15,18 @@ export class ChangepassComponent {
   form: FormGroup;
 
   constructor(private router: Router, private localstorageservice: LocalstorageService , private generalService: GeneralService) {
+    // this.form = new FormGroup({
+    //   password: new FormControl('', [Validators.required, CustomValidators.longitud, CustomValidators.number,
+    //     CustomValidators.lowerCase, CustomValidators.uppercase, CustomValidators.specialCharacter]),
+    //   re_password: new FormControl('', [Validators.required, Validators.minLength(8)])
+    // }, { validators: [CustomValidators.equalValues]});
     this.form = new FormGroup({
-      password: new FormControl('', [Validators.required, CustomValidators.longitud, CustomValidators.number,
-        CustomValidators.lowerCase, CustomValidators.uppercase, CustomValidators.specialCharacter]),
-      re_password: new FormControl('', [Validators.required, Validators.minLength(8)])
-    }, { validators: [CustomValidators.equalValues]});
+      password: new FormControl(''),
+      re_password: new FormControl('')
+    });
   }
 
   onSubmit() {
-    console.log(this.form);
     this.updatePassword('api/cwpidc/cfp', this.form.value);
   }
 
@@ -35,6 +38,8 @@ export class ChangepassComponent {
       } else if (resp.usuario.roll === 'idc') {
         this.router.navigate([`/admin`]);
       }
+    }, (err) => {
+      console.log(err);
     });
   }
 }
