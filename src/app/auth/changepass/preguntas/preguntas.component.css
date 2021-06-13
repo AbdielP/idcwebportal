@@ -1,7 +1,9 @@
-.wtf {
-    background-color: red;
+@import '../../../../assets/styles/general.css';
+
+.text-purple {
+    color: var(--angular-color-purple);
 }
 
-.wtf2 {
-    width: 100%;
+hr {
+    width: 50%;
 }

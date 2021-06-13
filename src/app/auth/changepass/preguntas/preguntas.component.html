@@ -1,9 +1,49 @@
-<div class="form-container d-flex flex-column justify-content-center align-items-center">
-    <h4 class="lead">Preguntas de seguridad.</h4>
-    <p class="text-muted text-center">Selecciona tres preguntas de seguridad. Estas preguntas nos ayudarán a verificar tu identidad.</p>
-    <div class="form-container d-flex flex-column justify-content-center align-items-center">
-        <form class="form-group" [formGroup]="formpreguntas" (ngSubmit)="onSubmit()">
-            Has esta baina con bootstrap.. ya basta
-        </form>
+<div class="row">
+    <div class="col-12">
+        <h3 class="lead text-center text-purple"><i class="far fa-clipboard"></i><b> Preguntas de seguridad.</b></h3>
+        <p class="text-muted text-center">Selecciona tres preguntas de seguridad. Estas preguntas nos ayudarán a verificar tu identidad.</p> 
+        <hr>
     </div>
 </div>
+
+<form [formGroup]="formpreguntas" (ngSubmit)="onSubmit()">
+    <div class="row mt-2">
+        <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <label class="text-purple">Pregunta de seguridad</label>
+         </div>
+        <div class="col-md-4">
+            <select class="custom-select d-block w-100" id="state" name="sexo" required>
+                <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                <option>¿Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, est?</option>
+                <option>¿Lorem ipsum dolor sit amet consectetur adipisicing elit?</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <label class="text-secondary">Respuesta</label>
+         </div>
+        <div class="col-md-4">
+            <input id="" class="form-control form-control-sm" type="text" name="" placeholder="Respuesta">
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <label class="text-purple">Pregunta de seguridad</label>
+         </div>
+        <div class="col-md-4">
+            <select class="custom-select d-block w-100" id="state" name="sexo" required>
+                <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                <option>¿Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, est?</option>
+                <option>¿Lorem ipsum dolor sit amet consectetur adipisicing elit?</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <label class="text-secondary">Respuesta</label>
+         </div>
+        <div class="col-md-4">
+            <input id="" class="form-control form-control-sm" type="text" name="" placeholder="Respuesta">
+        </div>
+    </div>
+</form>
