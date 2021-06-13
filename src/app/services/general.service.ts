@@ -35,11 +35,10 @@ export class GeneralService {
     ])));
   }
 
-  // CUIDADO: ACTUALIZA EL LOCALSTORAGE, USAR SOLO PARA CAMBIAR PRIMERA PASSWORD
+  // USAR SOLO PARA CAMBIAR PRIMERA PASSWORD
   update(url: string, form: any, token: any): Observable<any> {
     return this.http.post(`${this.SERVER_URL}/${url}?token=${token}`, form)
     .pipe(map((resp: any) => {
-      // this.updateStorage(resp.token); Deberia actualizar el storage con el nuevo token (no funciona por los guards)
       return resp;
     }));
     // }), catchError(err => [

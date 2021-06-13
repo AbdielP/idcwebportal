@@ -8,9 +8,10 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { ChangepassRoutingModule } from './changepass-routing.module';
 import { ChangepassComponent } from './changepass.component';
+import { PreguntasComponent } from './preguntas/preguntas.component';
 
 @NgModule({
-  declarations: [ChangepassComponent],
+  declarations: [ChangepassComponent, PreguntasComponent],
   imports: [
     CompartidosModule,
     CommonModule,
