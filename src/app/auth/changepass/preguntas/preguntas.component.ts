@@ -1,5 +1,7 @@
+import { LocalstorageService } from './../../../services/localstorage/localstorage.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { SeguridadService } from 'src/app/services/seguridad.service';
 
 @Component({
   selector: 'app-preguntas',
@@ -9,8 +11,9 @@ import { Component, OnInit } from '@angular/core';
 export class PreguntasComponent implements OnInit {
 
   formpreguntas: FormGroup;
+  spreguntas: Array<string>;
 
-  constructor() {
+  constructor(private seguridadService: SeguridadService, private localstorageService: LocalstorageService) {
     this.formpreguntas = new FormGroup({
       q1: new FormControl (''),
       a1: new FormControl (''),
@@ -22,8 +25,18 @@ export class PreguntasComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getSecurityQuestions(this.localstorageService.getToken());
   }
 
-  onSubmit(): void {}
+  onSubmit(): void {
+    console.log(this.formpreguntas.value);
+  }
+
+  getSecurityQuestions(token: string): void {
+    this.seguridadService.select(`api/cwpidc/squestions?token=${token}`).subscribe((resp: any) => {
+      this.spreguntas = resp.select;
+      console.log(this.spreguntas);
+    });
+  }
 
 }

@@ -12,10 +12,9 @@
             <label class="text-purple">Pregunta de seguridad</label>
          </div>
         <div class="col-md-4">
-            <select class="custom-select d-block w-100" id="state" name="sexo" required>
+            <select class="custom-select d-block w-100" formControlName="q1" required>
                 <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
-                <option>¿Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, est?</option>
-                <option>¿Lorem ipsum dolor sit amet consectetur adipisicing elit?</option>
+                <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
             </select>
         </div>
 
@@ -23,7 +22,7 @@
             <label class="text-secondary">Respuesta</label>
          </div>
         <div class="col-md-4">
-            <input id="" class="form-control form-control-sm" type="text" name="" placeholder="Respuesta">
+            <input class="form-control form-control-sm" type="text" formControlName="a1" placeholder="Respuesta">
         </div>
     </div>
 
@@ -32,10 +31,9 @@
             <label class="text-purple">Pregunta de seguridad</label>
          </div>
         <div class="col-md-4">
-            <select class="custom-select d-block w-100" id="state" name="sexo" required>
+            <select class="custom-select d-block w-100" formControlName="q2" required>
                 <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
-                <option>¿Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, est?</option>
-                <option>¿Lorem ipsum dolor sit amet consectetur adipisicing elit?</option>
+                <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
             </select>
         </div>
 
@@ -43,7 +41,27 @@
             <label class="text-secondary">Respuesta</label>
          </div>
         <div class="col-md-4">
-            <input id="" class="form-control form-control-sm" type="text" name="" placeholder="Respuesta">
+            <input class="form-control form-control-sm" type="text" formControlName="a2"  placeholder="Respuesta">
         </div>
     </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <label class="text-purple">Pregunta de seguridad</label>
+         </div>
+        <div class="col-md-4">
+            <select class="custom-select d-block w-100" formControlName="q3" required>
+                <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
+            </select>
+        </div>
+
+        <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <label class="text-secondary">Respuesta</label>
+         </div>
+        <div class="col-md-4">
+            <input class="form-control form-control-sm" type="text" formControlName="a3"  placeholder="Respuesta">
+        </div>
+    </div>
+    <button type="submit">Enviar</button>
 </form>

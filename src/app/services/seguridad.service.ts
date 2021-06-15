@@ -13,10 +13,19 @@ export class SeguridadService {
 
   constructor(private http: HttpClient) { }
 
-  select(storedprocedure: string): Observable<any> {
-    return this.http.get(`${this.SERVER_URL}/sssswwwwpppp/${storedprocedure}`)
-    .pipe((catchError(err => [
-      console.log(err)
+  // Corregir porque manda SP por url
+  // select(storedprocedure: string): Observable<any> {
+  //   return this.http.get(`${this.SERVER_URL}/sssswwwwpppp/${storedprocedure}`)
+  //   .pipe((catchError(err => [
+  //     console.log(err)
+  //   ])));
+  // }
+
+  // Preguntas de seguridad
+  select(url: string): Observable<any> {
+    return this.http.get(`${this.SERVER_URL}/${url}`)
+      .pipe((catchError(err => [
+        console.log(err)
     ])));
   }
 }
