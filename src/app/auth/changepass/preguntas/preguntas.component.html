@@ -7,6 +7,176 @@
 </div>
 
 <form [formGroup]="formpreguntas" (ngSubmit)="onSubmit()">
+    <!-- PREGUNTA 1  -->
+    <form [formGroup]="formpreguntas">
+        <div formGroupName="preguntaForm" class="row mt-2">
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <label class="text-purple">Pregunta de seguridad</label>
+            </div>
+            <div class="col-md-4">
+                <select class="custom-select d-block w-100" formControlName="pregunta" required>
+                    <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                    <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <label class="text-secondary">Respuesta</label>
+             </div>
+            <div class="col-md-4">
+                <input class="form-control form-control-sm" type="text" formControlName="respuesta" placeholder="Respuesta">
+            </div>
+        </div>
+    </form>
+     <!-- PREGUNTA 2  -->
+     <form [formGroup]="formpreguntas">
+        <div formGroupName="preguntaForm2" class="row mt-2">
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <label class="text-purple">Pregunta de seguridad</label>
+            </div>
+            <div class="col-md-4">
+                <select class="custom-select d-block w-100" formControlName="pregunta" required>
+                    <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                    <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <label class="text-secondary">Respuesta</label>
+             </div>
+            <div class="col-md-4">
+                <input class="form-control form-control-sm" type="text" formControlName="respuesta" placeholder="Respuesta">
+            </div>
+        </div>
+    </form>
+     <!-- PREGUNTA 3  -->
+     <form [formGroup]="formpreguntas">
+        <div formGroupName="preguntaForm3" class="row mt-2">
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <label class="text-purple">Pregunta de seguridad</label>
+            </div>
+            <div class="col-md-4">
+                <select class="custom-select d-block w-100" formControlName="pregunta" required>
+                    <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                    <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
+                </select>
+            </div>
+
+            <div class="col-md-6 d-flex justify-content-end align-items-center">
+                <label class="text-secondary">Respuesta</label>
+             </div>
+            <div class="col-md-4">
+                <input class="form-control form-control-sm" type="text" formControlName="respuesta" placeholder="Respuesta">
+            </div>
+        </div>
+    </form>
+    <button type="submit">GO?</button>
+
+</form>
+
+<!-- <form [formGroup]="formpreguntas" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formpreguntas">
+        PREGUNTA 1
+        <ng-container formGroupName="preguntaForm">
+            <div class="row mt-2">
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <label class="text-purple">Pregunta de seguridad</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="custom-select d-block w-100" formControlName="pregunta" required>
+                        <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                        <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <label class="text-secondary">Respuesta</label>
+                 </div>
+                <div class="col-md-4">
+                    <input class="form-control form-control-sm" type="text" formControlName="respuesta" placeholder="Respuesta">
+                </div>
+            </div>
+        </ng-container>
+    </form>
+        PREGUNTA 2
+    <form [formGroup]="formpreguntas">
+        <ng-container formGroupName="preguntaForm2">
+            <div class="row mt-2">
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <label class="text-purple">Pregunta de seguridad</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="custom-select d-block w-100" formControlName="pregunta" required>
+                        <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                        <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <label class="text-secondary">Respuesta</label>
+                 </div>
+                <div class="col-md-4">
+                    <input class="form-control form-control-sm" type="text" formControlName="respuesta" placeholder="Respuesta">
+                </div>
+            </div>
+        </ng-container>
+    </form>
+        PREGUNTA 3
+    <form [formGroup]="formpreguntas">
+        <ng-container formGroupName="preguntaForm3">
+            <div class="row mt-2">
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <label class="text-purple">Pregunta de seguridad</label>
+                </div>
+                <div class="col-md-4">
+                    <select class="custom-select d-block w-100" formControlName="pregunta" required>
+                        <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                        <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <label class="text-secondary">Respuesta</label>
+                 </div>
+                <div class="col-md-4">
+                    <input class="form-control form-control-sm" type="text" formControlName="respuesta" placeholder="Respuesta">
+                </div>
+            </div>
+        </ng-container>
+        <button type="submit">Enviar</button>
+    </form>
+</form> -->
+
+<!-- ESTE ES EL EJEMPLO QUE SIRVE!!!!!  -->
+<!-- <form [formGroup]="formpreguntas" (ngSubmit)="onSubmit()">
+    <form [formGroup]="formpreguntas">
+        <div formGroupName="preguntaForm">
+
+            <input type="text" formControlName='pregunta' placeholder="pregunta">
+            <input type="text" formControlName='respuesta' placeholder="respuesta">
+        </div>
+    </form>
+    <form [formGroup]="formpreguntas">
+        <div formGroupName="preguntaForm2">
+
+            <input type="text" formControlName='pregunta' placeholder="pregunta">
+            <input type="text" formControlName='respuesta' placeholder="respuesta">
+        </div>
+    </form>
+    <form [formGroup]="formpreguntas">
+        <div formGroupName="preguntaForm3">
+
+            <input type="text" formControlName='pregunta' placeholder="pregunta">
+            <input type="text" formControlName='respuesta' placeholder="respuesta">
+        </div>
+    </form>
+    <button type="submit">GO?</button>
+</form> -->
+
+
+
+
+<!-- <form [formGroup]="formpreguntas" (ngSubmit)="onSubmit()">
     <div class="row mt-2">
         <div class="col-md-6 d-flex justify-content-end align-items-center">
             <label class="text-purple">Pregunta de seguridad</label>
@@ -64,4 +234,4 @@
         </div>
     </div>
     <button type="submit">Enviar</button>
-</form>
+</form> -->

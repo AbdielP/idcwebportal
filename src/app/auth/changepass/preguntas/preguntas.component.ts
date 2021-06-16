@@ -1,5 +1,5 @@
 import { LocalstorageService } from './../../../services/localstorage/localstorage.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SeguridadService } from 'src/app/services/seguridad.service';
 
@@ -13,14 +13,20 @@ export class PreguntasComponent implements OnInit {
   formpreguntas: FormGroup;
   spreguntas: Array<string>;
 
-  constructor(private seguridadService: SeguridadService, private localstorageService: LocalstorageService) {
+  constructor(private seguridadService: SeguridadService, private localstorageService: LocalstorageService, private fb: FormBuilder) {
     this.formpreguntas = new FormGroup({
-      q1: new FormControl (''),
-      a1: new FormControl (''),
-      q2: new FormControl(''),
-      a2: new FormControl(''),
-      q3: new FormControl(''),
-      a3: new FormControl('')
+      preguntaForm: this.fb.group({
+        pregunta: [''],
+        respuesta: ['']
+      }),
+      preguntaForm2: this.fb.group({
+        pregunta: [''],
+        respuesta: ['']
+      }),
+      preguntaForm3: this.fb.group({
+        pregunta: [''],
+        respuesta: ['']
+      })
     });
   }
 
@@ -29,13 +35,19 @@ export class PreguntasComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.formpreguntas.value);
+    this.insertSecurityQuestions(this.formpreguntas.value, this.localstorageService.getToken());
   }
 
-  getSecurityQuestions(token: string): void {
+  private getSecurityQuestions(token: string): void {
     this.seguridadService.select(`api/cwpidc/squestions?token=${token}`).subscribe((resp: any) => {
       this.spreguntas = resp.select;
-      console.log(this.spreguntas);
+      // console.log(this.spreguntas);
+    });
+  }
+
+  private insertSecurityQuestions(form: any, token: string): void {
+    this.seguridadService.insert(`api/cwpidc/squestions?token=${token}`, form).subscribe((resp: any) => {
+      console.log(resp);
     });
   }
 
