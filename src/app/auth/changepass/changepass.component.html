@@ -50,7 +50,7 @@
                         </li>
                     </ul>
                </div>
-                <button class="btn btn-block btn-sm btn-purple text-light mt-3" [disabled]="!form.valid" type="submit">Cambiar contraseña</button>
+                <button class="btn btn-block btn-sm btn-purple text-light mt-3" [disabled]="!form.valid" type="submit">Continuar</button>
             </form>
             <!-- <br>
             <p class="text-purple"><i class="fas fa-exclamation-triangle text-warning"></i> Por favor, no recargue esta página.</p>
@@ -58,7 +58,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" [hidden]="hiddeQuestions">
         <app-preguntas></app-preguntas>
     </div>
 </div>

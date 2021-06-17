@@ -4,6 +4,17 @@
     color: var(--angular-color-purple);
 }
 
+
+.btn-purple {
+    background-color: var(--angular-color-purple);
+    max-width: 400px;
+  }.btn-purple:hover{
+    background-color: var(--btn-default);
+  }.btn-purple:disabled {
+      background-color: none;
+}
+
+
 hr {
     width: 50%;
 }

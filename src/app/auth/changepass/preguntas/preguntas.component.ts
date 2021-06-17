@@ -2,6 +2,7 @@ import { LocalstorageService } from './../../../services/localstorage/localstora
 import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { SeguridadService } from 'src/app/services/seguridad.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-preguntas',
@@ -47,7 +48,11 @@ export class PreguntasComponent implements OnInit {
 
   private insertSecurityQuestions(form: any, token: string): void {
     this.seguridadService.insert(`api/cwpidc/squestions?token=${token}`, form).subscribe((resp: any) => {
-      console.log(resp);
+      Swal.fire(
+        '¡Completado!',
+        `${resp.message}`,
+        'success'
+      );
     });
   }
 
