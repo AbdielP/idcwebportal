@@ -14,7 +14,7 @@ import { Subject } from 'rxjs';
 export class ChangepassComponent {
 
   eventError: Subject<any> = new Subject();
-  hiddeQuestions = true;
+  hiddeQuestions = false;
   form: FormGroup;
 
   constructor(private router: Router, private localstorageservice: LocalstorageService , private generalService: GeneralService) {
