@@ -59,7 +59,7 @@
     </div>
 
     <div class="container" [hidden]="hiddeQuestions === false">
-        <app-preguntas></app-preguntas>
+        <app-preguntas [events]="eventPreguntas.asObservable()"></app-preguntas>
     </div>
 </div>
 

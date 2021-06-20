@@ -15,6 +15,7 @@ import { SeguridadService } from 'src/app/services/seguridad.service';
 export class ChangepassComponent implements OnInit{
 
   eventError: Subject<any> = new Subject();
+  eventPreguntas: Subject<any> = new Subject();
   questionsCount: number;
   hiddeQuestions = false;
   form: FormGroup;
@@ -37,10 +38,13 @@ export class ChangepassComponent implements OnInit{
   }
 
   onSubmit() {
+    const formPassword = this.form.value;
     if (this.questionsCount < 3) {
-      // emitir el formulario hacia el componente 'preguntas'
+      // emitir el formulario hacia el componente 'preguntas' y mostrar el form preguntas
+      this.eventPreguntas.next({formPassword});
+      this.hiddeQuestions = true;
     } else {
-      this.updatePassword('api/cwpidc/cfp', this.form.value);
+      this.updatePassword('api/cwpidc/cfp', formPassword);
     }
   }
 
