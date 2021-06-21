@@ -50,7 +50,15 @@
                         </li>
                     </ul>
                </div>
-                <button class="btn btn-block btn-sm btn-purple text-light mt-3" [disabled]="!form.valid" type="submit">Continuar</button>
+               <!-- SPINNER -->
+               <div [hidden]="!showSpinner" class="text-center m-2">
+                   <p>Redireccionando en... {{counter}}</p>
+                   <div [hidden]="!showSpinner" class="spinner-border text-purple" role="status">
+                       <span class="sr-only">Loading...</span>
+                   </div>
+
+               </div>
+                <button (click)="onSubmit()" [hidden]="showSpinner===true" [disabled]="showSpinner===true" class="btn btn-block btn-sm btn-purple text-light mt-3" [disabled]="!form.valid" type="button">Continuar</button>
             </form>
             <!-- <br>
             <p class="text-purple"><i class="fas fa-exclamation-triangle text-warning"></i> Por favor, no recargue esta página.</p>
