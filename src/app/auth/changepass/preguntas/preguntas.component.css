@@ -4,7 +4,6 @@
     color: var(--angular-color-purple);
 }
 
-
 .btn-purple {
     background-color: var(--angular-color-purple);
     max-width: 400px;
@@ -14,6 +13,15 @@
       background-color: none;
 }
 
+.container {
+  width: 100%;
+  height: 100%;
+}
+
+.form-container {
+  width: 100%;
+  height: 100%;
+}
 
 hr {
     width: 50%;

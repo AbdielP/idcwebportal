@@ -54,7 +54,7 @@ export class ChangepassComponent implements OnInit{
     }
   }
 
-  updatePassword(url: string, form: any): void {
+  private updatePassword(url: string, form: any): void {
     // NO PUEDO ACTUALIZAR EL TOKEN, Los guard no lo detectan...
     this.generalService.update(url, form, this.localstorageservice.getToken()).subscribe((resp: any) => {
       if (resp.ok) {
@@ -64,24 +64,18 @@ export class ChangepassComponent implements OnInit{
           this.counter--;
           if (this.counter === 0) {
             clearInterval(interval);
-            // REDIRECCIONA AQUÍ! ...
             this.authService.logOut();
           }
           console.log(this.counter);
         }, 1000);
       }
-      // if (resp.usuario.roll === 'cliente') {
-      //   this.router.navigate([`/`]);
-      // } else if (resp.usuario.roll === 'idc') {
-      //   this.router.navigate([`/admin`]);
-      // }
     }, (err) => {
       this.eventError.next(err);
     });
   }
 
   // SELECT COUNT preguntas de usuario
-  countPreguntasUsuario() {
+  private countPreguntasUsuario() {
     this.seguridadService.select(`api/cwpidc/usersq?token=${this.localstorageservice.getToken()}`)
     .subscribe((resp: any) => {
       this.questionsCount = resp.select[0].registros;
