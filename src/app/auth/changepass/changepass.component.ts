@@ -32,10 +32,6 @@ export class ChangepassComponent implements OnInit{
         CustomValidators.lowerCase, CustomValidators.uppercase, CustomValidators.specialCharacter]),
       re_password: new FormControl('', [Validators.required, Validators.minLength(8)])
     }, { validators: [CustomValidators.equalValues]});
-    // this.form = new FormGroup({
-    //   password: new FormControl(''),
-    //   re_password: new FormControl('')
-    // });
   }
 
   ngOnInit(): void {
@@ -60,16 +56,16 @@ export class ChangepassComponent implements OnInit{
       if (resp.ok) {
         this.counter = 5;
         const interval = setInterval(() => {
-          this.swalAlert(resp.message);
           this.counter--;
           if (this.counter === 0) {
             clearInterval(interval);
             this.authService.logOut();
           }
-          console.log(this.counter);
         }, 1000);
+        this.swalAlert(resp.message);
       }
     }, (err) => {
+      this.showSpinner = false;
       this.eventError.next(err);
     });
   }
