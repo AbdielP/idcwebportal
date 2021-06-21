@@ -23,7 +23,7 @@ export class PreguntasComponent implements OnInit {
   counter = 5;
 
   constructor(private seguridadService: SeguridadService, private localstorageService: LocalstorageService, private fb: FormBuilder,
-              private authService: AuthService) {
+              public authService: AuthService) {
     this.formpreguntas = new FormGroup({
       password: new FormControl('', Validators.required),
       re_password: new FormControl('', Validators.required),

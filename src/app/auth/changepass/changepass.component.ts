@@ -26,7 +26,7 @@ export class ChangepassComponent implements OnInit{
   counter = 5;
 
   constructor(private router: Router, private localstorageservice: LocalstorageService , private generalService: GeneralService,
-              private seguridadService: SeguridadService, private authService: AuthService) {
+              private seguridadService: SeguridadService, public authService: AuthService) {
     this.form = new FormGroup({
       password: new FormControl('', [Validators.required, CustomValidators.longitud, CustomValidators.number,
         CustomValidators.lowerCase, CustomValidators.uppercase, CustomValidators.specialCharacter]),
@@ -35,19 +35,13 @@ export class ChangepassComponent implements OnInit{
   }
 
   ngOnInit(): void {
-   this.countPreguntasUsuario();
+  //  this.countPreguntasUsuario();
   }
 
   onSubmit() {
-    this.showSpinner = true;
     const formPassword = this.form.value;
-    if (this.questionsCount < 3) {
-      // emitir el formulario hacia el componente 'preguntas' y mostrar el form preguntas
-      this.eventPreguntas.next({formPassword});
-      this.hiddeQuestions = true;
-    } else {
-      this.updatePassword('api/cwpidc/cfp', formPassword);
-    }
+    this.showSpinner = true;
+    this.countPreguntasUsuario(formPassword);
   }
 
   private updatePassword(url: string, form: any): void {
@@ -71,10 +65,20 @@ export class ChangepassComponent implements OnInit{
   }
 
   // SELECT COUNT preguntas de usuario
-  private countPreguntasUsuario() {
+  private countPreguntasUsuario(formPassword) {
     this.seguridadService.select(`api/cwpidc/usersq?token=${this.localstorageservice.getToken()}`)
     .subscribe((resp: any) => {
       this.questionsCount = resp.select[0].registros;
+      if (this.questionsCount < 3) {
+        // emitir el formulario hacia el componente 'preguntas' y mostrar el form preguntas
+        this.eventPreguntas.next({formPassword});
+        this.hiddeQuestions = true;
+      } else {
+        this.updatePassword('api/cwpidc/cfp', formPassword);
+      }
+    }, (err) => {
+      this.showSpinner = false;
+      console.log(err); // Aquí van los errores del backend...
     });
   }
 

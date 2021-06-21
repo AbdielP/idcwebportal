@@ -52,7 +52,7 @@
                </div>
                <!-- SPINNER -->
                <div [hidden]="!showSpinner" class="text-center m-2">
-                   <p class="small text-primary">Redireccionando en... <b class="text-purple">{{counter}}</b></p>
+                   <p class="small text-secondary">Redireccionando a <a href="" (click)="authService.logOut()">inicio de sesión</a> en... <b class="text-purple">{{counter}}</b></p>
                    <div [hidden]="!showSpinner" class="spinner-border text-purple" role="status">
                        <span class="sr-only">Loading...</span>
                    </div>
