@@ -1,9 +1,10 @@
-import { LocalstorageService } from './../../../services/localstorage/localstorage.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable, Subscription, Subject } from 'rxjs';
+import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { Observable, Subscription } from 'rxjs';
+import { CustomValidators } from 'src/app/utils/custom-validators';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class PreguntasComponent implements OnInit {
 
+  eventError: Subject<any> = new Subject();
   formpreguntas: FormGroup;
   spreguntas: Array<string>;
 
@@ -25,21 +27,22 @@ export class PreguntasComponent implements OnInit {
   constructor(private seguridadService: SeguridadService, private localstorageService: LocalstorageService, private fb: FormBuilder,
               public authService: AuthService) {
     this.formpreguntas = new FormGroup({
-      password: new FormControl('', Validators.required),
-      re_password: new FormControl('', Validators.required),
+      // password: new FormControl('', Validators.required),
+      // re_password: new FormControl('', Validators.required),
       preguntaForm: this.fb.group({
-        pregunta: [''],
-        respuesta: ['']
+        pregunta: ['', Validators.required],
+        respuesta: ['', [Validators.required]]
       }),
       preguntaForm2: this.fb.group({
-        pregunta: [''],
-        respuesta: ['']
+        pregunta: ['', Validators.required],
+        respuesta: ['', Validators.required]
       }),
       preguntaForm3: this.fb.group({
-        pregunta: [''],
-        respuesta: ['']
+        pregunta: ['', Validators.required],
+        respuesta: ['', Validators.required]
       })
-    });
+    }, { validators: [CustomValidators.noRepeatQuestions]});
+    // console.log(this.formpreguntas.controls.preguntaForm.get('pregunta').errors);
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
@@ -78,7 +81,7 @@ export class PreguntasComponent implements OnInit {
       }
     }, (err) => {
       this.showSpinner = false;
-      // this.eventError.next(err);
+      this.eventError.next(err);
       console.log(err); // Aquí van los errores del backend...
     });
   }

@@ -87,5 +87,17 @@ export class CustomValidators {
         return null;
     }
 
+    /**
+     * Validaciones para preguntas de seguridad
+     */
+    static noRepeatQuestions(control: AbstractControl) {
+        const pregunta1 = control.value.preguntaForm.pregunta;
+        const pregunta2 = control.value.preguntaForm2.pregunta;
+        const pregunta3 = control.value.preguntaForm3.pregunta;
+        if (pregunta1 === pregunta2 || pregunta1 === pregunta3) {
+            return {noRepeatQuestions: true};
+        }
+        return null;
+    }
 }
 

@@ -57,7 +57,7 @@
                        <span class="sr-only">Loading...</span>
                    </div>
                </div>
-                <button (click)="onSubmit()" [hidden]="showSpinner===true" [disabled]="showSpinner===true" class="btn btn-block btn-sm btn-purple text-light mt-3" [disabled]="!form.valid" type="button">Continuar</button>
+                <button (click)="onSubmit()" [hidden]="showSpinner===true" class="btn btn-block btn-sm btn-purple text-light mt-3" [disabled]="!form.valid" type="button">Continuar</button>
             </form>
             <!-- <br>
             <p class="text-purple"><i class="fas fa-exclamation-triangle text-warning"></i> Por favor, no recargue esta página.</p>
@@ -66,8 +66,8 @@
     </div>
 </div>
 
-<div class="main-preguntas" [hidden]="hiddeQuestions === false">
+<!-- <div class="main-preguntas" [hidden]="hiddeQuestions === false"> -->
     <app-preguntas [events]="eventPreguntas.asObservable()"></app-preguntas>
-</div>
+<!-- </div> -->
 
 <app-backenderrors [events]="eventError.asObservable()"></app-backenderrors>

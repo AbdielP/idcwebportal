@@ -15,6 +15,9 @@
                         <label class="text-purple">Pregunta de seguridad</label>
                     </div>
                     <div class="col-md-4">
+                        <div *ngIf="formpreguntas.controls.preguntaForm.get('pregunta').errors?.required" class="form-control-feedback lead text-danger text-center small my-1">
+                            Campo requerido.
+                        </div>
                         <select class="custom-select d-block w-100" formControlName="pregunta" required>
                             <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
                             <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
@@ -25,6 +28,9 @@
                         <label class="text-secondary">Respuesta</label>
                      </div>
                     <div class="col-md-4">
+                        <div *ngIf="formpreguntas.controls.preguntaForm.get('respuesta').errors?.required" class="form-control-feedback lead text-danger text-center small my-1">
+                            Campo requerido.
+                        </div>
                         <input class="form-control form-control-sm" type="text" formControlName="respuesta" placeholder="Respuesta">
                     </div>
                 </div>
@@ -36,6 +42,9 @@
                         <label class="text-purple">Pregunta de seguridad</label>
                     </div>
                     <div class="col-md-4">
+                        <div *ngIf="formpreguntas.controls.preguntaForm2.get('pregunta').errors?.required" class="form-control-feedback lead text-danger text-center small my-1">
+                            Campo requerido.
+                        </div>
                         <select class="custom-select d-block w-100" formControlName="pregunta" required>
                             <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
                             <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
@@ -46,6 +55,9 @@
                         <label class="text-secondary">Respuesta</label>
                      </div>
                     <div class="col-md-4">
+                        <div *ngIf="formpreguntas.controls.preguntaForm2.get('respuesta').errors?.required" class="form-control-feedback lead text-danger text-center small my-1">
+                            Campo requerido.
+                        </div>
                         <input class="form-control form-control-sm" type="text" formControlName="respuesta" placeholder="Respuesta">
                     </div>
                 </div>
@@ -57,8 +69,11 @@
                         <label class="text-purple">Pregunta de seguridad</label>
                     </div>
                     <div class="col-md-4">
+                        <div *ngIf="formpreguntas.controls.preguntaForm3.get('pregunta').errors?.required" class="form-control-feedback lead text-danger text-center small my-1">
+                            Campo requerido.
+                        </div>
                         <select class="custom-select d-block w-100" formControlName="pregunta" required>
-                            <option value="" disabled selected>Seleccione una pregunta de la lista...</option>
+                            <option value="" selected disabled>Seleccione una pregunta de la lista...</option>
                             <option *ngFor="let pregunta of spreguntas" value="{{pregunta.idpoolsq}}">{{pregunta.descripcion }}</option>
                         </select>
                     </div>
@@ -67,13 +82,22 @@
                         <label class="text-secondary">Respuesta</label>
                      </div>
                     <div class="col-md-4">
+                        <div *ngIf="formpreguntas.controls.preguntaForm3.get('respuesta').errors?.required" class="form-control-feedback lead text-danger text-center small my-1">
+                            Campo requerido.
+                        </div>
                         <input class="form-control form-control-sm" type="text" formControlName="respuesta" placeholder="Respuesta">
                     </div>
                     
                 </div>
             </form>
-        
-            <div class="row m-4">
+            
+            <div class="row mt-2">
+                <div class="col-12">
+                    <p *ngIf="formpreguntas.getError('noRepeatQuestions') as error" class="m-0 form-control-feedback lead text-danger text-center small">Las preguntas de seguridad no pueden ser repetidas.</p>
+                </div>
+            </div>
+            <div class="row m-2">
+                
                 <div class="col-md-12 d-flex justify-content-center align-items-center">
                     <!-- SPINNER -->
                     <div [hidden]="!showSpinner" class="text-center m-2">
@@ -82,11 +106,11 @@
                             <span class="sr-only">Loading...</span>
                         </div>
                     </div>
-                    <button (click)="onSubmit()" [hidden]="showSpinner===true" [disabled]="showSpinner===true" type="button" class="btn btn-block btn-sm btn-purple text-light mt-3">Continuar</button>
+                    <button (click)="onSubmit()" [hidden]="showSpinner===true" [disabled]="!formpreguntas.valid" type="button" class="btn btn-block btn-sm btn-purple text-light mt-3">Continuar</button>
                 </div>
             </div>
         </form>
     </div>
     
 </div>
-
+<app-backenderrors [events]="eventError.asObservable()"></app-backenderrors>

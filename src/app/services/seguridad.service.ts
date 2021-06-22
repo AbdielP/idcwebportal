@@ -30,9 +30,9 @@ export class SeguridadService {
   }
 
   insert(url: string, form: any): Observable<any> {
-    return this.http.post(`${this.SERVER_URL}/${url}`, form)
-    .pipe((catchError(err => [
-      console.log(err)
-    ])));
+    return this.http.post(`${this.SERVER_URL}/${url}`, form);
+    // .pipe((catchError(err => [
+    //   console.log(err)
+    // ])));
   }
 }
