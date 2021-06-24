@@ -97,6 +97,12 @@ export class CustomValidators {
         if (pregunta1 === pregunta2 || pregunta1 === pregunta3) {
             return {noRepeatQuestions: true};
         }
+        if (pregunta2 === pregunta1 || pregunta2 === pregunta3) {
+            return {noRepeatQuestions: true};
+        }
+        if (pregunta3 === pregunta1 || pregunta3 === pregunta2) {
+            return {noRepeatQuestions: true};
+        }
         return null;
     }
 }

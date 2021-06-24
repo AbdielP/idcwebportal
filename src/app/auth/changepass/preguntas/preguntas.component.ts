@@ -27,19 +27,19 @@ export class PreguntasComponent implements OnInit {
   constructor(private seguridadService: SeguridadService, private localstorageService: LocalstorageService, private fb: FormBuilder,
               public authService: AuthService) {
     this.formpreguntas = new FormGroup({
-      // password: new FormControl('', Validators.required),
-      // re_password: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      re_password: new FormControl('', Validators.required),
       preguntaForm: this.fb.group({
         pregunta: ['', Validators.required],
-        respuesta: ['', [Validators.required]]
+        respuesta: ['', [Validators.required, Validators.maxLength(50)]]
       }),
       preguntaForm2: this.fb.group({
         pregunta: ['', Validators.required],
-        respuesta: ['', Validators.required]
+        respuesta: ['', [Validators.required, Validators.maxLength(50)]]
       }),
       preguntaForm3: this.fb.group({
         pregunta: ['', Validators.required],
-        respuesta: ['', Validators.required]
+        respuesta: ['', [Validators.required, Validators.maxLength(50)]]
       })
     }, { validators: [CustomValidators.noRepeatQuestions]});
     // console.log(this.formpreguntas.controls.preguntaForm.get('pregunta').errors);
