@@ -66,8 +66,8 @@
     </div>
 </div>
 
-<!-- <div class="main-preguntas" [hidden]="hiddeQuestions === false"> -->
+<div class="main-preguntas" [hidden]="hiddeQuestions === false">
     <app-preguntas [events]="eventPreguntas.asObservable()"></app-preguntas>
-<!-- </div> -->
+</div>
 
 <app-backenderrors [events]="eventError.asObservable()"></app-backenderrors>

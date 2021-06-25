@@ -82,7 +82,7 @@ export class PreguntasComponent implements OnInit {
     }, (err) => {
       this.showSpinner = false;
       this.eventError.next(err);
-      console.log(err); // Aquí van los errores del backend...
+      console.log(err); // AHORA NO MUESTRA LOS ERRORES DEL TRY CATCH DEL API ... fuck
     });
   }
 
