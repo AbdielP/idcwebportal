@@ -46,4 +46,11 @@ export class ErrorhandlerService {
     // Se podría definir cuando usar 'error' o 'question' según el tipo de error? probablemente desde el backend?
     // return Swal.fire('Error', `${error.error.message}`, 'error');
   }
+
+  // Sirve para mandar ALERTS (no controlado es status 500)
+  swalAlert(message: string) {
+    this.SwalParameters.text = `${message}`;
+    this.SwalParameters.footer = `Un error no controlado ha ocurrido en el servidor.`;
+    return Swal.fire(this.SwalParameters);
+  }
 }

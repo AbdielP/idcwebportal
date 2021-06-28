@@ -4,6 +4,7 @@ import { Observable, Subscription, Subject } from 'rxjs';
 import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 import { SeguridadService } from 'src/app/services/seguridad.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { ErrorhandlerService } from 'src/app/services/error/errorhandler.service';
 import { CustomValidators } from 'src/app/utils/custom-validators';
 import Swal from 'sweetalert2';
 
@@ -25,7 +26,23 @@ export class PreguntasComponent implements OnInit {
   counter = 5;
 
   constructor(private seguridadService: SeguridadService, private localstorageService: LocalstorageService, private fb: FormBuilder,
-              public authService: AuthService) {
+              public authService: AuthService, private errorHandler: ErrorhandlerService) {
+    // this.formpreguntas = new FormGroup({
+    //   password: new FormControl(''),
+    //   re_password: new FormControl(''),
+    //   preguntaForm: this.fb.group({
+    //     pregunta: [''],
+    //     respuesta: ['']
+    //   }),
+    //   preguntaForm2: this.fb.group({
+    //     pregunta: [''],
+    //     respuesta: ['']
+    //   }),
+    //   preguntaForm3: this.fb.group({
+    //     pregunta: [''],
+    //     respuesta: ['']
+    //   })
+    // });
     this.formpreguntas = new FormGroup({
       password: new FormControl('', Validators.required),
       re_password: new FormControl('', Validators.required),
@@ -80,9 +97,13 @@ export class PreguntasComponent implements OnInit {
         this.swalAlert(resp.message);
       }
     }, (err) => {
+      // console.log(err);
       this.showSpinner = false;
+      if (err.error.ok === false) {
+        // return alert(err.error.error);
+        this.errorHandler.swalAlert(err.error.message);
+      }
       this.eventError.next(err);
-      console.log(err); // AHORA NO MUESTRA LOS ERRORES DEL TRY CATCH DEL API ... fuck
     });
   }
 
