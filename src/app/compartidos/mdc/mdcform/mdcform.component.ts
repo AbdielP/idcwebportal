@@ -91,13 +91,16 @@ export class MdcformComponent implements OnInit {
   }
   // LLama de la BD los roles existentes para crear cuentas
   getRoles(): void {
-    this.generalService.select(`ppppccccc`, `sp_select_roles()`).subscribe((resp: any) => {
+    // this.generalService.select(`ppppccccc`, `sp_select_roles()`).subscribe((resp: any) => {
+      this.generalService.select(`ppppccccc`).subscribe((resp: any) => {
       this.roles = resp.select;
     });
   }
 
   getProyectos(): void {
-    this.generalService.select(`ggggwwwwpppp`, `sp_select_proyectos`).subscribe((resp: any) => {
+    // this.generalService.select(`ggggwwwwpppp`, `sp_select_proyectos`).subscribe((resp: any) => {
+      this.generalService.select(`ggggwwwwpppp`).subscribe((resp: any) => {
+
       this.projects = resp.select;
     });
   }

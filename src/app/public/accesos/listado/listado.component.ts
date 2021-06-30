@@ -37,7 +37,6 @@ export class ListadoComponent implements OnInit {
 
   // Lista los proyectos relacionados con el usuario logeado
   getUsuarioProyectos(): void {
-    // this.generalService.selectWithToken('ggggwwwwpppptoken', `sp_clientes_select_proyectos`, this.localstorageService.getToken())
     this.generalService.select(`api/cwpidc/general/proyectos?token=${this.localstorageService.getToken()}`)
     .subscribe((resp: any) => {
       console.log(resp);
@@ -53,14 +52,14 @@ export class ListadoComponent implements OnInit {
     this.showSpinner = true;
     this.proyecto = proyecto;
     this.localstorageService.setAcceso(this.proyecto);
-    let sp = '';
+    let url = '';
     if (this.valoropciones === 'aprobados') {
-      sp = `sp_select_accesos_compania('${proyecto.nombre_empresa}', '${proyecto.datacenter}')`;
+      url = `api/cwpidc/accesos/aprobados/${proyecto.nombre_empresa}/${proyecto.datacenter}`;
     } else {
-      sp = `sp_clientes_accesos_pendientes_aprobacion('${proyecto.nombre_empresa}',
+      url = `sp_clientes_accesos_pendientes_aprobacion('${proyecto.nombre_empresa}',
       '${proyecto.datacenter}')`;
     }
-    this.seguridadService.select(sp).subscribe((resp: any) => {
+    this.seguridadService.select(url).subscribe((resp: any) => {
       this.accesos = resp.select;
       this.showSpinner = false;
     });
