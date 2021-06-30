@@ -14,15 +14,15 @@ export class GeneralService {
 
   constructor(private http: HttpClient, private errorHandler: ErrorhandlerService) { }
 
-  select(url: string, storedprocedure: string): Observable<any> {
-    return this.http.get(`${this.SERVER_URL}/${url}/${storedprocedure}`)
+  select(url: string): Observable<any> {
+    return this.http.get(`${this.SERVER_URL}/${url}`)
     .pipe((catchError(err => [
       console.log(err)
     ])));
   }
-  // es un get que pasa el idusuario en el storedprocedure. requiere token. Se usa para listar proyectos del usuario
-  selectWithToken(url: string, storedprocedure: string, token: string): Observable<any> {
-    return this.http.get(`${this.SERVER_URL}/${url}/${storedprocedure}?token=${token}`)
+  // BORRAR!!! -> No usar este, pasar token por URL al 'select'
+  selectWithToken(url: string, sp: any, token: string): Observable<any> {
+    return this.http.get(`${this.SERVER_URL}/${url}?token=${token}`)
     .pipe((catchError(err => [
       console.log(err)
     ])));

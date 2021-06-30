@@ -37,9 +37,10 @@ export class ListadoComponent implements OnInit {
 
   // Lista los proyectos relacionados con el usuario logeado
   getUsuarioProyectos(): void {
-    this.generalService.selectWithToken('ggggwwwwpppptoken', `sp_clientes_select_proyectos`, this.localstorageService.getToken())
+    // this.generalService.selectWithToken('ggggwwwwpppptoken', `sp_clientes_select_proyectos`, this.localstorageService.getToken())
+    this.generalService.select(`api/cwpidc/general/proyectos?token=${this.localstorageService.getToken()}`)
     .subscribe((resp: any) => {
-      // console.log(resp);
+      console.log(resp);
       this.userProyects = resp.select;
       if (this.userProyects.length === 1) {
         this.selectAccesosProyecto(this.userProyects[0]);
