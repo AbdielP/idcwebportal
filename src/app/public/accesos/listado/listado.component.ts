@@ -56,8 +56,7 @@ export class ListadoComponent implements OnInit {
     if (this.valoropciones === 'aprobados') {
       url = `api/cwpidc/accesos/aprobados/${proyecto.nombre_empresa}/${proyecto.datacenter}`;
     } else {
-      url = `sp_clientes_accesos_pendientes_aprobacion('${proyecto.nombre_empresa}',
-      '${proyecto.datacenter}')`;
+      url = `api/cwpidc/accesos/pendientes/${proyecto.nombre_empresa}/${this.proyecto.datacenter}`;
     }
     this.seguridadService.select(url).subscribe((resp: any) => {
       this.accesos = resp.select;
@@ -70,20 +69,19 @@ export class ListadoComponent implements OnInit {
       // console.log(opciones);
       if (opciones === 'tramite') {
         this.valoropciones = 'tramite';
-        this.selectAccesos(`sp_clientes_accesos_pendientes_aprobacion('${this.proyecto.nombre_empresa}',
-         '${this.proyecto.datacenter}')`);
+        this.selectAccesos(`api/cwpidc/accesos/pendientes/${this.proyecto.nombre_empresa}/${this.proyecto.datacenter}`);
       } else {
         this.valoropciones = 'aprobados';
-        this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
+        this.selectAccesos(`api/cwpidc/accesos/aprobados/${this.proyecto.nombre_empresa}/${this.proyecto.datacenter}`);
       }
     });
   }
 
   // Llama al servicio para obtener listado de acesos
-  selectAccesos(storedprocedure: string): void {
+  selectAccesos(url: string): void {
     this.showSpinner = true;
-    this.seguridadService.select(storedprocedure).subscribe((resp: any) => {
-        // console.log(resp);
+    this.seguridadService.select(url).subscribe((resp: any) => {
+        console.log(resp);
         this.accesos = resp.select;
         this.showSpinner = false;
       });
