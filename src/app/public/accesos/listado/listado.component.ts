@@ -39,7 +39,6 @@ export class ListadoComponent implements OnInit {
   getUsuarioProyectos(): void {
     this.generalService.select(`api/cwpidc/general/proyectos?token=${this.localstorageService.getToken()}`)
     .subscribe((resp: any) => {
-      console.log(resp);
       this.userProyects = resp.select;
       if (this.userProyects.length === 1) {
         this.selectAccesosProyecto(this.userProyects[0]);
@@ -81,7 +80,6 @@ export class ListadoComponent implements OnInit {
   selectAccesos(url: string): void {
     this.showSpinner = true;
     this.seguridadService.select(url).subscribe((resp: any) => {
-        console.log(resp);
         this.accesos = resp.select;
         this.showSpinner = false;
       });

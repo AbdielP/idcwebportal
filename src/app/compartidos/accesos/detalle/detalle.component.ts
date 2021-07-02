@@ -37,7 +37,7 @@ export class DetalleComponent implements OnInit {
 
   subscribeEventDetalleAcceso(): void {
     this.eventSubscription = this.events.subscribe(({detalle}) => {
-      this.seguridadService.select(`sp_select_accesos_detalle('${detalle}')`).subscribe((resp: any) => {
+      this.seguridadService.select(`api/cwpidc/accesos/detalle/${detalle}`).subscribe((resp: any) => {
         // console.log(resp);
         this.acceso = resp.select[0];
         this.generarQR(this.acceso);
