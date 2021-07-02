@@ -42,14 +42,13 @@ export class BitacoraComponent implements OnInit  {
   getTokenInfo(token: string) {
     this.localstorageService.getTokenInfo(token).subscribe((resp: any) => {
       this.userInfo = resp.tokeninfo;
-      this.getUsuarioProyectos(this.userInfo.idusuario);
+      this.getUsuarioProyectos();
     });
   }
 
   // Lista los proyectos relacionados con el usuario logeado
-  getUsuarioProyectos(idusuario: number): void {
-    // this.generalService.select('ggggwwwwpppp', `sp_clientes_select_proyectos('${idusuario}')`).subscribe((resp: any) => {
-      this.generalService.select('ggggwwwwpppp').subscribe((resp: any) => {
+  getUsuarioProyectos(): void {
+      this.generalService.select(`api/cwpidc/general/proyectos?token=${this.localstorageService.getToken()}`).subscribe((resp: any) => {
       this.userProyects = resp.select;
       // CUANDO EL CLIENTE TIENE 1 SOLO PROYECTO
       if (this.userProyects.length === 1) {
@@ -66,9 +65,7 @@ export class BitacoraComponent implements OnInit  {
     // console.log(this.proyecto);
     this.nombreproyecto = proyecto.nombre_empresa;
     this.nombreidc = proyecto.datacenter;
-    // this.generalService.select('ggggwwwwpppp', `check_in_out.sp_select_bitacora_compania('${proyecto.nombre_empresa}',
-    // '${proyecto.datacenter}','${this.dateService.actualYear()}')`).subscribe((resp: any) => {
-    this.generalService.select('ggggwwwwpppp').subscribe((resp: any) => {
+    this.generalService.select(`api/cwpidc/checkin/bitacora/${proyecto.nombre_empresa}/${proyecto.datacenter}/${this.dateService.actualYear()}`).subscribe((resp: any) => {
       this.bitacora = resp.select;
       this.showSpinner = false;
       this.dataSource = new MatTableDataSource<any>(this.bitacora);
