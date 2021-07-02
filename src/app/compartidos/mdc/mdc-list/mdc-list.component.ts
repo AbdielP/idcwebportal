@@ -47,7 +47,7 @@ export class MdcListComponent implements OnInit {
 
   // Obtiene los proyectos del cliente
   selectProyectos(): void {
-    this.generalService.selectWithToken('ggggwwwwpppptoken', 'sp_clientes_select_proyectos', this.localstorageService.getToken())
+    this.generalService.select(`api/cwpidc/general/proyectos?token=${this.localstorageService.getToken()}`)
     .subscribe((resp: any) => {
       this.proyectos = resp.select;
     });
@@ -55,9 +55,7 @@ export class MdcListComponent implements OnInit {
 
   // Obtiene las versiones de MDC del proyecto del usuario
   getVersiones(idproyecto: any) {
-    // this.generalService.select('ppppccccc', `select_versiones_matrices(${idproyecto})`).subscribe((resp: any) => {
-      this.generalService.select('ppppccccc').subscribe((resp: any) => {
-      // console.log(resp.select);
+      this.generalService.select(`api/cwpidc/portal/vmdc/${idproyecto}`).subscribe((resp: any) => {
       this.versionesMatriz = resp.select;
     });
   }
@@ -68,8 +66,7 @@ export class MdcListComponent implements OnInit {
     // console.log(this.datePipe.transform(event.target.value, 'yyyy-MM-dd'));
     const fecha = this.datePipe.transform(event.target.value, 'yyyy-MM-dd');
     // this.generalService.select('ppppccccc', `sp_select_mdc_proyecto_version(${this.proyecto.idproyecto},'${fecha}')`)
-    this.generalService.select('ppppccccc')
-    .subscribe((resp: any) => {
+    this.generalService.select(`api/cwpidc/portal/versiones/${this.proyecto.idproyecto}/${fecha}`).subscribe((resp: any) => {
       this.usuarios = resp.select;
       this.showSpinner = false;
     });
@@ -78,8 +75,7 @@ export class MdcListComponent implements OnInit {
   // Obtiene el listado de personal de la MDC más reciente del usuario logeado
   getListadoMDC(idproyecto: number) {
     // this.generalService.select('ppppccccc', `sp_select_mdc_proyecto(${idproyecto})`).subscribe((resp: any) => {
-      this.generalService.select('ppppccccc').subscribe((resp: any) => {
-      // console.log(resp);
+      this.generalService.select(`api/cwpidc/portal/personal/${idproyecto}`).subscribe((resp: any) => {
       this.usuarios = resp.select;
       this.showSpinner = false;
     });

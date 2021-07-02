@@ -29,7 +29,7 @@ export class GeneralService {
   }
 
   insertNewUser(form: any): Observable<any> {
-    return this.http.post(`${this.SERVER_URL}/ppppccccnewuser`, form)
+    return this.http.post(`${this.SERVER_URL}/api/cwpidc/portal/newuser`, form)
     .pipe((catchError(err => [
       this.errorHandler.errorHandler(err)
     ])));
