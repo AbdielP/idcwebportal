@@ -1,0 +1,20 @@
+@import '../../../assets/styles/general.css';
+
+.text-purple {
+    color: var(--angular-color-purple);
+}
+    
+.active-purple-2 input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid var(--angular-color-purple);
+    box-shadow: 0 1px 0 0 var(--angular-color-purple);
+}
+    
+.active-purple input[type=text] {
+    border-bottom: 1px solid var(--angular-color-purple);
+    box-shadow: 0 1px 0 0 var(--angular-color-purple);
+}
+    
+.active-purple .fa,
+.active-purple-2 .fa {
+    color: var(--angular-color-purple);
+}
