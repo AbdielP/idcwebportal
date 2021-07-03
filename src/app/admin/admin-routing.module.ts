@@ -8,6 +8,7 @@ import { AdminComponent } from './admin.component';
 const routes: Routes = [
   { path: 'admin', canActivate: [LoginGuard, CheckedGuard , AdminGuard], component: AdminComponent, children: [
     { path: '', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+    { path: 'users', loadChildren: () => import('./usuarios/usuarios.module').then(m => m.UsuariosModule) },
     { path: 'access', loadChildren: () => import('./accesos/accesos.module').then(m => m.AccesosModule) },
     { path: 'mdc', loadChildren: () => import('./mdc/mdc.module').then(m => m.MdcModule)}
   ]}
