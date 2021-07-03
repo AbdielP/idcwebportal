@@ -11,7 +11,7 @@ export class MdcComponent {
   showForm = false;
   showList = false;
 
-  constructor(private sessionInactivity: SessionInactivityService) { 
+  constructor(private sessionInactivity: SessionInactivityService) {
     // this.showForm = true;
   }
 

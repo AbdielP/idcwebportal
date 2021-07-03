@@ -18,8 +18,7 @@ export class ProyectosComponent implements OnInit {
   }
 
   selectProyectos(): void {
-    // this.generalService.select('ggggwwwwpppp', 'sp_select_proyectos()').subscribe((resp: any) => {
-      this.generalService.select('ggggwwwwpppp').subscribe((resp: any) => {
+      this.generalService.select('api/cwpidc/general/all/proyectos').subscribe((resp: any) => {
       this.proyectos = resp.select;
     });
   }
