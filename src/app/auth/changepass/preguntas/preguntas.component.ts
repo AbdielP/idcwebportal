@@ -6,10 +6,12 @@ import { SeguridadService } from 'src/app/services/seguridad.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { ErrorhandlerService } from 'src/app/services/error/errorhandler.service';
 import { CustomValidators } from 'src/app/utils/custom-validators';
+import { LowerCasePipe } from '@angular/common';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-preguntas',
+  providers: [LowerCasePipe],
   templateUrl: './preguntas.component.html',
   styleUrls: ['./preguntas.component.css']
 })
@@ -26,7 +28,7 @@ export class PreguntasComponent implements OnInit {
   counter = 5;
 
   constructor(private seguridadService: SeguridadService, private localstorageService: LocalstorageService, private fb: FormBuilder,
-              public authService: AuthService, private errorHandler: ErrorhandlerService) {
+              public authService: AuthService, private errorHandler: ErrorhandlerService, private lowerCasePipe: LowerCasePipe) {
     // this.formpreguntas = new FormGroup({
     //   password: new FormControl(''),
     //   re_password: new FormControl(''),
@@ -73,6 +75,7 @@ export class PreguntasComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.answersToLowerCase();
     this.showSpinner = true;
     this.insertSecurityQuestions(this.formpreguntas.value, this.localstorageService.getToken());
   }
@@ -100,7 +103,6 @@ export class PreguntasComponent implements OnInit {
       // console.log(err);
       this.showSpinner = false;
       if (err.error.ok === false) {
-        // return alert(err.error.error);
         this.errorHandler.swalAlert(err.error.message);
       }
       this.eventError.next(err);
@@ -124,6 +126,19 @@ export class PreguntasComponent implements OnInit {
       title: message,
       showConfirmButton: true,
       timer: 1500
+    });
+  }
+
+  // Convierte las respuestas de seguridad a minúsculas
+  private answersToLowerCase(): void {
+    this.formpreguntas.controls.preguntaForm.patchValue({
+      respuesta: this.lowerCasePipe.transform(this.formpreguntas.controls.preguntaForm.get('respuesta').value)
+    });
+    this.formpreguntas.controls.preguntaForm2.patchValue({
+      respuesta: this.lowerCasePipe.transform(this.formpreguntas.controls.preguntaForm2.get('respuesta').value)
+    });
+    this.formpreguntas.controls.preguntaForm3.patchValue({
+      respuesta: this.lowerCasePipe.transform(this.formpreguntas.controls.preguntaForm3.get('respuesta').value)
     });
   }
 
