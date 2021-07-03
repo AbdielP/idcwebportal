@@ -7,21 +7,19 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class CheckedGuard implements CanActivate {
+export class UncheckedGuard implements CanActivate {
   token: string;
-  constructor(private localStorageService: LocalstorageService) {}
-
+  constructor(private localStorageService: LocalstorageService){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     this.token = this.localStorageService.getToken();
     return this.localStorageService.getTokenInfo(this.token).pipe(map((results: any) => {
-      if (results.tokeninfo.checked !== 1) {
+      if (results.tokeninfo.checked !== 0) {
         // Podría redireccionar al login?
         return false;
       }
       return true;
     }));
   }
-
 }
