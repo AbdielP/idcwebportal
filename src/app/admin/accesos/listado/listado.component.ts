@@ -38,7 +38,8 @@ export class ListadoComponent implements OnInit {
     this.eventSubscription = this.events.subscribe(({proyecto}) => {
       this.proyecto = JSON.parse(proyecto);
       this.localstorageService.setAcceso(this.proyecto);
-      this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
+      this.selectAccesos(`api/cwpidc/accesos/aprobados/${this.proyecto.nombre_empresa}/${this.proyecto.datacenter}`);
+      // this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
     });
   }
 
@@ -49,17 +50,18 @@ export class ListadoComponent implements OnInit {
       this.mnsgtramite = true;
       if (opciones === 'tramite') {
         this.mnsgtramite = false;
-        this.selectAccesos(`sp_select_accesos_pendientes_aprobacion()`);
+        this.selectAccesos(`api/cwpidc/accesos/pendientes`);
       } else {
-        this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
+        this.selectAccesos(`api/cwpidc/accesos/aprobados/${this.proyecto.nombre_empresa}/${this.proyecto.datacenter}`);
+        // this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
       }
     });
   }
 
   // Llama al servicio para obtener listado de acesos
-  selectAccesos(storedprocedure: string): void {
+  selectAccesos(url: string): void {
     this.showSpinner = true;
-    this.seguridadService.select(storedprocedure).subscribe((resp: any) => {
+    this.seguridadService.select(url).subscribe((resp: any) => {
         // console.log(resp);
         this.accesos = resp.select;
         this.showSpinner = false;
@@ -70,7 +72,7 @@ export class ListadoComponent implements OnInit {
   localStorageGetAccesos(): void {
     if (this.localstorageService.getProyecto() != null) {
       this.proyecto = JSON.parse(this.localstorageService.getProyecto());
-      this.selectAccesos(`sp_select_accesos_compania('${this.proyecto.nombre_empresa}', '${this.proyecto.datacenter}')`);
+      this.selectAccesos(`api/cwpidc/accesos/aprobados/${this.proyecto.nombre_empresa}/${this.proyecto.datacenter}`);
     }
   }
 

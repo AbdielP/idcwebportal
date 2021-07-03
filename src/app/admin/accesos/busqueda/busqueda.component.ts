@@ -20,8 +20,7 @@ export class BusquedaComponent implements OnInit {
 
   // Llamada al servicio REST para consultar el listado de proyectos/clientes disponible.
   selectProyectos(): void {
-    // this.generalService.select('ggggwwwwpppp', 'sp_select_proyectos()').subscribe((resp: any) => {
-      this.generalService.select('ggggwwwwpppp').subscribe((resp: any) => {
+      this.generalService.select('api/cwpidc/general/all/proyectos').subscribe((resp: any) => {
       this.proyectos = resp.select;
     });
   }
