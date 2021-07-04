@@ -20,9 +20,9 @@ export class GeneralService {
       console.log(err)
     ])));
   }
-  // BORRAR!!! -> No usar este, pasar token por URL al 'select'
-  selectWithToken(url: string, sp: any, token: string): Observable<any> {
-    return this.http.get(`${this.SERVER_URL}/${url}?token=${token}`)
+
+  post(url: string, body: any): Observable<any> {
+    return this.http.post(`${this.SERVER_URL}/${url}`, body)
     .pipe((catchError(err => [
       console.log(err)
     ])));

@@ -1,0 +1,63 @@
+<div class="users-container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <p class="nav-link active">Cuentas de usuario</p>
+        </li>
+    </ul>
+    <div class="container-fluid mt-1">
+        <!-- <mat-form-field>
+            <mat-label>Filtrar</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Busqueda" #input>
+        </mat-form-field> -->
+        <div class="mat-elevation-z8 ">
+            <table mat-table [dataSource]="dataSource" matSort >
+
+              <!-- Index -->
+              <ng-container matColumnDef="index">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>#</th>
+                <td width="50" mat-cell *matCellDef="let row; let i = index"><b class="text-purple">{{i+1}}</b> </td>
+              </ng-container>
+          
+              <!-- Nombre -->
+              <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+                <td mat-cell *matCellDef="let row"> {{row.nombre}}</td>
+              </ng-container>
+
+              <!-- Apellido -->
+              <ng-container matColumnDef="apellido">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Apellido</th>
+                <td mat-cell *matCellDef="let row"> {{row.apellido}}</td>
+              </ng-container>
+          
+              <!-- Username -->
+              <ng-container matColumnDef="username">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Usernmame</th>
+                <td mat-cell *matCellDef="let row" class="text-primary"> {{row.username}}</td>
+              </ng-container>
+
+              <!-- Cédula -->
+              <ng-container matColumnDef="cedula">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Cédula</th>
+                <td mat-cell *matCellDef="let row"> {{row.cedula}}</td>
+              </ng-container>
+
+              <!-- CreatedAt -->
+              <ng-container matColumnDef="createdAt">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Creada (yyyy-MM-dd)</th>
+                <td mat-cell *matCellDef="let row" class="text-success"> {{row.createdAt | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+              <!-- Row shown when there is no matching data. -->
+              <!-- <tr class="mat-row" *matNoDataRow> FUNCIONA SOLO EN ANGULAR 10+
+                <td class="mat-cell text-center" colspan="8">No hay resultados para mostrar "{{input.value}}"</td>
+              </tr> -->
+            </table>
+          
+            <mat-paginator [pageSize]="15" [pageSizeOptions]="[5, 15, 25, 100]"></mat-paginator>
+          </div>
+    </div>
+</div>

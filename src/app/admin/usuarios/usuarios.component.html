@@ -5,11 +5,15 @@
     </div>
     <div class="col-12 mt-2">
         <!-- Search form -->
-        <form class="form-inline md-form form-sm active-purple-2">
-            <input class="form-control form-control-sm mr-3 w-100" type="text" placeholder="Search" aria-label="Search"
-            mdbInput>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-inline md-form form-sm active-purple-2">
+            <input formControlName="search" class="form-control form-control-sm w-75" type="text" placeholder="Busqueda por nombre, cédula o compañia" aria-label="Busqueda por nombre, cédula o compañia" mdbInput>
             <!-- <mdb-icon fas icon="search" aria-hidden="true"></mdb-icon> -->
+            <button type="submit" class="form-control form-control-sm w-25"><i class="fas fa-search"></i> Buscar</button>
         </form>
+    </div>
+
+    <div class="col-12">
+        <app-lista-usuarios [events]="eventUsuarios.asObservable()"></app-lista-usuarios>
     </div>
 </div>
 
