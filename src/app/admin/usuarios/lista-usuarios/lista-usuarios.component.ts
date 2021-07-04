@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
 import {MatSort} from '@angular/material/sort';
@@ -17,6 +17,8 @@ export class ListaUsuariosComponent implements OnInit {
 
   displayedColumns: string[] = ['index', 'nombre', 'apellido', 'username', 'cedula', 'createdAt'];
   dataSource: MatTableDataSource<any> = null;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -30,7 +32,8 @@ export class ListaUsuariosComponent implements OnInit {
 
   subscribeEventUsuarios(): void {
     this.eventSubscription = this.events.subscribe((usuarios) => {
-      console.log(usuarios);
+      this.dataSource = new MatTableDataSource<any>(usuarios);
+      this.dataSource.paginator = this.paginator;
     });
   }
 

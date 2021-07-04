@@ -1,4 +1,18 @@
 
 .users-container {
-    background-color: goldenrod;
+    background-color: #F2F2F2;
 }
+
+/* TABLA */
+table {
+    width: 100%;
+  }
+    
+  .mat-form-field {
+    font-size: 1rem;
+    width: 100%;
+  }
+    
+  td, th {
+    font-size: 0.75rem!important
+  }
