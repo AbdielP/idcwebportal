@@ -15,7 +15,7 @@ export class ListaUsuariosComponent implements OnInit {
   @Input() events: Observable<any>;
   eventSubscription: Subscription;
 
-  displayedColumns: string[] = ['index', 'nombre', 'apellido', 'username', 'cedula', 'createdAt'];
+  displayedColumns: string[] = ['index', 'nombre', 'apellido', 'username', 'cedula', 'createdAt', 'activo', 'idusuario'];
   dataSource: MatTableDataSource<any> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -32,9 +32,14 @@ export class ListaUsuariosComponent implements OnInit {
 
   subscribeEventUsuarios(): void {
     this.eventSubscription = this.events.subscribe((usuarios) => {
+      console.log(usuarios);
       this.dataSource = new MatTableDataSource<any>(usuarios);
       this.dataSource.paginator = this.paginator;
     });
+  }
+
+  editUser(idusuario: number): void {
+    console.log(idusuario);
   }
 
 }

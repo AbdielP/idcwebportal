@@ -45,8 +45,26 @@
               <!-- CreatedAt -->
               <ng-container matColumnDef="createdAt">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Creada (yyyy-MM-dd)</th>
-                <td mat-cell *matCellDef="let row" class="text-success"> {{row.createdAt | date:'yyyy-MM-dd'}}</td>
+                <td mat-cell *matCellDef="let row" class="h6"> {{row.createdAt | date:'yyyy-MM-dd'}}</td>
               </ng-container>
+
+               <!-- Activo -->
+               <ng-container matColumnDef="activo">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+                <ng-container *matCellDef="let row">
+                  <td mat-cell *ngIf="row.activo === 1" class="text-success"><b>Habilitada</b></td>
+                  <td mat-cell *ngIf="row.activo === 0" class="text-danger"><b>Deshabilitada</b></td>
+                </ng-container>
+              </ng-container>
+
+             <!-- CreatedAt -->
+             <ng-container matColumnDef="idusuario">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
+              <td mat-cell *matCellDef="let row" class="h6">
+                 <!-- {{row.idusuario}} -->
+                 <button type="button" class="btn btn-sm btn-info" (click)="editUser(row.idusuario)"><i class="fas fa-user-edit"></i></button>
+              </td>
+            </ng-container>
 
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
