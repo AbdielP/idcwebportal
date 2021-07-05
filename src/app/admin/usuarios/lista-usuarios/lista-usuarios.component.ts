@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
@@ -20,7 +19,7 @@ export class ListaUsuariosComponent implements OnInit {
   dataSource: MatTableDataSource<any> = null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.subscribeEventUsuarios();
@@ -40,7 +39,7 @@ export class ListaUsuariosComponent implements OnInit {
   }
 
   editUser(idusuario: number): void {
-    this.router.navigate(['/admin/users/detail']);
+    console.log(idusuario);
     // window.open('/admin/users/detail', '_blank');
   }
 
