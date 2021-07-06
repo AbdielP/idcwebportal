@@ -13,7 +13,11 @@
     </div>
 
     <div class="col-12 mt-2">
-        <app-lista-usuarios [events]="eventUsuarios.asObservable()"></app-lista-usuarios>
+        <app-lista-usuarios [events]="eventUsuarios.asObservable()" (emitidusuario)="getUserId($event)"></app-lista-usuarios>
+    </div>
+
+    <div class="col-12">
+        <app-detalle-usuario [events]="eventDetalleUsuario.asObservable()"></app-detalle-usuario>
     </div>
 </div>
 

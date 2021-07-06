@@ -1,7 +1,7 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Output, ViewChild, EventEmitter } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
-import {MatSort} from '@angular/material/sort';
+// import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
@@ -13,6 +13,7 @@ import {MatTableDataSource} from '@angular/material/table';
 export class ListaUsuariosComponent implements OnInit {
 
   @Input() events: Observable<any>;
+  @Output() emitidusuario: EventEmitter<any> = new EventEmitter();
   eventSubscription: Subscription;
 
   displayedColumns: string[] = ['index', 'nombre', 'apellido', 'username', 'cedula', 'createdAt', 'activo', 'idusuario'];
@@ -25,22 +26,22 @@ export class ListaUsuariosComponent implements OnInit {
     this.subscribeEventUsuarios();
   }
 
-   // tslint:disable-next-line: use-lifecycle-interface
-   ngOnDestroy(): void {
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngOnDestroy(): void {
     this.eventSubscription.unsubscribe();
   }
 
   subscribeEventUsuarios(): void {
     this.eventSubscription = this.events.subscribe((usuarios) => {
-      console.log(usuarios);
+      // console.log(usuarios);
       this.dataSource = new MatTableDataSource<any>(usuarios);
       this.dataSource.paginator = this.paginator;
     });
   }
 
   editUser(idusuario: number): void {
-    console.log(idusuario);
-    // window.open('/admin/users/detail', '_blank');
+    // console.log(idusuario);
+    this.emitidusuario.emit(idusuario);
   }
 
 }

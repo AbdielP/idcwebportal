@@ -12,6 +12,7 @@ export class UsuariosComponent implements OnInit {
 
   form: FormGroup;
   eventUsuarios: Subject<any> = new Subject<any>();
+  eventDetalleUsuario: Subject<any> = new Subject<any>();
   usuarios: object;
 
   constructor(private generalService: GeneralService) {
@@ -25,6 +26,11 @@ export class UsuariosComponent implements OnInit {
 
   onSubmit(): void {
     this.search(this.form.value);
+  }
+
+  getUserId(idusuario: number): void {
+    // console.log(idusuario);
+    this.eventDetalleUsuario.next(idusuario);
   }
 
   private search(form: FormGroup): void{

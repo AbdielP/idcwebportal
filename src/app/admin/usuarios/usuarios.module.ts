@@ -11,10 +11,11 @@ import {MatTableModule} from '@angular/material/table';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatInputModule} from '@angular/material/input';
+import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.component';
 
 
 @NgModule({
-  declarations: [UsuariosComponent, ListaUsuariosComponent],
+  declarations: [UsuariosComponent, ListaUsuariosComponent, DetalleUsuarioComponent],
   imports: [
     CommonModule,
     UsuariosRoutingModule,
@@ -22,7 +23,7 @@ import {MatInputModule} from '@angular/material/input';
     MatTableModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatInputModule,
+    MatInputModule
   ]
 })
 export class UsuariosModule { }
