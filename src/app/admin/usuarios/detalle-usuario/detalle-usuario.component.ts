@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { GeneralService } from 'src/app/services/general.service';
@@ -12,6 +13,7 @@ export class DetalleUsuarioComponent implements OnInit {
 
   @Input() events: Observable<any>;
   eventSubscription: Subscription;
+  form: FormGroup;
 
   constructor(private generalService: GeneralService, private localStorageService: LocalstorageService) { }
 
@@ -32,5 +34,7 @@ export class DetalleUsuarioComponent implements OnInit {
       });
     });
   }
+
+  onSubmit(): void {}
 
 }

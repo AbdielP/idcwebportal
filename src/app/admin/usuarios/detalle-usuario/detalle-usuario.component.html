@@ -1,1 +1,53 @@
-<p>detalle-usuario works!</p>
+<div class="main-detalle mb-3">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <p class="nav-link active">Información del usuario</p>
+        </li>
+    </ul>
+    <div class="detalle-container d-flex">
+        <div class="foto-container d-flex align-items-center justify-content-center">
+            <img class="rounded user-img" src="../../../../assets/unknown.jpg" alt="UNKNOWN">
+            <!-- <img class="rounded img-thumbnail" src="{{acceso.foto}}" alt="Error" onerror="this.onerror!=null;this.src='../../../../assets/unknown.jpg';"> -->
+        </div>
+        <div class="info-container">
+            <div class="fila m-1 text-center">
+                <h6 class="card-title">Nombre y Apellido</h6>
+                <h6 class="card-subtitle mb-2 text-muted">-</h6>
+            </div>
+            <div class="fila m-1 text-center">
+                <h6 class="card-title">Cédula</h6>
+                <h6 class="card-subtitle mb-2 text-muted">-</h6>
+            </div>
+            <div class="fila m-1 text-center">
+                <h6 class="card-title">Nombre de usuario</h6>
+                <h6 class="card-subtitle mb-2 text-primary">-</h6>
+            </div>
+            <!-- BOTONES  -->
+            <div class="container-opciones">
+                <div class="container-titulo-opciones">
+                    <small class="text-muted cuenta-title">Estado de la cuenta: </small>
+                    <small class="text-success"><b>Activa</b><i class="fas fa-check ml-2"></i></small>
+                </div>
+                <div class="container-botones-opciones d-flex align-items-center justify-content-center flex-wrap">
+                    <button type="button" class="btn btn-sm btn-danger btn-opcion m-1 p-2">Bloquear<i class="fas fa-user-lock ml-1"></i></button>
+                    <button type="button" class="btn btn-sm btn-info btn-opcion m-1 p-2">Desbloquear<i class="fas fa-unlock-alt ml-1"></i></button>
+                    <button type="button" class="btn btn-sm btn-warning btn-opcion m-1 p-2">Desactivar<i class="fas fa-times ml-2"></i></button>
+                    <button type="button" class="btn btn-sm btn-success btn-opcion m-1 p-2">Activar<i class="fas fa-check ml-2"></i></button>
+                </div>
+            </div>
+            <div class="container-password">
+                <div class="container-titulo-opciones">
+                    <small class="text-muted cuenta-title">Cambiar contraseña de usuario: </small>
+                    <!-- <small class="text-success"><b>Activa</b><i class="fas fa-check ml-2"></i></small> -->
+                </div>
+                <div class="container-titulo-opciones input-group mb-3 d-flex justify-content-center pt-2">
+                    <div [formGroup]="form" (submit)="onSubmit()" class="form-group col-6">
+                        <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Nueva contraseña">
+                        <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Repetir contraseña">
+                        <button type="button" class="btn btn-sm btn-purple btn-block m-1">Cambiar contrasña</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

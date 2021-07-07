@@ -1,0 +1,50 @@
+@import '../../../../assets/styles/general.css';
+
+.btn-purple {
+    color: #fff;
+    background-color: var(--btn-default);
+}.btn-purple:active {
+    background-color: var(--angular-color-purple);
+}.btn-purple:hover{
+    background-color: var(--btn-hover);
+}
+
+.main-detalle {
+    background-color: #F2F2F2;
+    min-height: 200px;
+}
+
+.detalle-container {
+    background-color: #fff;
+}
+
+.user-img{
+    max-width: 29vh;
+}
+
+.info-container {
+    width: 100%;
+}
+
+.fila {
+    width: 99%;
+    border-top: 1px dashed #E6E6E6;
+    border-bottom: 1px dashed #E6E6E6;
+}
+
+.container-opciones,
+.container-titulo-opciones {
+    width: 100%;
+    border-bottom: 1px dashed #E6E6E6;
+    background-color: #F2F2F2;
+    /* margin: 1px; */
+}
+
+.cuenta-title {
+    width: 100%;
+    padding: 2px;
+}
+
+.btn-opcion {
+    width: 8rem;
+}
