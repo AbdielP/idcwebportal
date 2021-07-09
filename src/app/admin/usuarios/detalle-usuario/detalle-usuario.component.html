@@ -12,27 +12,34 @@
         <div class="info-container">
             <div class="fila m-1 text-center">
                 <h6 class="card-title">Nombre y Apellido</h6>
-                <h6 class="card-subtitle mb-2 text-muted">-</h6>
+                <h6 *ngIf="usuario === ''" class="card-subtitle mb-2 text-muted">-</h6>
+                <h6 *ngIf="usuario !== ''" class="card-subtitle mb-2 text-muted">{{usuario.nombre | titlecase}} {{usuario.apellido | titlecase}}</h6>
             </div>
             <div class="fila m-1 text-center">
                 <h6 class="card-title">Cédula</h6>
-                <h6 class="card-subtitle mb-2 text-muted">-</h6>
+                <h6 *ngIf="usuario === ''" class="card-subtitle mb-2 text-muted">-</h6>
+                <h6 *ngIf="usuario !== ''" class="card-subtitle mb-2 text-muted">{{usuario.cedula | uppercase}}</h6>
             </div>
             <div class="fila m-1 text-center">
                 <h6 class="card-title">Nombre de usuario</h6>
-                <h6 class="card-subtitle mb-2 text-primary">-</h6>
+                <h6 *ngIf="usuario === ''" class="card-subtitle mb-2 text-muted">-</h6>
+                <h6 *ngIf="usuario !== ''" class="card-subtitle mb-2 text-muted">{{usuario.username}}</h6>
             </div>
             <!-- BOTONES  -->
             <div class="container-opciones">
                 <div class="container-titulo-opciones">
                     <small class="text-muted cuenta-title">Estado de la cuenta: </small>
-                    <small class="text-success"><b>Activa</b><i class="fas fa-check ml-2"></i></small>
+                    <small *ngIf="usuario === ''" class="text-muted">-</small>
+                    <small *ngIf="usuario.activo === 1" class="text-success"><b>Activa</b><i class="fas fa-check ml-2"></i></small>
+                    <small *ngIf="usuario.activo === 0" class="text-warning"><b>Inactiva</b><i class="fas fa-times ml-2"></i></small>
+                    <small *ngIf="usuario.bloqueada === 1" class="text-danger"><b>Bloqueada</b><i class="fas fa-check ml-2"></i></small>
                 </div>
                 <div class="container-botones-opciones d-flex align-items-center justify-content-center flex-wrap">
-                    <button type="button" class="btn btn-sm btn-danger btn-opcion m-1 p-2">Bloquear<i class="fas fa-user-lock ml-1"></i></button>
-                    <button type="button" class="btn btn-sm btn-info btn-opcion m-1 p-2">Desbloquear<i class="fas fa-unlock-alt ml-1"></i></button>
-                    <button type="button" class="btn btn-sm btn-warning btn-opcion m-1 p-2">Desactivar<i class="fas fa-times ml-2"></i></button>
-                    <button type="button" class="btn btn-sm btn-success btn-opcion m-1 p-2">Activar<i class="fas fa-check ml-2"></i></button>
+                    <button *ngIf="usuario === ''" type="button" class="btn btn-sm btn-light btn-opcion m-1 p-2" disabled> </button>
+                    <button (click)="bloquear()" *ngIf="usuario.bloqueada === 0" type="button" class="btn btn-sm btn-danger btn-opcion m-1 p-2">Bloquear<i class="fas fa-user-lock ml-1"></i></button>
+                    <button (click)="desbloquear()" *ngIf="usuario.bloqueada === 1" type="button" class="btn btn-sm btn-info btn-opcion m-1 p-2">Desbloquear<i class="fas fa-unlock-alt ml-1"></i></button>
+                    <button (click)="desactivar()" *ngIf="usuario.activo === 1" type="button" class="btn btn-sm btn-warning btn-opcion m-1 p-2">Desactivar<i class="fas fa-times ml-2"></i></button>
+                    <button (click)="activar()" *ngIf="usuario.activo === 0" type="button" class="btn btn-sm btn-success btn-opcion m-1 p-2">Activar<i class="fas fa-check ml-2"></i></button>
                 </div>
             </div>
             <div class="container-password">
@@ -41,10 +48,12 @@
                     <!-- <small class="text-success"><b>Activa</b><i class="fas fa-check ml-2"></i></small> -->
                 </div>
                 <div class="container-titulo-opciones input-group mb-3 d-flex justify-content-center pt-2">
-                    <div [formGroup]="form" (submit)="onSubmit()" class="form-group col-6">
-                        <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Nueva contraseña">
-                        <input type="password" class="form-control form-control-sm" id="exampleInputPassword1" placeholder="Repetir contraseña">
-                        <button type="button" class="btn btn-sm btn-purple btn-block m-1">Cambiar contrasña</button>
+                    <div class="form-group col-11">
+                        <form [formGroup]="form">
+                            <input type="password" class="form-control form-control-sm small-input" formControlName="password" placeholder="Nueva contraseña" autocomplete="on">
+                            <input type="password" class="form-control form-control-sm small-input" formControlName="re_password" placeholder="Repetir contraseña" autocomplete="on">
+                            <button type="button" (click)="onSubmit()" class="btn btn-sm btn-purple btn-block m-1">Cambiar contraseña</button>
+                        </form>
                     </div>
                 </div>
             </div>
