@@ -61,28 +61,52 @@ export class DetalleUsuarioComponent implements OnInit {
     });
   }
 
-  activar(): void{}
-  desactivar(): void{}
-  bloquear(): void {
-    this.swalConfirm(`¿Bloquear este usuario?`);
+  btnActivar(): void{}
+  btnDesactivar(): void{}
+  btnBloquear(): void {
+    this.swalConfirm('bloquear', '¿Desea bloquear este usuario?');
   }
-  desbloquear(): void{}
+  btnDesbloquear(): void {
+    this.swalConfirm('desbloquear', '¿Desea desbloquear este usuario?');
+  }
 
-  private swalConfirm(mensaje: string): void {
-    Swal.fire({
-      title: mensaje,
-      // showDenyButton: true,
-      showCancelButton: true,
-      confirmButtonText: `Guardar`,
-      // denyButtonText: `No guardar`,
+  private swalConfirm(action: string, message: string): void {
+    Swal.fire({ title: message, showCancelButton: true, confirmButtonText: `Guardar`
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Cambios guardados', '', 'success');
-      } else if (result.isDenied) {
-        Swal.fire('Los cambios no fueron guardados', '', 'info');
+        switch (action) {
+          case 'activar':
+            break;
+          case 'desactivar':
+            break;
+          case 'bloquear':
+            this.bloquear(1);
+            break;
+          case 'desbloquear':
+            this.bloquear(0);
+            break;
+          default:
+            // NADA, por ahora.
+        }
       }
     });
   }
+
+  private bloquear(estado: number): void {
+    const body = { estado, idusuario: this.usuario.idusuario };
+    this.generalService.patch(`api/cwpidc/portal/block?token=${this.localStorageService.getToken()}`, body)
+    .subscribe(resp => {
+      console.log(resp);
+      if (resp.ok === true) {
+        Swal.fire(resp.message, '', 'success');
+      }
+    }, (error) => {
+      console.log(error);
+    });
+  }
+
+  // Hacer el servicio para activar - desactivar (de verdad es necesario desactivar una ves activada? bloquear basta no?)
+  // Enviar los datos del usuario actualizado para mostrarlos en pantalla
+  // - Enviar estos datos al componente padre para que se muestre tambíen
 
 }
