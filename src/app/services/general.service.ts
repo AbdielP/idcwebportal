@@ -28,6 +28,13 @@ export class GeneralService {
     ])));
   }
 
+  patch(url: string, body: any): Observable<any> {
+    return this.http.patch(`${this.SERVER_URL}/${url}`, body)
+    .pipe(map((resp: any) => {
+      return resp;
+    }));
+  }
+
   insertNewUser(form: any): Observable<any> {
     return this.http.post(`${this.SERVER_URL}/api/cwpidc/portal/newuser`, form)
     .pipe((catchError(err => [

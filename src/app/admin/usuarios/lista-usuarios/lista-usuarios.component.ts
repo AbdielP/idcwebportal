@@ -33,7 +33,7 @@ export class ListaUsuariosComponent implements OnInit {
 
   subscribeEventUsuarios(): void {
     this.eventSubscription = this.events.subscribe((usuarios) => {
-      // console.log(usuarios);
+      console.log(usuarios);
       this.dataSource = new MatTableDataSource<any>(usuarios);
       this.dataSource.paginator = this.paginator;
     });

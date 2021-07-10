@@ -6,8 +6,8 @@
     </ul>
     <div class="detalle-container d-flex">
         <div class="foto-container d-flex align-items-center justify-content-center">
-            <img class="rounded user-img" src="../../../../assets/unknown.jpg" alt="UNKNOWN">
-            <!-- <img class="rounded img-thumbnail" src="{{acceso.foto}}" alt="Error" onerror="this.onerror!=null;this.src='../../../../assets/unknown.jpg';"> -->
+            <img *ngIf="usuario === '' || usuario.foto === null" class="rounded user-img" src="../../../../assets/unknown.jpg" alt="UNKNOWN">
+            <img *ngIf="usuario !== '' && usuario.foto !== null" class="rounded user-img" src="{{usuario.foto}}" alt="Error" onerror="this.onerror!=null;this.src='../../../../assets/unknown.jpg';">
         </div>
         <div class="info-container">
             <div class="fila m-1 text-center">
