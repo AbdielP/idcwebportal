@@ -52,10 +52,12 @@
                <ng-container matColumnDef="bloqueda">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
                 <ng-container *matCellDef="let row">
-                  <td mat-cell *ngIf="row.bloqueada === 1" class="text-danger"><i class="fas fa-user-lock ml-1"></i></td>
-                  <td mat-cell *ngIf="row.bloqueada === 0" class="text-info"><i class="fas fa-unlock-alt ml-1"></i></td>
-                  <td mat-cell *ngIf="row.activo === 1" class="text-success"><i class="fas fa-check-square"></i></td>
-                  <td mat-cell *ngIf="row.activo === 0" class="text-warning"><i class="fas fa-exclamation-triangle"></i></td>
+                  <td mat-cell>
+                    <i *ngIf="row.bloqueada === 1" class="text-danger text-center fas fa-user-lock"></i>
+                    <i *ngIf="row.bloqueada === 0" class="text-info text-center fas fa-unlock-alt ml-1"></i>
+                    <i *ngIf="row.activo === 1" class="text-success text-center fas fa-check-square ml-1"></i>
+                    <i *ngIf="row.activo === 0" class="text-warning text-center fas fa-exclamation-triangle ml-1"></i>
+                  </td>
                 </ng-container>
               </ng-container>
 

@@ -38,7 +38,7 @@
                     <button *ngIf="usuario === ''" type="button" class="btn btn-sm btn-light btn-opcion m-1 p-2" disabled> </button>
                     <button (click)="btnBloquear()" *ngIf="usuario.bloqueada === 0" type="button" class="btn btn-sm btn-danger btn-opcion m-1 p-2">Bloquear<i class="fas fa-user-lock ml-1"></i></button>
                     <button (click)="btnDesbloquear()" *ngIf="usuario.bloqueada === 1" type="button" class="btn btn-sm btn-info btn-opcion m-1 p-2">Desbloquear<i class="fas fa-unlock-alt ml-1"></i></button>
-                    <button (click)="btnDesactivar()" *ngIf="usuario.activo === 1" type="button" class="btn btn-sm btn-warning btn-opcion m-1 p-2">Desactivar<i class="fas fa-times ml-2"></i></button>
+                    <!-- <button (click)="btnDesactivar()" *ngIf="usuario.activo === 1" type="button" class="btn btn-sm btn-warning btn-opcion m-1 p-2">Desactivar<i class="fas fa-times ml-2"></i></button> -->
                     <button (click)="btnActivar()" *ngIf="usuario.activo === 0" type="button" class="btn btn-sm btn-success btn-opcion m-1 p-2">Activar<i class="fas fa-check ml-2"></i></button>
                 </div>
             </div>
