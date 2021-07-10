@@ -112,8 +112,4 @@ export class DetalleUsuarioComponent implements OnInit {
     });
   }
 
-  // Hacer el servicio para activar - desactivar (de verdad es necesario desactivar una ves activada? bloquear basta no?)
-  // Enviar los datos del usuario actualizado para mostrarlos en pantalla
-  // - Enviar estos datos al componente padre para que se muestre tambíen
-
 }

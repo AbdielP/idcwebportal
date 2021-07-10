@@ -52,14 +52,16 @@
                <ng-container matColumnDef="bloqueda">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
                 <ng-container *matCellDef="let row">
-                  <td mat-cell *ngIf="row.bloqueada === 1" class="text-danger"><b>Bloqueda</b></td>
-                  <td mat-cell *ngIf="row.bloqueada === 0" class="text-success"><b>Desbloqueda</b></td>
+                  <td mat-cell *ngIf="row.bloqueada === 1" class="text-danger"><i class="fas fa-user-lock ml-1"></i></td>
+                  <td mat-cell *ngIf="row.bloqueada === 0" class="text-info"><i class="fas fa-unlock-alt ml-1"></i></td>
+                  <td mat-cell *ngIf="row.activo === 1" class="text-success"><i class="fas fa-check-square"></i></td>
+                  <td mat-cell *ngIf="row.activo === 0" class="text-warning"><i class="fas fa-exclamation-triangle"></i></td>
                 </ng-container>
               </ng-container>
 
              <!-- CreatedAt -->
              <ng-container matColumnDef="idusuario">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>Editar</th>
+              <th mat-header-cell *matHeaderCellDef mat-sort-header>Detalles</th>
               <td mat-cell *matCellDef="let row" class="h6">
                  <!-- {{row.idusuario}} -->
                  <button type="button" class="btn btn-sm btn-info" (click)="editUser(row.idusuario)"><i class="fas fa-user-edit"></i></button>
