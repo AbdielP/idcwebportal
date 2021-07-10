@@ -14,6 +14,7 @@ export class UsuariosComponent implements OnInit {
   eventUsuarios: Subject<any> = new Subject<any>();
   eventDetalleUsuario: Subject<any> = new Subject<any>();
   usuarios: object;
+  lastuserId: number;
 
   constructor(private generalService: GeneralService) {
     this.form = new FormGroup({
@@ -28,7 +29,8 @@ export class UsuariosComponent implements OnInit {
   }
 
   getUserId(idusuario: number): void {
-    this.eventDetalleUsuario.next(idusuario);
+    this.lastuserId = idusuario;
+    this.emitIdUsuario();
   }
 
   private search(form: FormGroup): void{
@@ -42,10 +44,15 @@ export class UsuariosComponent implements OnInit {
     this.eventUsuarios.next(this.usuarios);
   }
 
+  private emitIdUsuario(): void {
+    this.eventDetalleUsuario.next(this.lastuserId);
+  }
+
   // Recibe si hubo cambios en un usuario desde el componente hijo: app-detalle-usuario
   subscribeChanges(event: any): void {
     // No requiere el 'event'.
     this.search(this.form.value);
+    this.emitIdUsuario();
   }
 
 }

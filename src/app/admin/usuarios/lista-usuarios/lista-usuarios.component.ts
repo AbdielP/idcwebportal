@@ -33,7 +33,6 @@ export class ListaUsuariosComponent implements OnInit {
 
   subscribeEventUsuarios(): void {
     this.eventSubscription = this.events.subscribe((usuarios) => {
-      console.log(usuarios);
       this.fillTable(usuarios);
     });
   }
