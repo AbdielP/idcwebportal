@@ -17,7 +17,7 @@
     </div>
 
     <div class="col-12">
-        <app-detalle-usuario [events]="eventDetalleUsuario.asObservable()"></app-detalle-usuario>
+        <app-detalle-usuario [events]="eventDetalleUsuario.asObservable()" (emitChanges)="subscribeChanges($event)"></app-detalle-usuario>
     </div>
 </div>
 

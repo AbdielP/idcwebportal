@@ -21,23 +21,31 @@ export class UsuariosComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSubmit(): void {
     this.search(this.form.value);
   }
 
   getUserId(idusuario: number): void {
-    // console.log(idusuario);
     this.eventDetalleUsuario.next(idusuario);
   }
 
   private search(form: FormGroup): void{
     this.generalService.post(`api/cwpidc/portal/searchusers`, form).subscribe((resp: any) => {
       this.usuarios = resp.select;
-      this.eventUsuarios.next(this.usuarios);
+      this.sendSearchUsers();
     });
+  }
+
+  private sendSearchUsers(): void {
+    this.eventUsuarios.next(this.usuarios);
+  }
+
+  // Recibe si hubo cambios en un usuario desde el componente hijo: app-detalle-usuario
+  subscribeChanges(event: any): void {
+    // No requiere el 'event'.
+    this.search(this.form.value);
   }
 
 }

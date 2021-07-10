@@ -49,11 +49,11 @@
               </ng-container>
 
                <!-- Activo -->
-               <ng-container matColumnDef="activo">
+               <ng-container matColumnDef="bloqueda">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
                 <ng-container *matCellDef="let row">
-                  <td mat-cell *ngIf="row.activo === 1" class="text-success"><b>Habilitada</b></td>
-                  <td mat-cell *ngIf="row.activo === 0" class="text-danger"><b>Deshabilitada</b></td>
+                  <td mat-cell *ngIf="row.bloqueada === 1" class="text-danger"><b>Bloqueda</b></td>
+                  <td mat-cell *ngIf="row.bloqueada === 0" class="text-success"><b>Desbloqueda</b></td>
                 </ng-container>
               </ng-container>
 

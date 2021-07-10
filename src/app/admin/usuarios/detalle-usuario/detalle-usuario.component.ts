@@ -1,6 +1,6 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { GeneralService } from 'src/app/services/general.service';
 import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
 import Swal from 'sweetalert2';
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class DetalleUsuarioComponent implements OnInit {
 
   @Input() events: Observable<any>;
+  @Output() emitChanges: EventEmitter<any> = new EventEmitter();
   eventSubscription: Subscription;
   usuario: any = '';
   form: FormGroup;
@@ -39,7 +40,7 @@ export class DetalleUsuarioComponent implements OnInit {
     this.eventSubscription = this.events.subscribe(idusuario => {
       const usuario = {idusuario};
       this.generalService.post(`api/cwpidc/portal/userinfo?token=${this.localStorageService.getToken()}`, usuario).subscribe(resp => {
-        console.log(resp.select);
+        // console.log(resp.select);
         this.usuario = resp.select;
         this.form.patchValue({
           idusuario: (this.usuario.idusuario)
@@ -70,6 +71,11 @@ export class DetalleUsuarioComponent implements OnInit {
     this.swalConfirm('desbloquear', '¿Desea desbloquear este usuario?');
   }
 
+  // Emite al componente padre 'usuarios.component' cuando se ha realizado una actualización del usuario
+  sendChanges() {
+    this.emitChanges.emit(true);
+  }
+
   private swalConfirm(action: string, message: string): void {
     Swal.fire({ title: message, showCancelButton: true, confirmButtonText: `Guardar`
     }).then((result) => {
@@ -96,9 +102,10 @@ export class DetalleUsuarioComponent implements OnInit {
     const body = { estado, idusuario: this.usuario.idusuario };
     this.generalService.patch(`api/cwpidc/portal/block?token=${this.localStorageService.getToken()}`, body)
     .subscribe(resp => {
-      console.log(resp);
+      // console.log(resp);
       if (resp.ok === true) {
         Swal.fire(resp.message, '', 'success');
+        this.sendChanges();
       }
     }, (error) => {
       console.log(error);
