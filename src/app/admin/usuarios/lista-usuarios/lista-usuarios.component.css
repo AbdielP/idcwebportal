@@ -3,6 +3,11 @@
     background-color: #F2F2F2;
 }
 
+.btn-estado {
+  background-color: #fff;
+  border: none;
+}
+
 /* TABLA */
 table {
     width: 100%;

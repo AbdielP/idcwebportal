@@ -6,11 +6,7 @@ import { UsuariosRoutingModule } from './usuarios-routing.module';
 import { UsuariosComponent } from './usuarios.component';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 
-
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatInputModule} from '@angular/material/input';
+import { MaterialModule } from 'src/app/material/material.module';
 import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.component';
 
 
@@ -20,10 +16,7 @@ import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.compo
     CommonModule,
     UsuariosRoutingModule,
     ReactiveFormsModule,
-    MatTableModule,
-    MatFormFieldModule,
-    MatPaginatorModule,
-    MatInputModule
+    MaterialModule
   ]
 })
 export class UsuariosModule { }
