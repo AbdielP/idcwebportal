@@ -55,7 +55,7 @@
                   <td mat-cell>
                     <button *ngIf="row.activo === 1" class="btn-estado" matTooltip="Cuenta activa" matTooltipPosition="above"><i class="text-success fas fa-check-square"></i></button>
                     <button *ngIf="row.activo === 0" class="btn-estado" matTooltip="Cuenta inactiva" matTooltipPosition="above"><i class="text-warning fas fa-exclamation-triangle"></i></button>
-                    <button *ngIf="row.bloqueada === 1" class="btn-estado" matTooltip="Cuenta bloqueda" matTooltipPosition="above"><i class="text-warning fas fa-user-lock"></i></button>
+                    <button *ngIf="row.bloqueada === 1" class="btn-estado" matTooltip="Cuenta bloqueda" matTooltipPosition="above"><i class="text-danger fas fa-user-lock"></i></button>
                     <button *ngIf="row.bloqueada === 0" class="btn-estado" matTooltip="Cuenta desbloqueada" matTooltipPosition="above"><i class="text-info fas fa-unlock-alt"></i></button>
                   </td>
                 </ng-container>

@@ -62,8 +62,14 @@ export class DetalleUsuarioComponent implements OnInit {
     });
   }
 
-  btnActivar(): void{}
-  btnDesactivar(): void{}
+  btnActivar(): void {
+    this.swalConfirm('activar', '¿Desea activar esta cuenta de usuario?');
+  }
+  // Desactivar cuentas por ahora está comentado en el html
+  btnDesactivar(): void{
+    this.swalConfirm('desactivar', '¿Desea desactivar esta cuenta de usuario?');
+  }
+
   btnBloquear(): void {
     this.swalConfirm('bloquear', '¿Desea bloquear este usuario?');
   }
@@ -82,14 +88,16 @@ export class DetalleUsuarioComponent implements OnInit {
       if (result.isConfirmed) {
         switch (action) {
           case 'activar':
+            this.patchEstado(1, `api/cwpidc/portal/activar?token=${this.localStorageService.getToken()}`);
             break;
           case 'desactivar':
+            this.patchEstado(0, `api/cwpidc/portal/activar?token=${this.localStorageService.getToken()}`);
             break;
           case 'bloquear':
-            this.bloquear(1);
+            this.patchEstado(1, `api/cwpidc/portal/block?token=${this.localStorageService.getToken()}`);
             break;
           case 'desbloquear':
-            this.bloquear(0);
+            this.patchEstado(0, `api/cwpidc/portal/block?token=${this.localStorageService.getToken()}`);
             break;
           default:
             // NADA, por ahora.
@@ -98,9 +106,9 @@ export class DetalleUsuarioComponent implements OnInit {
     });
   }
 
-  private bloquear(estado: number): void {
+  private patchEstado(estado: number, url: string): void {
     const body = { estado, idusuario: this.usuario.idusuario };
-    this.generalService.patch(`api/cwpidc/portal/block?token=${this.localStorageService.getToken()}`, body)
+    this.generalService.patch(url, body)
     .subscribe(resp => {
       // console.log(resp);
       if (resp.ok === true) {
