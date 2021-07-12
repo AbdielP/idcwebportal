@@ -3,10 +3,14 @@
 .btn-purple {
     color: #fff;
     background-color: var(--btn-default);
+    cursor: pointer;
 }.btn-purple:active {
     background-color: var(--angular-color-purple);
 }.btn-purple:hover{
     background-color: var(--btn-hover);
+}.btn-purple:disabled {
+    color: #A4A4A4;
+    background-color: #F2F2F2;
 }
 
 .main-detalle {

@@ -50,9 +50,30 @@
                 <div class="container-titulo-opciones input-group mb-3 d-flex justify-content-center pt-2">
                     <div class="form-group col-11">
                         <form [formGroup]="form">
-                            <input type="password" class="form-control form-control-sm small-input" formControlName="password" placeholder="Nueva contraseña" autocomplete="on">
-                            <input type="password" class="form-control form-control-sm small-input" formControlName="re_password" placeholder="Repetir contraseña" autocomplete="on">
-                            <button type="button" (click)="onSubmit()" class="btn btn-sm btn-purple btn-block m-1">Cambiar contraseña</button>
+                            <div *ngIf="form.controls['password'].errors?.required && form.controls['password'].touched" class="form-control-feedback small text-danger text-center mx-3">
+                                Campo requerido.
+                            </div>
+                            <div *ngIf="form.controls['password'].errors?.minlength" class="form-control-feedback small text-danger text-center mx-3">
+                                Mínimo 8 caracteres.
+                            </div>
+                            <div *ngIf="form.controls['password'].errors?.maxlength" class="form-control-feedback small text-danger text-center mx-3">
+                                Máximo 20 caracteres.
+                            </div>
+                            <input type="password" class="form-control form-control-sm small-input" formControlName="password" placeholder="Nueva contraseña" autocomplete="on" maxlength="20">
+                            <div *ngIf="form.controls['re_password'].errors?.required && form.controls['re_password'].touched" class="form-control-feedback small text-danger text-center mx-3">
+                                Campo requerido.
+                            </div>
+                            <div *ngIf="form.controls['re_password'].errors?.minlength" class="form-control-feedback small text-danger text-center mx-3">
+                                Mínimo 8 caracteres.
+                            </div>
+                            <div *ngIf="form.controls['re_password'].errors?.maxlength" class="form-control-feedback small text-danger text-center mx-3">
+                                Máximo 20 caracteres.
+                            </div>
+                            <input type="password" class="form-control form-control-sm small-input" formControlName="re_password" placeholder="Repetir contraseña" autocomplete="on" maxlength="20">
+                            <button [disabled]="!form.valid" type="button" (click)="onSubmit()" class="btn btn-sm btn-purple btn-block m-1">Cambiar contraseña</button>
+                            <div *ngIf="form.getError('equalValues') as error" class="text-danger text-center form-control-feedback m-2">
+                                Las contraseñas deben ser iguales.
+                            </div>
                         </form>
                     </div>
                 </div>

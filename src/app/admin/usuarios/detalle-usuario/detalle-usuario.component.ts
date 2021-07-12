@@ -1,4 +1,5 @@
-import { FormControl, FormGroup } from '@angular/forms';
+import { CustomValidators } from 'src/app/utils/custom-validators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { GeneralService } from 'src/app/services/general.service';
@@ -21,10 +22,10 @@ export class DetalleUsuarioComponent implements OnInit {
 
   constructor(private generalService: GeneralService, private localStorageService: LocalstorageService) {
     this.form = new FormGroup({
-      idusuario: new FormControl(''),
-      password: new FormControl(''),
-      re_password: new FormControl('')
-    });
+      idusuario: new FormControl('', Validators.required),
+      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
+      re_password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)])
+    }, { validators: [CustomValidators.equalValues] });
   }
 
   ngOnInit(): void {
