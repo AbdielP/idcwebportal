@@ -117,13 +117,12 @@ export class DetalleUsuarioComponent implements OnInit {
     const body = { estado, idusuario: this.usuario.idusuario };
     this.generalService.patch(url, body)
     .subscribe(resp => {
-      console.log(resp);
       if (resp.ok === true) {
         Swal.fire(resp.message, '', 'success');
         this.sendChanges();
       }
     }, (error) => {
-      console.log(error);
+      // console.log(error);
       this.eventError.next(error);
     });
   }

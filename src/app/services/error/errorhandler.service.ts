@@ -10,7 +10,7 @@ export class ErrorhandlerService {
 
   SwalParameters: any = {
     icon: 'error',
-    title: 'Oops...',
+    title: 'Error...',
     text: '',
     footer: '',
     backdrop: `rgba(0,0,0,0.4)`
@@ -22,7 +22,7 @@ export class ErrorhandlerService {
 
   errorHandler(error: any): Promise<any> {
     this.router = this.injector.get(Router);
-    console.log(error);
+    // console.log(error);
     // console.log(error.error.error.code)
     if (error.status === 0) {
       return Swal.fire('Server Down.', `Servidor fuera de servicio.`, 'question');
