@@ -20,6 +20,7 @@ export class DetalleUsuarioComponent implements OnInit {
   eventSubscription: Subscription;
   usuario: any = '';
   form: FormGroup;
+  showSpinner: boolean;
 
   constructor(private generalService: GeneralService, private localStorageService: LocalstorageService) {
     this.form = new FormGroup({
@@ -27,6 +28,7 @@ export class DetalleUsuarioComponent implements OnInit {
       password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)]),
       re_password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(20)])
     }, { validators: [CustomValidators.equalValues] });
+    this.showSpinner = false;
   }
 
   ngOnInit(): void {
@@ -103,6 +105,8 @@ export class DetalleUsuarioComponent implements OnInit {
   }
 
   private patchPassword(form: FormGroup): void {
+    console.log(this.showSpinner);
+    this.showSpinner = true;
     this.generalService.patch(`api/cwpidc/portal/changepass?token=${this.localStorageService.getToken()}`, form)
     .subscribe(resp => {
       if (resp.ok === true) {
@@ -111,6 +115,7 @@ export class DetalleUsuarioComponent implements OnInit {
     }, (error) => {
       console.log(error);
     });
+    this.showSpinner = false;
   }
 
   private patchEstado(estado: number, url: string): void {
