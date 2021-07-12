@@ -18,7 +18,7 @@ export class UsuariosComponent implements OnInit {
 
   constructor(private generalService: GeneralService) {
     this.form = new FormGroup({
-      search: new FormControl('', Validators.maxLength(50))
+      search: new FormControl('', [Validators.required, Validators.maxLength(50)])
     });
   }
 
