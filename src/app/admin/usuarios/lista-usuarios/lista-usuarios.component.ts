@@ -47,6 +47,4 @@ export class ListaUsuariosComponent implements OnInit {
     this.emitidusuario.emit(idusuario);
   }
 
-  // Cambiar lo que muestra en columna 'estado' en la tabla. debe mostrar iconos con una leyenda: 'activo', 'bloqueda', 'inactiva'
-
 }

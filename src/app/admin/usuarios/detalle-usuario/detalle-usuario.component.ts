@@ -51,16 +51,7 @@ export class DetalleUsuarioComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.patchPassword(this.form.value);
-  }
-
-  private patchPassword(form: FormGroup): void {
-    this.generalService.patch(`api/cwpidc/portal/changepass?token=${this.localStorageService.getToken()}`, form)
-    .subscribe(resp => {
-      console.log(resp);
-    }, (error) => {
-      console.log(error);
-    });
+    this.swalConfirm('password', '¿Desea cambiar la contraseña de este usuario?');
   }
 
   btnActivar(): void {
@@ -100,10 +91,24 @@ export class DetalleUsuarioComponent implements OnInit {
           case 'desbloquear':
             this.patchEstado(0, `api/cwpidc/portal/block?token=${this.localStorageService.getToken()}`);
             break;
+          case 'password':
+            this.patchPassword(this.form.value);
+            break;
           default:
             // NADA, por ahora.
         }
       }
+    });
+  }
+
+  private patchPassword(form: FormGroup): void {
+    this.generalService.patch(`api/cwpidc/portal/changepass?token=${this.localStorageService.getToken()}`, form)
+    .subscribe(resp => {
+      if (resp.ok === true) {
+        Swal.fire(resp.message, '', 'success');
+      }
+    }, (error) => {
+      console.log(error);
     });
   }
 
