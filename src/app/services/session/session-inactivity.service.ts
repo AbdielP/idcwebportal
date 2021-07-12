@@ -22,12 +22,12 @@ export class SessionInactivityService {
   }
 
   callLogOut() {
-    console.log('user has been inactive for 4s')
+    // console.log('user has been inactive for 4s');
     this.authService.logOut();
   }
 
   resetActivity() {
-    console.log('Se mueve?');
+    // console.log('Se mueve?');
     clearTimeout(this.userActivity);
     this.setTimeout();
   }
