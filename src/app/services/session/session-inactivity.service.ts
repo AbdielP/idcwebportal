@@ -16,18 +16,18 @@ export class SessionInactivityService {
   }
 
   setTimeout() {
-    // this.userActivity = setTimeout(() => this.userInactive.next(undefined), 1000);
+    // this.userActivity = setTimeout(() => this.userInactive.next(undefined), 5000);
     // this.userActivity = setTimeout(() => this.userInactive.next(undefined), 300000); // 5 Minutos
     this.userActivity = setTimeout(() => this.userInactive.next(undefined), 28800000);
   }
 
   callLogOut() {
-    // console.log('user has been inactive for 4s')
+    console.log('user has been inactive for 4s')
     this.authService.logOut();
   }
 
   resetActivity() {
-    // console.log('Se mueve?');
+    console.log('Se mueve?');
     clearTimeout(this.userActivity);
     this.setTimeout();
   }

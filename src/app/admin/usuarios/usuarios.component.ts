@@ -1,7 +1,8 @@
 import { Subject } from 'rxjs';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { GeneralService } from 'src/app/services/general.service';
+import { SessionInactivityService } from 'src/app/services/session/session-inactivity.service';
 
 @Component({
   selector: 'app-usuarios',
@@ -16,10 +17,14 @@ export class UsuariosComponent implements OnInit {
   usuarios: object;
   lastuserId: number;
 
-  constructor(private generalService: GeneralService) {
+  constructor(private generalService: GeneralService, private sessionInactivity: SessionInactivityService) {
     this.form = new FormGroup({
       search: new FormControl('', [Validators.required, Validators.maxLength(50)])
     });
+  }
+
+  @HostListener('window:mousemove') refreshUserState() {
+    this.sessionInactivity.resetActivity();
   }
 
   ngOnInit(): void {}
