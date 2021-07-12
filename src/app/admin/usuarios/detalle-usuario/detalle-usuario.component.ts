@@ -1,6 +1,6 @@
 import { CustomValidators } from 'src/app/utils/custom-validators';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { GeneralService } from 'src/app/services/general.service';
 import { LocalstorageService } from 'src/app/services/localstorage/localstorage.service';
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 })
 export class DetalleUsuarioComponent implements OnInit {
 
+  eventError: Subject<any> = new Subject();
   @Input() events: Observable<any>;
   @Output() emitChanges: EventEmitter<any> = new EventEmitter();
   eventSubscription: Subscription;
@@ -116,13 +117,14 @@ export class DetalleUsuarioComponent implements OnInit {
     const body = { estado, idusuario: this.usuario.idusuario };
     this.generalService.patch(url, body)
     .subscribe(resp => {
-      // console.log(resp);
+      console.log(resp);
       if (resp.ok === true) {
         Swal.fire(resp.message, '', 'success');
         this.sendChanges();
       }
     }, (error) => {
       console.log(error);
+      this.eventError.next(error);
     });
   }
 

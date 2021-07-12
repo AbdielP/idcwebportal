@@ -8,11 +8,13 @@ import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.componen
 
 import { MaterialModule } from 'src/app/material/material.module';
 import { DetalleUsuarioComponent } from './detalle-usuario/detalle-usuario.component';
+import { CompartidosModule } from 'src/app/compartidos/compartidos.module';
 
 
 @NgModule({
   declarations: [UsuariosComponent, ListaUsuariosComponent, DetalleUsuarioComponent],
   imports: [
+    CompartidosModule,
     CommonModule,
     UsuariosRoutingModule,
     ReactiveFormsModule,
