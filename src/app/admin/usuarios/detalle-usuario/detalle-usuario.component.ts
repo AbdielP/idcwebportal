@@ -33,7 +33,6 @@ export class DetalleUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeEventIdUsuario();
-    console.log(this.showSpinner);
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
@@ -98,7 +97,6 @@ export class DetalleUsuarioComponent implements OnInit {
             break;
           case 'password':
             this.showSpinner = true;
-            console.log(this.showSpinner);
             this.patchPassword(this.form.value);
             break;
           default:
