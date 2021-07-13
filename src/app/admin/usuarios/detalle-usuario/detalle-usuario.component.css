@@ -9,8 +9,9 @@
 }.btn-purple:hover{
     background-color: var(--btn-hover);
 }.btn-purple:disabled {
+    cursor: default;
     color: #A4A4A4;
-    background-color: #F2F2F2;
+    background-color: #E6E6E6;
 }
 
 .text-purple {

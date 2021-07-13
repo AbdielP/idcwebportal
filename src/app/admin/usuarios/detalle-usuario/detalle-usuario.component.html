@@ -70,13 +70,17 @@
                                 Máximo 20 caracteres.
                             </div>
                             <input type="password" class="form-control form-control-sm small-input" formControlName="re_password" placeholder="Repetir contraseña" autocomplete="on" maxlength="20">
-                            <button [disabled]="!form.valid" type="button" (click)="onSubmit()" class="btn btn-sm btn-purple btn-block m-1">Cambiar contraseña</button>
+                            <button [disabled]="!form.valid || showSpinner === true" type="button" (click)="onSubmit()" class="btn btn-sm btn-purple btn-block m-1">Cambiar contraseña</button>
+                            <div *ngIf="showSpinner === true" class="d-flex justify-content-center align-center">
+                                <mat-progress-spinner diameter="40" mode="indeterminate"></mat-progress-spinner>
+                            </div>
+                            <!-- <mat-spinner></mat-spinner> -->
                              <!-- SPINNER -->
-                             <div class="col-12 d-flex align-items-center justify-content-center">
+                             <!-- <div class="col-12 d-flex align-items-center justify-content-center">
                                 <div [hidden]="showSpinner === false" class="spinner-border text-purple p-2  m-3" role="status">
                                     <span class="sr-only">Enviando...</span>
                                 </div>
-                            </div>
+                            </div> -->
                             <div *ngIf="form.getError('equalValues') as error" class="text-danger text-center form-control-feedback m-2">
                                 Las contraseñas deben ser iguales.
                             </div>

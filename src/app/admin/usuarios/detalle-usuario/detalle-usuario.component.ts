@@ -33,6 +33,7 @@ export class DetalleUsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscribeEventIdUsuario();
+    console.log(this.showSpinner);
   }
 
   // tslint:disable-next-line: use-lifecycle-interface
@@ -45,6 +46,7 @@ export class DetalleUsuarioComponent implements OnInit {
       const usuario = {idusuario};
       this.generalService.post(`api/cwpidc/portal/userinfo?token=${this.localStorageService.getToken()}`, usuario).subscribe(resp => {
         // console.log(resp.select);
+        this.form.reset();
         this.usuario = resp.select;
         this.form.patchValue({
           idusuario: (this.usuario.idusuario)
@@ -95,6 +97,8 @@ export class DetalleUsuarioComponent implements OnInit {
             this.patchEstado(0, `api/cwpidc/portal/block?token=${this.localStorageService.getToken()}`);
             break;
           case 'password':
+            this.showSpinner = true;
+            console.log(this.showSpinner);
             this.patchPassword(this.form.value);
             break;
           default:
@@ -105,17 +109,16 @@ export class DetalleUsuarioComponent implements OnInit {
   }
 
   private patchPassword(form: FormGroup): void {
-    console.log(this.showSpinner);
-    this.showSpinner = true;
     this.generalService.patch(`api/cwpidc/portal/changepass?token=${this.localStorageService.getToken()}`, form)
     .subscribe(resp => {
       if (resp.ok === true) {
+        this.showSpinner = false;
         Swal.fire(resp.message, '', 'success');
       }
     }, (error) => {
       console.log(error);
+      this.showSpinner = false;
     });
-    this.showSpinner = false;
   }
 
   private patchEstado(estado: number, url: string): void {
@@ -125,6 +128,7 @@ export class DetalleUsuarioComponent implements OnInit {
       if (resp.ok === true) {
         Swal.fire(resp.message, '', 'success');
         this.sendChanges();
+        this.form.reset();
       }
     }, (error) => {
       // console.log(error);
