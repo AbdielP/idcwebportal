@@ -91,7 +91,7 @@
                 Campo requerido.
               </div>
             </div>
-            <select id="rollId" formControlName="rollId" class="form-control form-control-sm" (change)="onChange($event)" required>
+            <select id="rollId" formControlName="rollId" class="form-control form-control-sm" required>
               <option value="" disabled>Escoger...</option>
               <!-- <option value="1">Especialista</option>
               <option value="2">Cliente</option> -->
@@ -163,7 +163,7 @@
                   <label> Los proyectos no deben ser iguales.</label>
                 </div>
               </div>
-              <select formControlName="proyecto" class="form-control form-control-sm">
+              <select formControlName="proyecto" class="form-control form-control-sm" (change)="onChange($event)">
                 <option value="" disabled>Escoger...</option>
                 <ng-container *ngIf="projects != ''">
                   <option *ngFor="let cliente of projects" value="{{cliente.idproyecto}}">{{cliente.nombre_empresa}} - LOC{{cliente.loc}} - {{cliente.datacenter}}</option>
@@ -180,6 +180,20 @@
               <label for="version" class="lead text-secondary"><i class="far fa-calendar"></i> Fecha</label>
               <input type="date" class="form-control form-control-sm" formControlName="version" placeholder="dd/mm/yyyy" min="{{hoy}}" max="{{dateService.lastDayYear()}}">
             </div> -->
+
+            <div class="form-group col-md-3">
+              <div class="error-container">
+                <div *ngIf="mdcForm.controls['version'].errors?.required" class="form-control-feedback">
+                  <!-- La fecha del documento de matriz de comunicación es requerida. -->
+                </div>
+              </div>
+              <label for="version" class="lead text-secondary"><i class="far fa-calendar"></i> Versión MDC</label>
+              <select formControlName="version" class="form-control form-control-sm">
+                <option *ngIf="lastmdc === undefined" value="" disabled selected>Seleccione cliente/proyecto</option>
+                <option *ngIf="lastmdc != undefined" value="{{lastmdc | date: 'yyyy/MM/dd'}}">{{lastmdc | date: 'yyyy/MM/dd'}}</option>
+                <option *ngIf="lastmdc != undefined" value="0">- Nueva MDC -</option>
+              </select>
+            </div>
           </div>
 
           <div *ngIf="userroll !== 2" class="form-row">

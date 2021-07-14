@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormArray } from '@angular/forms';
 import { DateService } from 'src/app/services/date.service';
@@ -8,6 +9,7 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-mdcform',
+  providers: [DatePipe],
   templateUrl: './mdcform.component.html',
   styleUrls: ['./mdcform.component.css']
 })
@@ -29,8 +31,10 @@ export class MdcformComponent implements OnInit {
   roles = [];
   showSpinner = false;
 
+  lastmdc: Date;
+
   constructor(private formBuilder: FormBuilder, public dateService: DateService, private localstorageService: LocalstorageService,
-              private generalService: GeneralService) {
+              private generalService: GeneralService, private datePipe: DatePipe) {
     this.hoy = this.dateService.getDate();
   }
 
@@ -52,7 +56,7 @@ export class MdcformComponent implements OnInit {
       check_activo: [false],
 
       proyecto: ['', {validators: [Validators.required]}],
-      version: [this.hoy, [Validators.required]],
+      version: [{value: '', disabled: false}, {validators: [Validators.required]}],
       solicitar_acceso: [false],
       actualizar_acceso: [false],
       eliminar_acceso: [false],
@@ -80,7 +84,7 @@ export class MdcformComponent implements OnInit {
   }
 
   // Obtiene del localstorage el roll del usuario logeado
-  getUserRoll() {
+  private getUserRoll() {
     this.userroll = this.localstorageService.getUserRoll();
     if (this.userroll === 2) {
       this.mdcForm.patchValue({
@@ -90,19 +94,19 @@ export class MdcformComponent implements OnInit {
     }
   }
   // LLama de la BD los roles existentes para crear cuentas
-  getRoles(): void {
+  private getRoles(): void {
       this.generalService.select(`api/cwpidc/portal`).subscribe((resp: any) => {
       this.roles = resp.select;
     });
   }
 
-  getProyectos(): void {
+  private getProyectos(): void {
       this.generalService.select(`api/cwpidc/general/all/proyectos`).subscribe((resp: any) => {
       this.projects = resp.select;
     });
   }
   // Lista los proyectos del usuario logeado si es CLIENTE
-  getUserProyectos(): void {
+  private getUserProyectos(): void {
     this.generalService.select(`api/cwpidc/general/proyectos?token=${this.localstorageService.getToken()}`)
     .subscribe((resp: any) => {
       this.projects = resp.select;
@@ -119,7 +123,27 @@ export class MdcformComponent implements OnInit {
     // console.log(this.mdcForm.getRawValue());
   }
 
-  agregarUsuarioMatriz(form: any) {
+  // Captura el proyecto seleccionado para traer su ultima versión de MDC (lado admin)
+  onChange(event: any): void {
+    // console.log(event.target.value);
+    const proyecto = {id: Number(event.target.value)};
+    this.generalService.post(`api/cwpidc/portal/mdc/maxversion`, proyecto)
+    .subscribe(resp => {
+      // console.log(resp);
+      this.lastmdc = resp.select.ultima_version;
+      this.patchFormLastMDC(this.lastmdc);
+    });
+  }
+ // !!!!!!!!!!!!!!!!!!!!!!! HERE
+  private patchFormLastMDC(versionmdc: Date): void {
+    // console.log(versionmdc);
+    this.mdcForm.patchValue({
+      version: this.datePipe.transform(versionmdc, 'yyyy/MM/dd')
+    });
+    // console.log(this.mdcForm.value);
+  }
+
+  private agregarUsuarioMatriz(form: any) {
     this.generalService.insertNewUser(form).subscribe((resp: any) => {
       if (resp.ok) {
         this.SwalParameters.text = `${resp.message}`;
@@ -127,10 +151,6 @@ export class MdcformComponent implements OnInit {
       }
       this.showSpinner = false;
     });
-  }
-
-  onChange(event: any): void {
-    // Creo que aquí no va nada? Borrar...
   }
 
   agregarMDC() {
