@@ -299,7 +299,7 @@
                       <label> Los proyectos no deben ser iguales.</label>
                     </div>
                   </div>
-                  <select [attr.id]="'proyecto'  +i" formControlName="proyecto" class="form-control form-control-sm">
+                  <select [attr.id]="'proyecto'  +i" formControlName="proyecto" class="form-control form-control-sm" (change)="onChangeMDCAdicional($event, i)">
                     <option value="" disabled>Seleccionar...</option>
                     <ng-container *ngIf="projects != ''">
                       <option *ngFor="let cliente of projects" value="{{cliente.idproyecto}}">{{cliente.nombre_empresa}} - LOC{{cliente.loc}} - {{cliente.datacenter}}</option>
@@ -314,7 +314,8 @@
                     </div>
                   </div>
                   <label for="version" class="lead text-secondary"><i class="far fa-calendar"></i> Fecha</label>
-                  <input type="date" class="form-control form-control-sm" formControlName="version" placeholder="Año: 20XX"  max="maxdate">
+                  <!-- <input type="date" class="form-control form-control-sm" formControlName="version" placeholder="Año: 20XX"  min="{{hoy}}" max="{{dateService.lastDayYear()}}"> -->
+                  <input type="text" class="form-control form-control-sm" formControlName="version" placeholder="FECHA">
                 </div>
               </div>
   

@@ -131,8 +131,19 @@ export class MdcformComponent implements OnInit {
     .subscribe(resp => {
       // console.log(resp);
       this.lastmdc = resp.select.ultima_version;
-      console.log(this.lastmdc);
       this.patchFormLastMDC(this.lastmdc);
+    });
+  }
+
+  onChangeMDCAdicional(event: any, index): void {
+    // console.log(this.proyectos.controls[index].get('version'));
+    const proyecto = {id: Number(event.target.value)};
+    this.generalService.post(`api/cwpidc/portal/mdc/maxversion`, proyecto)
+    .subscribe(resp => {
+      // CONTINUAR AQUÍ: Hacer esto una función similar a patchFormLastMDC
+      this.proyectos.controls[index].patchValue({
+        version: this.datePipe.transform(resp.select.ultima_version, 'yyyy/MM/dd')
+      });
     });
   }
 
@@ -163,7 +174,8 @@ export class MdcformComponent implements OnInit {
     const mdcFormGroup = this.formBuilder.group({
       proyecto: ['', {validators: [Validators.required]}],
       link: ['', {validators: [Validators.required]}],
-      version: [this.hoy, {validators: [Validators.required]}],
+      // version: [this.hoy, {validators: [Validators.required]}],
+      version: ['', {validators: [Validators.required]}],
       solicitar_acceso: [false],
       actualizar_acceso: [false],
       eliminar_acceso: [false],
