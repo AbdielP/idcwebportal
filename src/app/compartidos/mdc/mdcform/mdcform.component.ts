@@ -131,16 +131,22 @@ export class MdcformComponent implements OnInit {
     .subscribe(resp => {
       // console.log(resp);
       this.lastmdc = resp.select.ultima_version;
+      console.log(this.lastmdc);
       this.patchFormLastMDC(this.lastmdc);
     });
   }
- // !!!!!!!!!!!!!!!!!!!!!!! HERE
+
   private patchFormLastMDC(versionmdc: Date): void {
-    // console.log(versionmdc);
-    this.mdcForm.patchValue({
-      version: this.datePipe.transform(versionmdc, 'yyyy/MM/dd')
-    });
-    // console.log(this.mdcForm.value);
+    if (versionmdc != null) {
+      this.mdcForm.patchValue({
+        version: this.datePipe.transform(versionmdc, 'yyyy/MM/dd')
+      });
+    }
+    if (versionmdc === null) {
+      this.mdcForm.patchValue({
+        version: this.hoy
+      });
+    }
   }
 
   private agregarUsuarioMatriz(form: any) {
